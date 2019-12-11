@@ -1,42 +1,62 @@
+Query:<br>
+<textarea rows=5 cols=80 id=query>SELECT * FROM Tuotteet;</textarea>
+<br>
+<button onclick="test();">lol</button>
+<br><br>
+<div id="result"></div>
+<script src="dist/sql-wasm.js"></script>
 <script>
-function sql_run(sql) {
-    var worker = new Worker("dist/worker.sql-wasm.js");
-    worker.onmessage = () => {
-        worker.onmessage = event => {
-            sql_result(event.data);
-        };
-	
-        worker.postMessage({
-            id: 2,
-            action: 'exec',
-            sql: sql
-        });
-    };
 
-    worker.onerror = e => console.log("Worker error: ", e);
-    worker.postMessage({
-      id:1,
-      action:'open',
+function sql_run(context,query) {
+    config = {locateFile: filename => `dist/${filename}`};
+
+    initSqlJs(config).then(function(SQL){
+        var db = new SQL.Database();
+        db.run(context);
+        try {
+            var result = db.exec(query);
+            sql_result(result);
+        } catch(error) {
+            sql_error(error);
+        }
     });
 }
 
-function sql_result(data) {
-    document.write("<table border>");
-    document.write("<tr>");
-    for (var i = 0; i < data.results[0].columns.length; i++) {
-        document.write("<th>"+data.results[0].columns[i]+"</th>");
-    }
-    document.write("</tr>");
-    for (var i = 0; i < data.results[0].values.length; i++) {
-        document.write("<tr>");
-        for (var j = 0; j < data.results[0].values[i].length; j++) {
-            document.write("<td>"+data.results[0].values[i][j]+"</td>");
+function sql_result(result) {
+    var table = "";
+    if (result.length == 0) {
+        table = "No results";
+    } else {
+        table += "<table border>";
+        table += "<tr>";
+        for (var i = 0; i < result[0].columns.length; i++) {
+            table += "<th>"+result[0].columns[i]+"</th>";
         }
-        document.write("</tr>");
+        table += "</tr>";
+        for (var i = 0; i < result[0].values.length; i++) {
+            table += "<tr>";
+            for (var j = 0; j < result[0].values[i].length; j++) {
+                table += "<td>"+result[0].values[i][j]+"</td>";
+            }
+            table += "</tr>";
+        }
+        table += "</table>";
     }
-    document.write("</table>");
-    console.log(data);
+    document.getElementById("result").innerHTML = table;
 }
 
-sql_run("CREATE TABLE lol(x INTEGER, y INTEGER);INSERT INTO lol(x) VALUES (123);INSERT INTO lol(x) VALUES (456);SELECT * FROM lol;");
+function sql_error(error) {
+    document.getElementById("result").innerHTML = "Error: "+error;
+}
+
+function test() {
+    var query = document.getElementById("query").value;
+    var context = "";
+    context += "CREATE TABLE Tuotteet(id INTEGER PRIMARY KEY, nimi TEXT, hinta INTEGER);";
+    context += "INSERT INTO Tuotteet(nimi,hinta) VALUES ('selleri',5);";
+    context += "INSERT INTO Tuotteet(nimi,hinta) VALUES ('lanttu',8);";
+    context += "INSERT INTO Tuotteet(nimi,hinta) VALUES ('retiisi',4);";
+    sql_run(context,query);
+}
+
 </script>
