@@ -1,0 +1,42 @@
+<script>
+function sql_run(sql) {
+    var worker = new Worker("dist/worker.sql-wasm.js");
+    worker.onmessage = () => {
+        worker.onmessage = event => {
+            sql_result(event.data);
+        };
+	
+        worker.postMessage({
+            id: 2,
+            action: 'exec',
+            sql: sql
+        });
+    };
+
+    worker.onerror = e => console.log("Worker error: ", e);
+    worker.postMessage({
+      id:1,
+      action:'open',
+    });
+}
+
+function sql_result(data) {
+    document.write("<table border>");
+    document.write("<tr>");
+    for (var i = 0; i < data.results[0].columns.length; i++) {
+        document.write("<th>"+data.results[0].columns[i]+"</th>");
+    }
+    document.write("</tr>");
+    for (var i = 0; i < data.results[0].values.length; i++) {
+        document.write("<tr>");
+        for (var j = 0; j < data.results[0].values[i].length; j++) {
+            document.write("<td>"+data.results[0].values[i][j]+"</td>");
+        }
+        document.write("</tr>");
+    }
+    document.write("</table>");
+    console.log(data);
+}
+
+sql_run("CREATE TABLE lol(x INTEGER, y INTEGER);INSERT INTO lol(x) VALUES (123);INSERT INTO lol(x) VALUES (456);SELECT * FROM lol;");
+</script>
