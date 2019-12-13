@@ -1,0 +1,26 @@
+TASK
+Taulussa on tuotteita, joilla on nimi ja hinta.
+Tee kysely, joka hakee jokaisen tuotteen nimen ja hinnan.
+
+TABLES
+CREATE TABLE Tuotteet (id INTEGER PRIMARY KEY, nimi TEXT, hinta INTEGER);
+
+TEST
+INSERT INTO Tuotteet (nimi,hinta) VALUES ('selleri',5);
+INSERT INTO Tuotteet (nimi,hinta) VALUES ('lanttu',8);
+INSERT INTO Tuotteet (nimi,hinta) VALUES ('retiisi',4);
+
+RESULT
+selleri|5
+lanttu|8
+retiisi|4
+
+TEST
+INSERT INTO Tuotteet (nimi,hinta) VALUES ('aybabtu',1);
+INSERT INTO Tuotteet (nimi,hinta) VALUES ('aybabtu',1);
+INSERT INTO Tuotteet (nimi,hinta) VALUES ('aybabtu',1);
+
+RESULT
+aybabtu|1
+aybabtu|1
+aybabtu|1
