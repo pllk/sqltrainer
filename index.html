@@ -4,18 +4,13 @@
 <h2>Tehtävä</h2>
 <p id="task"></p>
 <h2>Esimerkki</h2>
-<fieldset><legend><b>Taulut</b></legend>
-<p id="example"></p>
-</fieldset>
-<fieldset><legend><b>Haluttu tulos</b></legend>
-<p id="result"></p>
+<div id="example"></div>
 </fieldset>
 <h2>Lähetä vastaus</h2>
 Kysely:<br>
 <textarea rows=5 cols=80 id=query>SELECT O.nimi, COUNT(K.id) FROM Opettajat O, Kurssit K WHERE K.opettaja_id = O.id GROUP BY O.id;</textarea>
 <br><br>
 <button onclick="check();">Tarkasta</button>
-<br><br>
 <div id="verdict"></div>
 <script src="dist/sql-wasm.js"></script>
 <script>
@@ -56,6 +51,19 @@ function render_table(data) {
     return table;
 }
 
+function render_tables(data) {
+    var html = "";
+    html += "<fieldset><legend><b>Taulut</b></legend>";
+    html += "<table><tr valign=top>";
+    for (var i = 0; i < data.length; i++) {
+        if (i != 0) html += "<td width=20></td>";
+        html += "<td>"+render_table(data[i])+"</td>";
+    }
+    html += "</tr></table>";
+    html += "</fieldset>";
+    return html;
+}
+
 function render_plain(data) {
     if (data.length == 0) return "";
     data = data[0];
@@ -71,6 +79,23 @@ function render_plain(data) {
     return lines;
 }
 
+function render_result(data,title) {
+    var html = "";
+    html += "<fieldset><legend><b>"+title+"</b></legend>";
+    html += "<table border>";
+    for (var i = 0; i < data.length; i++) {
+        html += "<tr>";
+        var parts = data[i].split("|");
+        for (var j = 0; j < parts.length; j++ ){
+            html += "<td>"+parts[j]+"</td>";
+        }
+        html += "</tr>";
+    }
+    html += "</table>";
+    html += "</fieldset>";
+    return html;
+}
+
 function same(a,b) {
     if (a.length != b.length) return false;
     for (var i = 0; i < a.length; i++) {
@@ -79,19 +104,31 @@ function same(a,b) {
     return true;
 }
 
+var table_data;
+
 function sql_result(result,what) {
     if (what[0] == "example") {
-        var place = document.getElementById("table"+what[1]);
-        place.innerHTML += render_table(result);
-    }
-    var verdict = document.getElementById("verdict");
-    if (what[0] == "test") {
-        var plain = render_plain(result);
-        if (same(plain,results[what[1]])) {
-            verdict.innerHTML += "<font color=green>Testi "+(what[1]+1)+" meni oikein</font><br>";
+        if (what[1] == 0) table_data = [];
+        table_data.push(result);
+        my_table++;
+        if (my_table < tables.length) {
+            show_example();
         } else {
-            verdict.innerHTML += "<font color=red>Testi "+(what[1]+1)+" meni väärin</font><br>";
+            var html = "";
+            html += render_tables(table_data);
+            html += "<br>";
+            html += render_result(results[0],"Haluttu tulos");
+            document.getElementById("example").innerHTML = html;
         }
+    }
+    if (what[0] == "test") {
+        var verdict = document.getElementById("verdict");
+        var plain = render_plain(result);
+        var correct = same(results[what[1]],plain);
+        var message = correct ? "<font color=green>oikein</font>" : "<font color=red>väärin</font>";
+        verdict.innerHTML += "<h2>Testi "+(what[1]+1)+" ("+message+")</h2>";
+        verdict.innerHTML += render_result(results[what[1]],"Haluttu tulos");
+        verdict.innerHTML += render_result(plain,"Kyselysi tulos");
         my_test++;
         if (my_test < tests.length) check_test();
     }
@@ -146,12 +183,15 @@ function read_task(file) {
     x.onreadystatechange = function() {
         if (x.readyState == 4 && x.status == 200) {
             parse_task(x.responseText);
+            my_table = 0;
             show_example();
         }
     }
     x.open("GET",file);
     x.send();
 }
+
+var my_table;
 
 function show_example() {
     var context = "";
@@ -161,38 +201,9 @@ function show_example() {
     for (var i = 0; i < tests[0].length; i++) {
         context += tests[0][i];
     }
-    var example = document.getElementById("example");
-    var html = "";
-    html = "<table><tr valign=top>";
-    for (var i = 0; i < tables.length; i++) {
-        if (i != 0) html += "<td width=20></td>";
-        var parts = tables[i].split(" ");
-        var table = parts[2];
-        html += "<td>";
-        html += "<i>"+table+"</i><br>";
-        html += "<div id=\"table"+i+"\"></div>";
-        html += "</td>";
-    }
-    html += "</tr></table>";
-    example.innerHTML = html;
-    for (var i = 0; i < tables.length; i++) {
-        var parts = tables[i].split(" ");
-        var table = parts[2];
-        sql_run(context,"SELECT * FROM "+table+";",["example",i]);
-    }
-    var html = "";
-    html += "<table border>";
-    for (var i = 0; i < results[0].length; i++) {
-        var columns = results[0][i].split("|");
-        html += "<tr>";
-        for (var j = 0; j < columns.length; j++) {
-            html += "<td>"+columns[j]+"</td>";
-        }
-        html += "</tr>";
-    }
-    html += "</table>";
-    var result = document.getElementById("result");
-    result.innerHTML = html;
+    var parts = tables[my_table].split(" ");
+    var table = parts[2];
+    sql_run(context,"SELECT * FROM "+table+";",["example",my_table]);
 }
 
 var my_test;
