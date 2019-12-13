@@ -98,8 +98,14 @@ function render_result(data,title) {
 
 function same(a,b) {
     if (a.length != b.length) return false;
+    var c = [], d = [];
     for (var i = 0; i < a.length; i++) {
-        if (a[i] != b[i]) return false;
+        c.push(a[i]);
+        d.push(b[i]);
+    }
+    c.sort(); d.sort();
+    for (var i = 0; i < a.length; i++) {
+        if (c[i] != d[i]) return false;
     }
     return true;
 }
@@ -108,17 +114,23 @@ var table_data;
 
 function sql_result(result,what) {
     if (what[0] == "example") {
-        if (what[1] == 0) table_data = [];
-        table_data.push(result);
+        table_data[my_test].push(result);
         my_table++;
         if (my_table < tables.length) {
             show_example();
         } else {
-            var html = "";
-            html += render_tables(table_data);
-            html += "<br>";
-            html += render_result(results[0],"Haluttu tulos");
-            document.getElementById("example").innerHTML = html;
+            if (my_test == 0) {
+                var html = "";
+                html += render_tables(table_data[0]);
+                html += "<br>";
+                html += render_result(results[0],"Haluttu tulos");
+                document.getElementById("example").innerHTML = html;
+            }
+            my_table = 0;
+            my_test++;
+            if (my_test < tests.length) {
+                show_example();
+            }
         }
     }
     if (what[0] == "test") {
@@ -127,6 +139,7 @@ function sql_result(result,what) {
         var correct = same(results[what[1]],plain);
         var message = correct ? "<font color=green>oikein</font>" : "<font color=red>väärin</font>";
         verdict.innerHTML += "<h2>Testi "+(what[1]+1)+" ("+message+")</h2>";
+        verdict.innerHTML += render_tables(table_data[what[1]]);
         verdict.innerHTML += render_result(results[what[1]],"Haluttu tulos");
         verdict.innerHTML += render_result(plain,"Kyselysi tulos");
         my_test++;
@@ -137,7 +150,7 @@ function sql_result(result,what) {
 
 function sql_error(error,what) {
     var verdict = document.getElementById("verdict");
-    verdict.innerHTML += "<font color=red>Virhe kyselyssä:</font><br>"+error;
+    verdict.innerHTML += "<br><font color=red>Virhe kyselyssä:</font><br>"+error;
 }
 
 var tables, tests, results;
@@ -183,7 +196,7 @@ function read_task(file) {
     x.onreadystatechange = function() {
         if (x.readyState == 4 && x.status == 200) {
             parse_task(x.responseText);
-            my_table = 0;
+            my_test = my_table = 0;
             show_example();
         }
     }
@@ -191,22 +204,22 @@ function read_task(file) {
     x.send();
 }
 
-var my_table;
+var my_test, my_table;
 
 function show_example() {
+    if (my_test == 0 && my_table == 0) table_data = [];
+    if (my_table == 0) table_data.push([]);
     var context = "";
     for (var i = 0; i < tables.length; i++) {
         context += tables[i];
     }
-    for (var i = 0; i < tests[0].length; i++) {
-        context += tests[0][i];
+    for (var i = 0; i < tests[my_test].length; i++) {
+        context += tests[my_test][i];
     }
     var parts = tables[my_table].split(" ");
     var table = parts[2];
     sql_run(context,"SELECT * FROM "+table+";",["example",my_table]);
 }
-
-var my_test;
 
 function check_test() {
     var context = "";
