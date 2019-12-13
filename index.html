@@ -239,16 +239,6 @@ function check() {
     check_test();
 }
 
-function test() {
-    var query = document.getElementById("query").value;
-    var context = "";
-    context += "CREATE TABLE Tuotteet(id INTEGER PRIMARY KEY, nimi TEXT, hinta INTEGER);";
-    context += "INSERT INTO Tuotteet(nimi,hinta) VALUES ('selleri',5);";
-    context += "INSERT INTO Tuotteet(nimi,hinta) VALUES ('lanttu',8);";
-    context += "INSERT INTO Tuotteet(nimi,hinta) VALUES ('retiisi',4);";
-    sql_run(context,query);
-}
-
 read_task("tasks/task2.txt");
 
 </script>
