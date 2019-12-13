@@ -30,10 +30,11 @@ function sql_run(context,query,what) {
     });
 }
 
-function render_table(data) {
+function render_table(data,name) {
     if (data.length == 0) return "";
     data = data[0];
     var table = "";
+    table += "<i>"+name+"</i>";
     table += "<table border>";
     table += "<tr>";
     for (var i = 0; i < data.columns.length; i++) {
@@ -57,7 +58,7 @@ function render_tables(data) {
     html += "<table><tr valign=top>";
     for (var i = 0; i < data.length; i++) {
         if (i != 0) html += "<td width=20></td>";
-        html += "<td>"+render_table(data[i])+"</td>";
+        html += "<td>"+render_table(data[i],table_names[i])+"</td>";
     }
     html += "</tr></table>";
     html += "</fieldset>";
@@ -110,6 +111,7 @@ function same(a,b) {
     return true;
 }
 
+var table_names = [];
 var table_data;
 
 function sql_result(result,what) {
@@ -218,6 +220,7 @@ function show_example() {
     }
     var parts = tables[my_table].split(" ");
     var table = parts[2];
+    table_names.push(table);
     sql_run(context,"SELECT * FROM "+table+";",["example",my_table]);
 }
 
