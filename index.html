@@ -1,7 +1,9 @@
 <meta charset="utf-8">
-<body style="max-width:800px">
+<body>
 <h1>SQL Trainer</h1>
-<h2>Tehtävä</h2>
+<table>
+<tr valign=top><td width=800>
+<h2>Tehtävä <span id="which"></span></h2>
 <p id="task"></p>
 <h2>Esimerkki</h2>
 <div id="example"></div>
@@ -10,17 +12,33 @@
 Kysely:<br>
 <textarea rows=5 cols=80 id=query>SELECT O.nimi, COUNT(K.id) FROM Opettajat O, Kurssit K WHERE K.opettaja_id = O.id GROUP BY O.id;</textarea>
 <br><br>
-<button onclick="check();">Tarkasta</button>
+<button id="submit" onclick="check();">Tarkasta</button>
+<span id="message"></span>
 <div id="verdict"></div>
+</td>
+<td width=20></td>
+<td>
+<div id="menu"></div>
+</td>
+</tr></table>
+
 <script src="dist/sql-wasm.js"></script>
 <script>
+
+function get(id) {
+    return document.getElementById(id);
+}
 
 function sql_run(context,query,what) {
     config = {locateFile: filename => `dist/${filename}`};
 
     initSqlJs(config).then(function(SQL){
         var db = new SQL.Database();
-        db.run(context);
+        try {
+            db.run(context);
+        } catch(error) {
+            alert("Virhe tehtävän määrittelyssä");
+        }
         try {
             var result = db.exec(query);
             sql_result(result,what);
@@ -97,6 +115,8 @@ function render_result(data,title) {
     return html;
 }
 
+var strict;
+
 function same(a,b) {
     if (a.length != b.length) return false;
     var c = [], d = [];
@@ -104,68 +124,80 @@ function same(a,b) {
         c.push(a[i]);
         d.push(b[i]);
     }
-    c.sort(); d.sort();
+    if (!strict) {
+        c.sort(); d.sort();
+    }
     for (var i = 0; i < a.length; i++) {
         if (c[i] != d[i]) return false;
     }
     return true;
 }
 
-var table_names = [];
+var table_names;
 var table_data;
+var all_correct;
 
 function sql_result(result,what) {
     if (what[0] == "example") {
         table_data[my_test].push(result);
         my_table++;
         if (my_table < tables.length) {
-            show_example();
+            process_task();
         } else {
             if (my_test == 0) {
                 var html = "";
                 html += render_tables(table_data[0]);
                 html += "<br>";
                 html += render_result(results[0],"Haluttu tulos");
-                document.getElementById("example").innerHTML = html;
+                get("example").innerHTML = html;
             }
             my_table = 0;
             my_test++;
             if (my_test < tests.length) {
-                show_example();
+                process_task();
+            } else {
+                get("submit").disabled = false;
             }
         }
     }
     if (what[0] == "test") {
-        var verdict = document.getElementById("verdict");
+        var verdict = get("verdict");
         var plain = render_plain(result);
         var correct = same(results[what[1]],plain);
+        if (!correct) all_correct = false;
         var message = correct ? "<font color=green>oikein</font>" : "<font color=red>väärin</font>";
         verdict.innerHTML += "<h2>Testi "+(what[1]+1)+" ("+message+")</h2>";
         verdict.innerHTML += render_tables(table_data[what[1]]);
         verdict.innerHTML += render_result(results[what[1]],"Haluttu tulos");
         verdict.innerHTML += render_result(plain,"Kyselysi tulos");
         my_test++;
-        if (my_test < tests.length) check_test();
+        if (all_correct && my_test < tests.length) {
+            check_test();
+        } else {
+            var message = all_correct ? "<font color=green>Kyselysi toimii oikein</font>" : "<font color=red>Kyselysi toimii väärin</font>";
+            get("message").innerHTML = message;
+        }
     }
 }
 
 
 function sql_error(error,what) {
-    var verdict = document.getElementById("verdict");
-    verdict.innerHTML += "<br><font color=red>Virhe kyselyssä:</font><br>"+error;
+    get("message").innerHTML = "<font color=red>Kyselysi on virheellinen</font>";
+    get("verdict").innerHTML = "<br>"+error;
 }
 
 var tables, tests, results;
-var tests;
 
 function parse_task(data) {
     var lines = data.split("\n");
     var mode = 0;
-    var task = document.getElementById("task");
+    var task = get("task");
     task.innerHTML = "";
     tables = [];
+    table_names = [];
     tests = [];
     results = [];
+    strict = false;
     for (var i = 0; i < lines.length; i++) {
         var line = lines[i].trim();
         if (line == "TASK") {
@@ -178,6 +210,8 @@ function parse_task(data) {
             results.push([]);
         } else if (line == "RESULT") {
             mode = 4;
+        } else if (line == "STRICT") {
+            strict = true;
         } else if (line == "") {
         } else {
             if (mode == 1) {
@@ -194,21 +228,22 @@ function parse_task(data) {
 }
 
 function read_task(file) {
+    get("submit").disabled = true;
     var x = new XMLHttpRequest();
     x.onreadystatechange = function() {
         if (x.readyState == 4 && x.status == 200) {
             parse_task(x.responseText);
             my_test = my_table = 0;
-            show_example();
+            process_task();
         }
     }
-    x.open("GET",file);
+    x.open("GET",file+"?"+(new Date().getTime()));
     x.send();
 }
 
 var my_test, my_table;
 
-function show_example() {
+function process_task() {
     if (my_test == 0 && my_table == 0) table_data = [];
     if (my_table == 0) table_data.push([]);
     var context = "";
@@ -232,16 +267,46 @@ function check_test() {
     for (var i = 0; i < tests[my_test].length; i++) {
         context += tests[my_test][i];
     }
-    var query = document.getElementById("query").value;
+    var query = get("query").value;
     sql_run(context,query,["test",my_test]);
 }
 
 function check() {
-    document.getElementById("verdict").innerHTML = "";
+    get("verdict").innerHTML = "";
+    get("message").innerHTML = "";
     my_test = 0;
+    all_correct = true;
     check_test();
 }
 
-read_task("tasks/task2.txt");
+var my_task;
+
+function create_menu() {
+    var html = "";
+    html += "<h2>Tehtävän valinta</h2>";
+    html += "<table border>";
+    for (var i = 1; i <= 100; i++) {
+        if (i%10 == 1) html += "<tr>";
+        var link = i == my_task ? "<b>"+i+"</b>" : "<a href=\"#\" onclick=\"show_task("+i+");\">"+i+"</a>";
+        html += "<td width=30>"+link+"</td>";
+        if (i%10 == 0) html += "</tr>";
+    }
+    html += "</table>";
+    get("menu").innerHTML = html;
+}
+
+function show_task(task) {
+    my_task = task;
+    get("query").value = "";
+    get("task").innerHTML = "";
+    get("example").innerHTML = "";
+    get("message").innerHTML = "";
+    get("verdict").innerHTML = "";
+    get("which").innerHTML = task;
+    read_task("tasks/task"+task+".txt");
+    create_menu();
+}
+
+show_task(1);
 
 </script>

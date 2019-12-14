@@ -25,8 +25,6 @@ INSERT INTO Kurssit (nimi,opettaja_id) VALUES ("Ohja",1);
 INSERT INTO Kurssit (nimi,opettaja_id) VALUES ("Tira",1);
 INSERT INTO Kurssit (nimi,opettaja_id) VALUES ("Lama",1);
 INSERT INTO Opettajat (nimi) VALUES ("Kaila");
-INSERT INTO Opettajat (nimi) VALUES ("Kivinen");
-INSERT INTO Opettajat (nimi) VALUES ("Laaksonen");
 
 RESULT
 Kaila|4
