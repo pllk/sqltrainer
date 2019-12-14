@@ -1,5 +1,5 @@
 TASK
-Hae kaikkien elokuvien nimet.
+Hae kaikki eri elokuvien julkaisuvuodet.
 
 TABLES
 CREATE TABLE Elokuvat (id INTEGER PRIMARY KEY, nimi TEXT, vuosi INTEGER);
@@ -12,11 +12,10 @@ INSERT INTO Elokuvat (nimi,vuosi) VALUES ('Dumbo',1941);
 INSERT INTO Elokuvat (nimi,vuosi) VALUES ('Bambi',1942);
 
 RESULT
-Lumikki
-Fantasia
-Pinocchio
-Dumbo
-Bambi
+1937
+1940
+1941
+1942
 
 TEST
 INSERT INTO Elokuvat (nimi,vuosi) VALUES ('Tuhkimo',1950);
@@ -25,7 +24,16 @@ INSERT INTO Elokuvat (nimi,vuosi) VALUES ('Aristokatit',1970);
 INSERT INTO Elokuvat (nimi,vuosi) VALUES ('Hiidenpata',1985);
 
 RESULT
-Tuhkimo
-Peter Pan
-Aristokatit
-Hiidenpata
+1950
+1953
+1970
+1985
+
+TEST
+INSERT INTO Elokuvat (nimi,vuosi) VALUES ('A',2000);
+INSERT INTO Elokuvat (nimi,vuosi) VALUES ('B',2000);
+INSERT INTO Elokuvat (nimi,vuosi) VALUES ('C',2000);
+INSERT INTO Elokuvat (nimi,vuosi) VALUES ('D',2000);
+
+RESULT
+2000

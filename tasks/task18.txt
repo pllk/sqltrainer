@@ -1,0 +1,26 @@
+TASK
+Hae jokaisesta maasta kaupunkien määrä.
+
+TABLES
+CREATE TABLE Kaupungit (id INTEGER PRIMARY KEY, nimi TEXT, maa TEXT);
+
+TEST
+INSERT INTO Kaupungit (nimi,maa) VALUES ('Helsinki','Suomi');
+INSERT INTO Kaupungit (nimi,maa) VALUES ('Tampere','Suomi');
+INSERT INTO Kaupungit (nimi,maa) VALUES ('Tukholma','Ruotsi');
+INSERT INTO Kaupungit (nimi,maa) VALUES ('Tartto','Viro');
+INSERT INTO Kaupungit (nimi,maa) VALUES ('Tallinna','Viro');
+
+RESULT
+Suomi|2
+Ruotsi|1
+Viro|2
+
+TEST
+INSERT INTO Kaupungit (nimi,maa) VALUES ('Helsinki','Suomi');
+INSERT INTO Kaupungit (nimi,maa) VALUES ('Tampere','Suomi');
+INSERT INTO Kaupungit (nimi,maa) VALUES ('Turku','Suomi');
+INSERT INTO Kaupungit (nimi,maa) VALUES ('Oulu','Suomi');
+
+RESULT
+Suomi|4

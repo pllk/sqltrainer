@@ -1,30 +1,31 @@
 TASK
-Ilmoita jokaisesta opettajasta, montako kurssia hän opettaa.
+Hae kaikkien elokuvien nimet ja julkaisuvuodet.
 
 TABLES
-CREATE TABLE Kurssit (id INTEGER PRIMARY KEY, nimi TEXT, opettaja_id INTEGER);
-CREATE TABLE Opettajat (id INTEGER PRIMARY KEY, nimi TEXT);
+CREATE TABLE Elokuvat (id INTEGER PRIMARY KEY, nimi TEXT, vuosi INTEGER);
 
 TEST
-INSERT INTO Kurssit (nimi,opettaja_id) VALUES ("Ohpe",1);
-INSERT INTO Kurssit (nimi,opettaja_id) VALUES ("Ohja",1);
-INSERT INTO Kurssit (nimi,opettaja_id) VALUES ("Tira",3);
-INSERT INTO Kurssit (nimi,opettaja_id) VALUES ("Lama",2);
-INSERT INTO Opettajat (nimi) VALUES ("Kaila");
-INSERT INTO Opettajat (nimi) VALUES ("Kivinen");
-INSERT INTO Opettajat (nimi) VALUES ("Laaksonen");
+INSERT INTO Elokuvat (nimi,vuosi) VALUES ('Lumikki',1937);
+INSERT INTO Elokuvat (nimi,vuosi) VALUES ('Fantasia',1940);
+INSERT INTO Elokuvat (nimi,vuosi) VALUES ('Pinocchio',1940);
+INSERT INTO Elokuvat (nimi,vuosi) VALUES ('Dumbo',1941);
+INSERT INTO Elokuvat (nimi,vuosi) VALUES ('Bambi',1942);
 
 RESULT
-Kaila|2
-Kivinen|1
-Laaksonen|1
+Lumikki|1937
+Fantasia|1940
+Pinocchio|1940
+Dumbo|1941
+Bambi|1942
 
 TEST
-INSERT INTO Kurssit (nimi,opettaja_id) VALUES ("Ohpe",1);
-INSERT INTO Kurssit (nimi,opettaja_id) VALUES ("Ohja",1);
-INSERT INTO Kurssit (nimi,opettaja_id) VALUES ("Tira",1);
-INSERT INTO Kurssit (nimi,opettaja_id) VALUES ("Lama",1);
-INSERT INTO Opettajat (nimi) VALUES ("Kaila");
+INSERT INTO Elokuvat (nimi,vuosi) VALUES ('Tuhkimo',1950);
+INSERT INTO Elokuvat (nimi,vuosi) VALUES ('Peter Pan',1953);
+INSERT INTO Elokuvat (nimi,vuosi) VALUES ('Aristokatit',1970);
+INSERT INTO Elokuvat (nimi,vuosi) VALUES ('Hiidenpata',1985);
 
 RESULT
-Kaila|4
+Tuhkimo|1950
+Peter Pan|1953
+Aristokatit|1970
+Hiidenpata|1985

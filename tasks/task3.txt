@@ -1,5 +1,5 @@
 TASK
-Hae kaikkien elokuvien nimet.
+Hae kaikkien vuonna 1940 julkaistujen elokuvien nimet.
 
 TABLES
 CREATE TABLE Elokuvat (id INTEGER PRIMARY KEY, nimi TEXT, vuosi INTEGER);
@@ -12,20 +12,13 @@ INSERT INTO Elokuvat (nimi,vuosi) VALUES ('Dumbo',1941);
 INSERT INTO Elokuvat (nimi,vuosi) VALUES ('Bambi',1942);
 
 RESULT
-Lumikki
 Fantasia
 Pinocchio
-Dumbo
-Bambi
 
 TEST
-INSERT INTO Elokuvat (nimi,vuosi) VALUES ('Tuhkimo',1950);
-INSERT INTO Elokuvat (nimi,vuosi) VALUES ('Peter Pan',1953);
+INSERT INTO Elokuvat (nimi,vuosi) VALUES ('Fantasia',1940);
 INSERT INTO Elokuvat (nimi,vuosi) VALUES ('Aristokatit',1970);
 INSERT INTO Elokuvat (nimi,vuosi) VALUES ('Hiidenpata',1985);
 
 RESULT
-Tuhkimo
-Peter Pan
-Aristokatit
-Hiidenpata
+Fantasia

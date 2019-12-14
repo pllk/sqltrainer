@@ -1,5 +1,7 @@
 TASK
-Hae kaikkien elokuvien nimet.
+Hae kaikkien elokuvien nimet käänteisessä aakkosjärjestyksessä.
+
+STRICT
 
 TABLES
 CREATE TABLE Elokuvat (id INTEGER PRIMARY KEY, nimi TEXT, vuosi INTEGER);
@@ -12,9 +14,9 @@ INSERT INTO Elokuvat (nimi,vuosi) VALUES ('Dumbo',1941);
 INSERT INTO Elokuvat (nimi,vuosi) VALUES ('Bambi',1942);
 
 RESULT
+Pinocchio
 Lumikki
 Fantasia
-Pinocchio
 Dumbo
 Bambi
 
@@ -27,5 +29,5 @@ INSERT INTO Elokuvat (nimi,vuosi) VALUES ('Hiidenpata',1985);
 RESULT
 Tuhkimo
 Peter Pan
-Aristokatit
 Hiidenpata
+Aristokatit

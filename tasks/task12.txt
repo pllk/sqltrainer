@@ -1,0 +1,32 @@
+TASK
+Hae jokainen erilainen nimi-julkaisuvuosi-yhdistelmä elokuvista.
+
+TABLES
+CREATE TABLE Elokuvat (id INTEGER PRIMARY KEY, nimi TEXT, vuosi INTEGER);
+
+TEST
+INSERT INTO Elokuvat (nimi,vuosi) VALUES ('Lumikki',1937);
+INSERT INTO Elokuvat (nimi,vuosi) VALUES ('Lumikki',1937);
+INSERT INTO Elokuvat (nimi,vuosi) VALUES ('Tuhkimo',1950);
+INSERT INTO Elokuvat (nimi,vuosi) VALUES ('Tuhkimo',1950);
+INSERT INTO Elokuvat (nimi,vuosi) VALUES ('Lumikki',2000);
+
+RESULT
+Lumikki|1937
+Tuhkimo|1950
+Lumikki|2000
+
+TEST
+INSERT INTO Elokuvat (nimi,vuosi) VALUES ('Aristokatit',1950);
+INSERT INTO Elokuvat (nimi,vuosi) VALUES ('Hiidenpata',1985);
+INSERT INTO Elokuvat (nimi,vuosi) VALUES ('Aristokatit',1970);
+INSERT INTO Elokuvat (nimi,vuosi) VALUES ('Tuhkimo',1950);
+INSERT INTO Elokuvat (nimi,vuosi) VALUES ('Aristokatit',1970);
+INSERT INTO Elokuvat (nimi,vuosi) VALUES ('Aristokatit',1970);
+INSERT INTO Elokuvat (nimi,vuosi) VALUES ('Hiidenpata',1985);
+
+RESULT
+Tuhkimo|1950
+Aristokatit|1950
+Aristokatit|1970
+Hiidenpata|1985

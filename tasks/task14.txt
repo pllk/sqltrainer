@@ -1,0 +1,22 @@
+TASK
+Hae niiden työntekijöiden määrä, joiden palkka on yli 2000.
+
+TABLES
+CREATE TABLE Tyontekijat (id INTEGER PRIMARY KEY, nimi TEXT, palkka INTEGER);
+
+TEST
+INSERT INTO Tyontekijat (nimi,palkka) VALUES ('Uolevi',2500);
+INSERT INTO Tyontekijat (nimi,palkka) VALUES ('Maija',3000);
+INSERT INTO Tyontekijat (nimi,palkka) VALUES ('Liisa',5000);
+INSERT INTO Tyontekijat (nimi,palkka) VALUES ('Kaaleppi',1500);
+
+RESULT
+3
+
+TEST
+INSERT INTO Tyontekijat (nimi,palkka) VALUES ('Kotivalo',2000);
+INSERT INTO Tyontekijat (nimi,palkka) VALUES ('Justiina',7000);
+INSERT INTO Tyontekijat (nimi,palkka) VALUES ('Vihtori',1000);
+
+RESULT
+1
