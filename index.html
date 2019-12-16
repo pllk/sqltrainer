@@ -1,4 +1,9 @@
 <meta charset="utf-8">
+<style>
+.task_button {width:30px;border-style:solid;border-width:1px;border-color:black;text-align:center;color:black;}
+
+a {text-decoration:none;color:black}
+</style>
 <body>
 <h1>SQL Trainer</h1>
 <table>
@@ -268,6 +273,7 @@ function check_test() {
         context += tests[my_test][i];
     }
     var query = get("query").value;
+    if (query.trim() == "") return;
     sql_run(context,query,["test",my_test]);
 }
 
@@ -284,11 +290,11 @@ var my_task;
 function create_menu() {
     var html = "";
     html += "<h2>Tehtävän valinta</h2>";
-    html += "<table border>";
+    html += "<table>";
     for (var i = 1; i <= 100; i++) {
         if (i%10 == 1) html += "<tr>";
-        var link = i == my_task ? "<b>"+i+"</b>" : "<a href=\"#\" onclick=\"show_task("+i+");\">"+i+"</a>";
-        html += "<td width=30>"+link+"</td>";
+        var link = i == my_task ? "<b>"+i+"</b>" : "<a href=\"#"+i+"\" onclick=\"show_task("+i+");\">"+i+"</a>";
+        html += "<td><div class=\"task_button\">"+link+"</div></td>";
         if (i%10 == 0) html += "</tr>";
     }
     html += "</table>";
@@ -307,6 +313,14 @@ function show_task(task) {
     create_menu();
 }
 
-show_task(1);
+function begin() {
+    var task = 1;
+    if (window.location.hash != "") {
+        task = parseInt(window.location.hash.substring(1));
+    }
+    show_task(task);
+}
+
+begin();
 
 </script>
