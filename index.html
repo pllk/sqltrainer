@@ -171,7 +171,7 @@ function sql_result(result,what) {
         verdict.innerHTML += render_result(results[what[1]],"Haluttu tulos");
         verdict.innerHTML += render_result(plain,"Kyselysi tulos");
         my_test++;
-        if (all_correct && my_test < tests.length) {
+        if (my_test < tests.length) {
             check_test();
         } else {
             var message = all_correct ? "<font color=green>Kyselysi toimii oikein</font>" : "<font color=red>Kyselysi toimii väärin</font>";
