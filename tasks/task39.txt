@@ -1,0 +1,39 @@
+TASK
+Hae nimet kaikista kursseista, joita ei ole suoritettu kertaakaan.
+
+TABLES
+CREATE TABLE Opiskelijat (id INTEGER PRIMARY KEY, nimi TEXT);
+CREATE TABLE Kurssit (id INTEGER PRIMARY KEY, nimi TEXT);
+CREATE TABLE Suoritukset (opiskelija_id INTEGER, kurssi_id INTEGER, arvosana INTEGER);
+
+TEST
+INSERT INTO Opiskelijat (nimi) VALUES ('Uolevi');
+INSERT INTO Opiskelijat (nimi) VALUES ('Maija');
+INSERT INTO Opiskelijat (nimi) VALUES ('Kaaleppi');
+INSERT INTO Kurssit (nimi) VALUES ('Ohpe');
+INSERT INTO Kurssit (nimi) VALUES ('Ohja');
+INSERT INTO Kurssit (nimi) VALUES ('Tira');
+INSERT INTO Kurssit (nimi) VALUES ('Lama');
+INSERT INTO Suoritukset (opiskelija_id,kurssi_id,arvosana) VALUES (1,1,3);
+INSERT INTO Suoritukset (opiskelija_id,kurssi_id,arvosana) VALUES (1,2,4);
+INSERT INTO Suoritukset (opiskelija_id,kurssi_id,arvosana) VALUES (2,1,2);
+INSERT INTO Suoritukset (opiskelija_id,kurssi_id,arvosana) VALUES (2,2,5);
+INSERT INTO Suoritukset (opiskelija_id,kurssi_id,arvosana) VALUES (3,4,4);
+
+RESULT
+Tira
+
+TEST
+INSERT INTO Opiskelijat (nimi) VALUES ('Uolevi');
+INSERT INTO Opiskelijat (nimi) VALUES ('Maija');
+INSERT INTO Opiskelijat (nimi) VALUES ('Kaaleppi');
+INSERT INTO Kurssit (nimi) VALUES ('Ohpe');
+INSERT INTO Kurssit (nimi) VALUES ('Ohja');
+INSERT INTO Kurssit (nimi) VALUES ('Tira');
+INSERT INTO Kurssit (nimi) VALUES ('Lama');
+INSERT INTO Suoritukset (opiskelija_id,kurssi_id,arvosana) VALUES (1,1,1);
+
+RESULT
+Ohja
+Tira
+Lama

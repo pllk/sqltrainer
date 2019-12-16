@@ -1,0 +1,33 @@
+TASK
+Ilmoita jokaisesta pelaajasta, montako tulosta hänellä on
+(myös vaikka ei olisi tuloksia).
+
+TABLES
+CREATE TABLE Pelaajat (id INTEGER PRIMARY KEY, nimi TEXT);
+CREATE TABLE Tulokset (id INTEGER PRIMARY KEY, pelaaja_id INTEGER, tulos INTEGER);
+
+TEST
+INSERT INTO Pelaajat (nimi) VALUES ('Uolevi');
+INSERT INTO Pelaajat (nimi) VALUES ('Maija');
+INSERT INTO Pelaajat (nimi) VALUES ('Kaaleppi');
+INSERT INTO Tulokset (pelaaja_id,tulos) VALUES (1,250);
+INSERT INTO Tulokset (pelaaja_id,tulos) VALUES (1,300);
+INSERT INTO Tulokset (pelaaja_id,tulos) VALUES (2,100);
+INSERT INTO Tulokset (pelaaja_id,tulos) VALUES (2,350);
+INSERT INTO Tulokset (pelaaja_id,tulos) VALUES (2,500);
+
+RESULT
+Uolevi|2
+Maija|3
+Kaaleppi|0
+
+TEST
+INSERT INTO Pelaajat (nimi) VALUES ('Uolevi');
+INSERT INTO Pelaajat (nimi) VALUES ('Maija');
+INSERT INTO Pelaajat (nimi) VALUES ('Kaaleppi');
+INSERT INTO Tulokset (pelaaja_id,tulos) VALUES (3,100);
+
+RESULT
+Uolevi|0
+Maija|0
+Kaaleppi|0

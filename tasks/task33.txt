@@ -1,0 +1,37 @@
+TASK
+Hae tiedot kaikista lentoyhteyksistä.
+
+TABLES
+CREATE TABLE Kaupungit (id INTEGER PRIMARY KEY, nimi TEXT);
+CREATE TABLE Lennot (id INTEGER PRIMARY KEY, mista_id INTEGER, minne_id INTEGER);
+
+TEST
+INSERT INTO Kaupungit (nimi) VALUES ('Helsinki');
+INSERT INTO Kaupungit (nimi) VALUES ('Tukholma');
+INSERT INTO Kaupungit (nimi) VALUES ('Oslo');
+INSERT INTO Kaupungit (nimi) VALUES ('Turku');
+INSERT INTO Lennot (mista_id, minne_id) VALUES (1,2);
+INSERT INTO Lennot (mista_id, minne_id) VALUES (1,3);
+INSERT INTO Lennot (mista_id, minne_id) VALUES (2,3);
+INSERT INTO Lennot (mista_id, minne_id) VALUES (2,4);
+
+RESULT
+Helsinki|Tukholma
+Helsinki|Oslo
+Tukholma|Oslo
+Tukholma|Turku
+
+TEST
+INSERT INTO Kaupungit (nimi) VALUES ('Helsinki');
+INSERT INTO Kaupungit (nimi) VALUES ('Tukholma');
+INSERT INTO Kaupungit (nimi) VALUES ('Oslo');
+INSERT INTO Lennot (mista_id, minne_id) VALUES (1,2);
+INSERT INTO Lennot (mista_id, minne_id) VALUES (2,1);
+INSERT INTO Lennot (mista_id, minne_id) VALUES (1,3);
+INSERT INTO Lennot (mista_id, minne_id) VALUES (3,1);
+
+RESULT
+Helsinki|Tukholma
+Tukholma|Helsinki
+Helsinki|Oslo
+Oslo|Helsinki

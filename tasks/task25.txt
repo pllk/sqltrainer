@@ -1,0 +1,33 @@
+TASK
+Ilmoita jokaisesta pelaajasta, mikä on hänen paras tuloksensa.
+Voit olettaa, että jokaisella pelaajalla on ainakin yksi tulos.
+
+TABLES
+CREATE TABLE Pelaajat (id INTEGER PRIMARY KEY, nimi TEXT);
+CREATE TABLE Tulokset (id INTEGER PRIMARY KEY, pelaaja_id INTEGER, tulos INTEGER);
+
+TEST
+INSERT INTO Pelaajat (nimi) VALUES ('Uolevi');
+INSERT INTO Pelaajat (nimi) VALUES ('Maija');
+INSERT INTO Pelaajat (nimi) VALUES ('Kaaleppi');
+INSERT INTO Tulokset (pelaaja_id,tulos) VALUES (1,250);
+INSERT INTO Tulokset (pelaaja_id,tulos) VALUES (1,300);
+INSERT INTO Tulokset (pelaaja_id,tulos) VALUES (2,100);
+INSERT INTO Tulokset (pelaaja_id,tulos) VALUES (2,350);
+INSERT INTO Tulokset (pelaaja_id,tulos) VALUES (3,500);
+
+RESULT
+Uolevi|300
+Maija|350
+Kaaleppi|500
+
+TEST
+INSERT INTO Pelaajat (nimi) VALUES ('Uolevi');
+INSERT INTO Tulokset (pelaaja_id,tulos) VALUES (1,100);
+INSERT INTO Tulokset (pelaaja_id,tulos) VALUES (1,200);
+INSERT INTO Tulokset (pelaaja_id,tulos) VALUES (1,300);
+INSERT INTO Tulokset (pelaaja_id,tulos) VALUES (1,400);
+INSERT INTO Tulokset (pelaaja_id,tulos) VALUES (1,500);
+
+RESULT
+Uolevi|500

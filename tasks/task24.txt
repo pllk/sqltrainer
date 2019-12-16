@@ -1,0 +1,58 @@
+TASK
+Muodosta tuloslista, jossa näkyy kaikki tulokset järjestettynä ensisijaisesti
+käänteisesti pistemäärän mukaan ja toissijaisesti nimen mukaan.
+
+TABLES
+CREATE TABLE Pelaajat (id INTEGER PRIMARY KEY, nimi TEXT);
+CREATE TABLE Tulokset (id INTEGER PRIMARY KEY, pelaaja_id INTEGER, tulos INTEGER);
+
+TEST
+INSERT INTO Pelaajat (nimi) VALUES ('Uolevi');
+INSERT INTO Pelaajat (nimi) VALUES ('Maija');
+INSERT INTO Pelaajat (nimi) VALUES ('Kaaleppi');
+INSERT INTO Tulokset (pelaaja_id,tulos) VALUES (1,250);
+INSERT INTO Tulokset (pelaaja_id,tulos) VALUES (1,350);
+INSERT INTO Tulokset (pelaaja_id,tulos) VALUES (2,100);
+INSERT INTO Tulokset (pelaaja_id,tulos) VALUES (2,350);
+INSERT INTO Tulokset (pelaaja_id,tulos) VALUES (3,500);
+
+RESULT
+Kaaleppi|500
+Maija|350
+Uolevi|350
+Uolevi|250
+Maija|100
+
+TEST
+INSERT INTO Pelaajat (nimi) VALUES ('Uolevi');
+INSERT INTO Tulokset (pelaaja_id,tulos) VALUES (1,100);
+INSERT INTO Tulokset (pelaaja_id,tulos) VALUES (1,200);
+INSERT INTO Tulokset (pelaaja_id,tulos) VALUES (1,300);
+INSERT INTO Tulokset (pelaaja_id,tulos) VALUES (1,400);
+INSERT INTO Tulokset (pelaaja_id,tulos) VALUES (1,500);
+
+RESULT
+Uolevi|500
+Uolevi|400
+Uolevi|300
+Uolevi|200
+Uolevi|100
+
+TEST
+INSERT INTO Pelaajat (nimi) VALUES ('Uolevi');
+INSERT INTO Pelaajat (nimi) VALUES ('Maija');
+INSERT INTO Pelaajat (nimi) VALUES ('Kaaleppi');
+INSERT INTO Tulokset (pelaaja_id,tulos) VALUES (1,100);
+INSERT INTO Tulokset (pelaaja_id,tulos) VALUES (2,100);
+INSERT INTO Tulokset (pelaaja_id,tulos) VALUES (3,100);
+INSERT INTO Tulokset (pelaaja_id,tulos) VALUES (1,200);
+INSERT INTO Tulokset (pelaaja_id,tulos) VALUES (2,200);
+INSERT INTO Tulokset (pelaaja_id,tulos) VALUES (3,200);
+
+RESULT
+Kaaleppi|200
+Maija|200
+Uolevi|200
+Kaaleppi|100
+Maija|100
+Uolevi|100
