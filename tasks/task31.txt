@@ -36,10 +36,8 @@ INSERT INTO Suoritukset (opiskelija_id,kurssi_id,arvosana) VALUES (1,1,1);
 INSERT INTO Suoritukset (opiskelija_id,kurssi_id,arvosana) VALUES (2,1,1);
 INSERT INTO Suoritukset (opiskelija_id,kurssi_id,arvosana) VALUES (3,1,5);
 INSERT INTO Suoritukset (opiskelija_id,kurssi_id,arvosana) VALUES (3,2,5);
-INSERT INTO Suoritukset (opiskelija_id,kurssi_id,arvosana) VALUES (3,3,5);
-INSERT INTO Suoritukset (opiskelija_id,kurssi_id,arvosana) VALUES (3,4,5);
 
 RESULT
 Uolevi|1
 Maija|1
-Kaaleppi|4
+Kaaleppi|2

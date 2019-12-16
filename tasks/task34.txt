@@ -23,6 +23,7 @@ TEST
 INSERT INTO Kaupungit (nimi) VALUES ('Helsinki');
 INSERT INTO Kaupungit (nimi) VALUES ('Tukholma');
 INSERT INTO Kaupungit (nimi) VALUES ('Oslo');
+INSERT INTO Kaupungit (nimi) VALUES ('Turku');
 INSERT INTO Lennot (mista_id, minne_id) VALUES (1,4);
 INSERT INTO Lennot (mista_id, minne_id) VALUES (2,1);
 INSERT INTO Lennot (mista_id, minne_id) VALUES (3,1);

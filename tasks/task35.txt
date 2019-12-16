@@ -30,4 +30,4 @@ INSERT INTO Tulokset (pelaaja_id,tulos) VALUES (3,100);
 RESULT
 Uolevi|0
 Maija|0
-Kaaleppi|0
+Kaaleppi|1
