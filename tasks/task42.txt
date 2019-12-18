@@ -1,0 +1,24 @@
+TASK
+Hae kaikki tuotteet, joiden hinta on parillinen.
+
+TABLES
+CREATE TABLE Tuotteet (id INTEGER PRIMARY KEY, nimi TEXT, hinta INTEGER);
+
+TEST
+INSERT INTO Tuotteet (nimi,hinta) VALUES ('selleri',5);
+INSERT INTO Tuotteet (nimi,hinta) VALUES ('lanttu',8);
+INSERT INTO Tuotteet (nimi,hinta) VALUES ('nauris',7);
+INSERT INTO Tuotteet (nimi,hinta) VALUES ('porkkana',2);
+
+RESULT
+lanttu|8
+porkkana|2
+
+TEST
+INSERT INTO Tuotteet (nimi,hinta) VALUES ('ananas',4);
+INSERT INTO Tuotteet (nimi,hinta) VALUES ('banaani',8);
+INSERT INTO Tuotteet (nimi,hinta) VALUES ('peruna',5);
+
+RESULT
+ananas|4
+banaani|8

@@ -1,0 +1,21 @@
+TASK
+Laske kaikkien tilausten yhteishintojen summa.
+
+TABLES
+CREATE TABLE Tilaukset (id INTEGER PRIMARY KEY, tuote TEXT, hinta INTEGER, maara INTEGER);
+
+TEST
+INSERT INTO Tilaukset (tuote,hinta,maara) VALUES ('lanttu',4,10);
+INSERT INTO Tilaukset (tuote,hinta,maara) VALUES ('selleri',7,20);
+INSERT INTO Tilaukset (tuote,hinta,maara) VALUES ('nauris',5,15);
+
+RESULT
+255
+
+TEST
+INSERT INTO Tilaukset (tuote,hinta,maara) VALUES ('lanttu',4,1);
+INSERT INTO Tilaukset (tuote,hinta,maara) VALUES ('lanttu',4,10);
+INSERT INTO Tilaukset (tuote,hinta,maara) VALUES ('lanttu',4,100);
+
+RESULT
+444

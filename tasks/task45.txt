@@ -1,0 +1,32 @@
+TASK
+Hae sanat järjestettynä ensisijaisesti pituuden mukaan
+ja toissijaisesti aakkosjärjestyksen mukaan.
+
+STRICT
+
+TABLES
+CREATE TABLE Sanat (id INTEGER PRIMARY KEY, sana TEXT);
+
+TEST
+INSERT INTO Sanat (sana) VALUES ('banaani');
+INSERT INTO Sanat (sana) VALUES ('aakkonen');
+INSERT INTO Sanat (sana) VALUES ('cembalo');
+
+RESULT
+banaani
+cembalo
+aakkonen
+
+TEST
+INSERT INTO Sanat (sana) VALUES ('katu');
+INSERT INTO Sanat (sana) VALUES ('kala');
+INSERT INTO Sanat (sana) VALUES ('pelle');
+INSERT INTO Sanat (sana) VALUES ('apina');
+INSERT INTO Sanat (sana) VALUES ('hai');
+
+RESULT
+hai
+kala
+katu
+apina
+pelle

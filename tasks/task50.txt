@@ -1,0 +1,26 @@
+TASK
+Ilmoita jokaisesta sanan pituudesta,
+montako sellaista sanaa on.
+
+TABLES
+CREATE TABLE Sanat (id INTEGER PRIMARY KEY, sana TEXT);
+
+TEST
+INSERT INTO Sanat (sana) VALUES ('apina');
+INSERT INTO Sanat (sana) VALUES ('banaani');
+INSERT INTO Sanat (sana) VALUES ('cembalo');
+
+RESULT
+5|1
+7|2
+
+TEST
+INSERT INTO Sanat (sana) VALUES ('Uolevi');
+INSERT INTO Sanat (sana) VALUES ('Maija');
+INSERT INTO Sanat (sana) VALUES ('Kaaleppi');
+INSERT INTO Sanat (sana) VALUES ('Liisa');
+
+RESULT
+5|2
+6|1
+8|1

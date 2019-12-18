@@ -1,0 +1,27 @@
+TASK
+Hae jokaisen sanan pituus merkkeinä.
+
+TABLES
+CREATE TABLE Sanat (id INTEGER PRIMARY KEY, sana TEXT);
+
+TEST
+INSERT INTO Sanat (sana) VALUES ('apina');
+INSERT INTO Sanat (sana) VALUES ('banaani');
+INSERT INTO Sanat (sana) VALUES ('cembalo');
+
+RESULT
+apina|5
+banaani|7
+cembalo|7
+
+TEST
+INSERT INTO Sanat (sana) VALUES ('Uolevi');
+INSERT INTO Sanat (sana) VALUES ('Maija');
+INSERT INTO Sanat (sana) VALUES ('Kaaleppi');
+INSERT INTO Sanat (sana) VALUES ('Liisa');
+
+RESULT
+Uolevi|6
+Maija|5
+Kaaleppi|8
+Liisa|5

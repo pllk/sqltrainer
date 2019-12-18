@@ -1,0 +1,22 @@
+TASK
+Hae kaikkien sanojen yhteispituus.
+
+TABLES
+CREATE TABLE Sanat (id INTEGER PRIMARY KEY, sana TEXT);
+
+TEST
+INSERT INTO Sanat (sana) VALUES ('apina');
+INSERT INTO Sanat (sana) VALUES ('banaani');
+INSERT INTO Sanat (sana) VALUES ('cembalo');
+
+RESULT
+19
+
+TEST
+INSERT INTO Sanat (sana) VALUES ('Uolevi');
+INSERT INTO Sanat (sana) VALUES ('Maija');
+INSERT INTO Sanat (sana) VALUES ('Kaaleppi');
+INSERT INTO Sanat (sana) VALUES ('Liisa');
+
+RESULT
+24

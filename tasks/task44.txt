@@ -1,0 +1,23 @@
+TASK
+Hae kaikki sanat, joiden pituus on 7 merkkiä.
+
+TABLES
+CREATE TABLE Sanat (id INTEGER PRIMARY KEY, sana TEXT);
+
+TEST
+INSERT INTO Sanat (sana) VALUES ('apina');
+INSERT INTO Sanat (sana) VALUES ('banaani');
+INSERT INTO Sanat (sana) VALUES ('cembalo');
+
+RESULT
+banaani
+cembalo
+
+TEST
+INSERT INTO Sanat (sana) VALUES ('Uolevi');
+INSERT INTO Sanat (sana) VALUES ('Maija');
+INSERT INTO Sanat (sana) VALUES ('Vihtori');
+INSERT INTO Sanat (sana) VALUES ('Liisa');
+
+RESULT
+Vihtori
