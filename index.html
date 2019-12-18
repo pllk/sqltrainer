@@ -6,8 +6,9 @@ a {text-decoration:none;color:black}
 </style>
 <body onhashchange="begin()">
 <h1>SQL Trainer</h1>
-<table>
-<tr valign=top><td width=800>
+<div id="menu" style="float:right"></div>
+</div>
+<div style="max-width:800px">
 <h2>Tehtävä <span id="which"></span></h2>
 <p id="task"></p>
 <h2>Esimerkki</h2>
@@ -15,18 +16,14 @@ a {text-decoration:none;color:black}
 </fieldset>
 <h2>Lähetä vastaus</h2>
 Kysely:<br>
-<textarea rows=5 cols=80 id=query>SELECT O.nimi, COUNT(K.id) FROM Opettajat O, Kurssit K WHERE K.opettaja_id = O.id GROUP BY O.id;</textarea>
+<textarea rows=5 cols=80 id=query></textarea>
 <br><br>
 <button id="submit" onclick="check();">Tarkasta</button>
 <span id="message"></span>
 <div id="verdict"></div>
-</td>
-<td width=20></td>
-<td>
-<div id="menu"></div>
-</td>
-</tr></table>
-
+<hr>
+<p align="right">
+<img src="vanillajs.png">
 <script src="dist/sql-wasm.js"></script>
 <script>
 
@@ -317,6 +314,7 @@ function begin() {
     var task = 1;
     if (window.location.hash != "") {
         task = parseInt(window.location.hash.substring(1));
+        if (!(task >= 1 && task <= 100)) return;
     }
     show_task(task);
 }
