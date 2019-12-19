@@ -1,0 +1,36 @@
+TASK
+Hae kaikki tuotteet, joiden hintaa ei ole millään muulla tuotteella.
+
+TABLES
+CREATE TABLE Tuotteet (id INTEGER PRIMARY KEY, nimi TEXT, hinta INTEGER);
+
+TEST
+INSERT INTO Tuotteet (nimi,hinta) VALUES ('selleri',5);
+INSERT INTO Tuotteet (nimi,hinta) VALUES ('lanttu',3);
+INSERT INTO Tuotteet (nimi,hinta) VALUES ('retiisi',5);
+INSERT INTO Tuotteet (nimi,hinta) VALUES ('nauris',6);
+
+RESULT
+lanttu
+nauris
+
+TEST
+INSERT INTO Tuotteet (nimi,hinta) VALUES ('selleri',2);
+INSERT INTO Tuotteet (nimi,hinta) VALUES ('lanttu',2);
+INSERT INTO Tuotteet (nimi,hinta) VALUES ('retiisi',3);
+INSERT INTO Tuotteet (nimi,hinta) VALUES ('nauris',2);
+
+RESULT
+retiisi
+
+TEST
+INSERT INTO Tuotteet (nimi,hinta) VALUES ('selleri',1);
+INSERT INTO Tuotteet (nimi,hinta) VALUES ('lanttu',2);
+INSERT INTO Tuotteet (nimi,hinta) VALUES ('retiisi',3);
+INSERT INTO Tuotteet (nimi,hinta) VALUES ('nauris',4);
+
+RESULT
+selleri
+lanttu
+retiisi
+nauris

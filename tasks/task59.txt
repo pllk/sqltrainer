@@ -1,0 +1,30 @@
+TASK
+Hae jokaisesta tuotteesta tieto,
+monenko tuotteen hinta eroaa enintään yhdellä.
+
+TABLES
+CREATE TABLE Tuotteet (id INTEGER PRIMARY KEY, nimi TEXT, hinta INTEGER);
+
+TEST
+INSERT INTO Tuotteet (nimi,hinta) VALUES ('selleri',7);
+INSERT INTO Tuotteet (nimi,hinta) VALUES ('lanttu',4);
+INSERT INTO Tuotteet (nimi,hinta) VALUES ('retiisi',8);
+INSERT INTO Tuotteet (nimi,hinta) VALUES ('nauris',6);
+
+RESULT
+selleri|3
+lanttu|1
+retiisi|2
+nauris|2
+
+TEST
+INSERT INTO Tuotteet (nimi,hinta) VALUES ('selleri',7);
+INSERT INTO Tuotteet (nimi,hinta) VALUES ('lanttu',5);
+INSERT INTO Tuotteet (nimi,hinta) VALUES ('retiisi',8);
+INSERT INTO Tuotteet (nimi,hinta) VALUES ('nauris',3);
+
+RESULT
+selleri|2
+lanttu|1
+retiisi|2
+nauris|1

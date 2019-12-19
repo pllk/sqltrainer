@@ -1,0 +1,38 @@
+TASK
+Hae kaikki tuotteet, joiden hinta on enintään kaksinkertainen
+halvimpaan hintaan verrattuna.
+
+TABLES
+CREATE TABLE Tuotteet (id INTEGER PRIMARY KEY, nimi TEXT, hinta INTEGER);
+
+TEST
+INSERT INTO Tuotteet (nimi,hinta) VALUES ('selleri',7);
+INSERT INTO Tuotteet (nimi,hinta) VALUES ('lanttu',3);
+INSERT INTO Tuotteet (nimi,hinta) VALUES ('retiisi',5);
+INSERT INTO Tuotteet (nimi,hinta) VALUES ('nauris',6);
+
+RESULT
+lanttu
+retiisi
+nauris
+
+TEST
+INSERT INTO Tuotteet (nimi,hinta) VALUES ('selleri',7);
+INSERT INTO Tuotteet (nimi,hinta) VALUES ('lanttu',2);
+INSERT INTO Tuotteet (nimi,hinta) VALUES ('retiisi',5);
+INSERT INTO Tuotteet (nimi,hinta) VALUES ('nauris',6);
+
+RESULT
+lanttu
+
+TEST
+INSERT INTO Tuotteet (nimi,hinta) VALUES ('selleri',5);
+INSERT INTO Tuotteet (nimi,hinta) VALUES ('lanttu',6);
+INSERT INTO Tuotteet (nimi,hinta) VALUES ('retiisi',7);
+INSERT INTO Tuotteet (nimi,hinta) VALUES ('nauris',8);
+
+RESULT
+selleri
+lanttu
+retiisi
+nauris

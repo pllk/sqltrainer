@@ -1,0 +1,27 @@
+TASK
+Hae jokaisesta sanasta tieto, montako yhtä pitkää sanaa on.
+
+TABLES
+CREATE TABLE Sanat (id INTEGER PRIMARY KEY, sana TEXT);
+
+TEST
+INSERT INTO Sanat (sana) VALUES ('apina');
+INSERT INTO Sanat (sana) VALUES ('banaani');
+INSERT INTO Sanat (sana) VALUES ('cembalo');
+
+RESULT
+apina|1
+banaani|2
+cembalo|2
+
+TEST
+INSERT INTO Sanat (sana) VALUES ('apina');
+INSERT INTO Sanat (sana) VALUES ('apila');
+INSERT INTO Sanat (sana) VALUES ('koivu');
+INSERT INTO Sanat (sana) VALUES ('kuusi');
+
+RESULT
+apina|4
+apila|4
+koivu|4
+kuusi|4

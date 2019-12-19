@@ -1,0 +1,22 @@
+TASK
+Hae aakkosjärjestyksessä toinen sana.
+
+TABLES
+CREATE TABLE Sanat (id INTEGER PRIMARY KEY, sana TEXT);
+
+TEST
+INSERT INTO Sanat (sana) VALUES ('apina');
+INSERT INTO Sanat (sana) VALUES ('banaani');
+INSERT INTO Sanat (sana) VALUES ('cembalo');
+
+RESULT
+banaani
+
+TEST
+INSERT INTO Sanat (sana) VALUES ('apina');
+INSERT INTO Sanat (sana) VALUES ('apila');
+INSERT INTO Sanat (sana) VALUES ('koivu');
+INSERT INTO Sanat (sana) VALUES ('kuusi');
+
+RESULT
+apina

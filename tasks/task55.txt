@@ -1,0 +1,28 @@
+TASK
+Hae jokaisesta sanasta tieto, montako sanaa on aakkosjärjestyksessä
+sanan jälkeen.
+
+TABLES
+CREATE TABLE Sanat (id INTEGER PRIMARY KEY, sana TEXT);
+
+TEST
+INSERT INTO Sanat (sana) VALUES ('apina');
+INSERT INTO Sanat (sana) VALUES ('banaani');
+INSERT INTO Sanat (sana) VALUES ('cembalo');
+
+RESULT
+apina|2
+banaani|1
+cembalo|0
+
+TEST
+INSERT INTO Sanat (sana) VALUES ('apina');
+INSERT INTO Sanat (sana) VALUES ('apila');
+INSERT INTO Sanat (sana) VALUES ('koivu');
+INSERT INTO Sanat (sana) VALUES ('kuusi');
+
+RESULT
+apina|2
+apila|3
+koivu|1
+kuusi|0

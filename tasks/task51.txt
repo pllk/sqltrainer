@@ -1,0 +1,36 @@
+TASK
+Hae kaikki tuotteet, joiden hinta on halvin hinta.
+
+TABLES
+CREATE TABLE Tuotteet (id INTEGER PRIMARY KEY, nimi TEXT, hinta INTEGER);
+
+TEST
+INSERT INTO Tuotteet (nimi,hinta) VALUES ('selleri',7);
+INSERT INTO Tuotteet (nimi,hinta) VALUES ('lanttu',5);
+INSERT INTO Tuotteet (nimi,hinta) VALUES ('retiisi',8);
+INSERT INTO Tuotteet (nimi,hinta) VALUES ('nauris',5);
+
+RESULT
+lanttu
+nauris
+
+TEST
+INSERT INTO Tuotteet (nimi,hinta) VALUES ('selleri',7);
+INSERT INTO Tuotteet (nimi,hinta) VALUES ('lanttu',5);
+INSERT INTO Tuotteet (nimi,hinta) VALUES ('retiisi',8);
+INSERT INTO Tuotteet (nimi,hinta) VALUES ('nauris',6);
+
+RESULT
+lanttu
+
+TEST
+INSERT INTO Tuotteet (nimi,hinta) VALUES ('selleri',5);
+INSERT INTO Tuotteet (nimi,hinta) VALUES ('lanttu',5);
+INSERT INTO Tuotteet (nimi,hinta) VALUES ('retiisi',5);
+INSERT INTO Tuotteet (nimi,hinta) VALUES ('nauris',5);
+
+RESULT
+selleri
+lanttu
+retiisi
+nauris
