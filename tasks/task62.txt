@@ -1,0 +1,25 @@
+TASK
+Hae kaikki sanat, joissa on tasan viisi kirjainta
+ja toinen kirjain on p.
+
+TABLES
+CREATE TABLE Sanat (id INTEGER PRIMARY KEY, sana TEXT);
+
+TEST
+INSERT INTO Sanat (sana) VALUES ('apina');
+INSERT INTO Sanat (sana) VALUES ('banaani');
+INSERT INTO Sanat (sana) VALUES ('cembalo');
+
+RESULT
+apina
+
+TEST
+INSERT INTO Sanat (sana) VALUES ('apina');
+INSERT INTO Sanat (sana) VALUES ('koivu');
+INSERT INTO Sanat (sana) VALUES ('kuusi');
+INSERT INTO Sanat (sana) VALUES ('oppia');
+INSERT INTO Sanat (sana) VALUES ('oppilas');
+
+RESULT
+apina
+oppia

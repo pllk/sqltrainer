@@ -1,0 +1,30 @@
+TASK
+Laske, monellako tavalla voit valita kaksi tuotetta niin,
+että yhteishinta on tasan 10.
+
+TABLES
+CREATE TABLE Tuotteet (id INTEGER PRIMARY KEY, nimi TEXT, hinta INTEGER);
+
+TEST
+INSERT INTO Tuotteet (nimi,hinta) VALUES ('selleri',5);
+INSERT INTO Tuotteet (nimi,hinta) VALUES ('lanttu',3);
+INSERT INTO Tuotteet (nimi,hinta) VALUES ('retiisi',8);
+INSERT INTO Tuotteet (nimi,hinta) VALUES ('nauris',7);
+
+RESULT
+2
+
+TEST
+INSERT INTO Tuotteet (nimi,hinta) VALUES ('a',1);
+INSERT INTO Tuotteet (nimi,hinta) VALUES ('b',2);
+INSERT INTO Tuotteet (nimi,hinta) VALUES ('c',3);
+INSERT INTO Tuotteet (nimi,hinta) VALUES ('d',4);
+INSERT INTO Tuotteet (nimi,hinta) VALUES ('e',5);
+INSERT INTO Tuotteet (nimi,hinta) VALUES ('f',6);
+INSERT INTO Tuotteet (nimi,hinta) VALUES ('g',7);
+INSERT INTO Tuotteet (nimi,hinta) VALUES ('h',8);
+INSERT INTO Tuotteet (nimi,hinta) VALUES ('i',9);
+INSERT INTO Tuotteet (nimi,hinta) VALUES ('j',10);
+
+RESULT
+5

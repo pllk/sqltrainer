@@ -1,0 +1,48 @@
+TASK
+Laske Uolevin tilin saldon historia.
+
+STRICT
+
+TABLES
+CREATE TABLE Tilit (id INTEGER PRIMARY KEY, haltija TEXT);
+CREATE TABLE Tapahtumat (id INTEGER PRIMARY KEY, tili_id INTEGER, muutos INTEGER);
+
+TEST
+INSERT INTO Tilit (haltija) VALUES ('Uolevi');
+INSERT INTO Tilit (haltija) VALUES ('Maija');
+INSERT INTO Tilit (haltija) VALUES ('Kaaleppi');
+INSERT INTO Tapahtumat (tili_id,muutos) VALUES (1,500);
+INSERT INTO Tapahtumat (tili_id,muutos) VALUES (2,300);
+INSERT INTO Tapahtumat (tili_id,muutos) VALUES (1,-100);
+INSERT INTO Tapahtumat (tili_id,muutos) VALUES (2,100);
+INSERT INTO Tapahtumat (tili_id,muutos) VALUES (2,-300);
+
+RESULT
+500
+400
+
+TEST
+INSERT INTO Tilit (haltija) VALUES ('Uolevi');
+INSERT INTO Tilit (haltija) VALUES ('Maija');
+INSERT INTO Tilit (haltija) VALUES ('Kaaleppi');
+INSERT INTO Tapahtumat (tili_id,muutos) VALUES (1,100);
+INSERT INTO Tapahtumat (tili_id,muutos) VALUES (1,200);
+INSERT INTO Tapahtumat (tili_id,muutos) VALUES (1,300);
+INSERT INTO Tapahtumat (tili_id,muutos) VALUES (1,400);
+INSERT INTO Tapahtumat (tili_id,muutos) VALUES (1,-500);
+
+RESULT
+100
+300
+600
+1000
+500
+
+TEST
+INSERT INTO Tilit (haltija) VALUES ('Maija');
+INSERT INTO Tilit (haltija) VALUES ('Uolevi');
+INSERT INTO Tapahtumat (tili_id,muutos) VALUES (1,100);
+INSERT INTO Tapahtumat (tili_id,muutos) VALUES (2,200);
+
+RESULT
+200

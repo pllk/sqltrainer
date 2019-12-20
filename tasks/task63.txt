@@ -1,0 +1,26 @@
+TASK
+Hae kaikki sanat, joissa on ainakin kaksi a-kirjainta.
+
+TABLES
+CREATE TABLE Sanat (id INTEGER PRIMARY KEY, sana TEXT);
+
+TEST
+INSERT INTO Sanat (sana) VALUES ('apina');
+INSERT INTO Sanat (sana) VALUES ('banaani');
+INSERT INTO Sanat (sana) VALUES ('cembalo');
+
+RESULT
+apina
+banaani
+
+TEST
+INSERT INTO Sanat (sana) VALUES ('apina');
+INSERT INTO Sanat (sana) VALUES ('maa');
+INSERT INTO Sanat (sana) VALUES ('katu');
+INSERT INTO Sanat (sana) VALUES ('puu');
+INSERT INTO Sanat (sana) VALUES ('vaara');
+
+RESULT
+apina
+maa
+vaara

@@ -1,0 +1,23 @@
+TASK
+Laske, mikä on pienin ero kahden tuotteen hinnassa.
+
+TABLES
+CREATE TABLE Tuotteet (id INTEGER PRIMARY KEY, nimi TEXT, hinta INTEGER);
+
+TEST
+INSERT INTO Tuotteet (nimi,hinta) VALUES ('selleri',5);
+INSERT INTO Tuotteet (nimi,hinta) VALUES ('lanttu',3);
+INSERT INTO Tuotteet (nimi,hinta) VALUES ('retiisi',8);
+INSERT INTO Tuotteet (nimi,hinta) VALUES ('nauris',7);
+
+RESULT
+1
+
+TEST
+INSERT INTO Tuotteet (nimi,hinta) VALUES ('selleri',1);
+INSERT INTO Tuotteet (nimi,hinta) VALUES ('lanttu',7);
+INSERT INTO Tuotteet (nimi,hinta) VALUES ('retiisi',15);
+INSERT INTO Tuotteet (nimi,hinta) VALUES ('nauris',18);
+
+RESULT
+3

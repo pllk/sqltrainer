@@ -1,0 +1,54 @@
+TASK
+Laske, montako eri tehtävää kukin opiskelija on ratkaissut oikein
+(lähetyksen tila on 0 = väärin tai 1 = oikein).
+
+TABLES
+CREATE TABLE Opiskelijat (id INTEGER PRIMARY KEY, nimi TEXT);
+CREATE TABLE Tehtavat (id INTEGER PRIMARY KEY, nimi TEXT);
+CREATE TABLE Lahetykset (id INTEGER PRIMARY KEY, opiskelija_id INTEGER, tehtava_id INTEGER, tila INTEGER);
+
+TEST
+INSERT INTO Opiskelijat (nimi) VALUES ('Uolevi');
+INSERT INTO Opiskelijat (nimi) VALUES ('Maija');
+INSERT INTO Opiskelijat (nimi) VALUES ('Kaaleppi');
+INSERT INTO Tehtavat (nimi) VALUES ('T1');
+INSERT INTO Tehtavat (nimi) VALUES ('T2');
+INSERT INTO Tehtavat (nimi) VALUES ('T3');
+INSERT INTO Lahetykset (opiskelija_id,tehtava_id,tila) VALUES (1,1,0);
+INSERT INTO Lahetykset (opiskelija_id,tehtava_id,tila) VALUES (1,1,0);
+INSERT INTO Lahetykset (opiskelija_id,tehtava_id,tila) VALUES (2,1,1);
+INSERT INTO Lahetykset (opiskelija_id,tehtava_id,tila) VALUES (1,2,0);
+INSERT INTO Lahetykset (opiskelija_id,tehtava_id,tila) VALUES (1,1,1);
+INSERT INTO Lahetykset (opiskelija_id,tehtava_id,tila) VALUES (2,2,1);
+INSERT INTO Lahetykset (opiskelija_id,tehtava_id,tila) VALUES (2,3,0);
+INSERT INTO Lahetykset (opiskelija_id,tehtava_id,tila) VALUES (1,2,0);
+INSERT INTO Lahetykset (opiskelija_id,tehtava_id,tila) VALUES (1,2,1);
+INSERT INTO Lahetykset (opiskelija_id,tehtava_id,tila) VALUES (2,2,1);
+INSERT INTO Lahetykset (opiskelija_id,tehtava_id,tila) VALUES (2,2,1);
+
+RESULT
+Uolevi|2
+Maija|2
+Kaaleppi|0
+
+TEST
+INSERT INTO Opiskelijat (nimi) VALUES ('Uolevi');
+INSERT INTO Opiskelijat (nimi) VALUES ('Maija');
+INSERT INTO Opiskelijat (nimi) VALUES ('Kaaleppi');
+INSERT INTO Tehtavat (nimi) VALUES ('T1');
+INSERT INTO Tehtavat (nimi) VALUES ('T2');
+INSERT INTO Tehtavat (nimi) VALUES ('T3');
+INSERT INTO Lahetykset (opiskelija_id,tehtava_id,tila) VALUES (1,1,1);
+INSERT INTO Lahetykset (opiskelija_id,tehtava_id,tila) VALUES (1,2,1);
+INSERT INTO Lahetykset (opiskelija_id,tehtava_id,tila) VALUES (1,3,1);
+INSERT INTO Lahetykset (opiskelija_id,tehtava_id,tila) VALUES (2,1,0);
+INSERT INTO Lahetykset (opiskelija_id,tehtava_id,tila) VALUES (2,2,0);
+INSERT INTO Lahetykset (opiskelija_id,tehtava_id,tila) VALUES (2,3,0);
+INSERT INTO Lahetykset (opiskelija_id,tehtava_id,tila) VALUES (1,2,1);
+INSERT INTO Lahetykset (opiskelija_id,tehtava_id,tila) VALUES (1,3,1);
+INSERT INTO Lahetykset (opiskelija_id,tehtava_id,tila) VALUES (3,3,1);
+
+RESULT
+Uolevi|3
+Maija|0
+Kaaleppi|1
