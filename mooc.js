@@ -1,19 +1,17 @@
-<div id="test"></div>
-<script>
 var client_id = "50c4648f34bb075578c383ec62d6908fa49b6986d992c34a2a029be777e0337e";
 var client_secret = "d15d4d4ba2b80a91aaff7a5c94d30fe65c87b058991a327a5de4dfe71f7c5576";
-var login = 0;
-var token;
+var mooc_status = 0;
+var mooc_token;
 
-function mooc_login(username,password) {
+function mooc_login(username,password,callback) {
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
         if (this.readyState == 4) {
-            login = this.status == 200 ? 1 : 2;
-            document.getElementById("test").innerHTML = this.responseText;
-            if (login == 1) {
-                token = JSON.parse(this.responseText)["access_token"]
+            mooc_status = this.status == 200 ? 1 : 2;
+            if (mooc_status == 1) {
+                mooc_token = JSON.parse(this.responseText)["access_token"];
             }
+            callback();
         }
     }
     xhttp.open("POST","https://tmc.mooc.fi/oauth/token",true);
@@ -25,24 +23,20 @@ function mooc_login(username,password) {
                "grant_type=password"); 
 }
 
-function mooc_query(query) {
+function mooc_logout(callback) {
+    mooc_status = 0;
+    mooc_token = "";
+    callback();
+}
+
+function mooc_query(query,callback) {
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
-            document.getElementById("test").innerHTML = this.responseText;
+            callback(JSON.parse(this.responseText));
         }
     }
     xhttp.open("GET",query,true);
-    xhttp.setRequestHeader("Authorization","Bearer "+token);
+    xhttp.setRequestHeader("Authorization","Bearer "+mooc_token);
     xhttp.send();
 }
-
-function test() {
-    mooc_login("pllk","a");
-}
-function lol() {
-    mooc_query("https://tmc.mooc.fi/api/v8/users/current");
-}
-</script>
-<button onclick="test()">Test</button>
-<button onclick="lol()">Lol</button>

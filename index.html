@@ -28,6 +28,7 @@ Kysely:<br>
 <p align="right">
 <img src="vanillajs.png">
 <script src="dist/sql-wasm.js"></script>
+<script src="mooc.js"></script>
 <script>
 
 function get(id) {
@@ -287,6 +288,18 @@ function check() {
 
 var my_task;
 
+function start_login() {
+    mooc_login(get("username").value,get("password").value,end_login);
+}
+
+function end_login(result) {
+    if (mooc_status == 2) {
+        alert("Tunnus tai salasana ei ole oikea");
+        mooc_status = 0;
+    }
+    create_menu();    
+}
+
 function create_menu() {
     var html = "";
     html += "<h2>Tehtävän valinta</h2>";
@@ -298,6 +311,16 @@ function create_menu() {
         if (i%10 == 0) html += "</tr>";
     }
     html += "</table>";
+    html += "<h2>Kirjautuminen</h2>";
+    if (mooc_status != 1) {
+        html += "<p>Voit kirjautua sisään mooc.fi-tunnuksella:</p>";
+        html += "Tunnus:<br><input type=text id=\"username\"><br>";
+        html += "Salasana:<br><input type=password id=\"password\"><br>";
+        html += "<br><button onclick=\"start_login()\">Kirjaudu sisään</button>";
+    } else {
+        html += "<p>Olet kirjautunut sisään.</p>";
+        html += "<button onclick=\"mooc_logout(create_menu)\">Kirjaudu ulos</button>";
+    }
     get("menu").innerHTML = html;
 }
 
