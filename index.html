@@ -300,6 +300,10 @@ function end_login(result) {
     create_menu();    
 }
 
+function check_submit(event) {
+    if (event.keyCode == 13) start_login();
+}
+
 function create_menu() {
     var html = "";
     html += "<h2>Tehtävän valinta</h2>";
@@ -314,8 +318,8 @@ function create_menu() {
     html += "<h2>Kirjautuminen</h2>";
     if (mooc_status != 1) {
         html += "<p>Voit kirjautua sisään mooc.fi-tunnuksella:</p>";
-        html += "Tunnus:<br><input type=text id=\"username\"><br>";
-        html += "Salasana:<br><input type=password id=\"password\"><br>";
+        html += "Tunnus:<br><input onkeyup=\"check_submit(event)\" type=text id=\"username\"><br>";
+        html += "Salasana:<br><input onkeyup=\"check_submit(event)\" type=password id=\"password\"><br>";
         html += "<br><button onclick=\"start_login()\">Kirjaudu sisään</button>";
     } else {
         html += "<p>Olet kirjautunut sisään.</p>";
