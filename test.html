@@ -1,0 +1,48 @@
+<div id="test"></div>
+<script>
+var client_id = "50c4648f34bb075578c383ec62d6908fa49b6986d992c34a2a029be777e0337e";
+var client_secret = "d15d4d4ba2b80a91aaff7a5c94d30fe65c87b058991a327a5de4dfe71f7c5576";
+var login = 0;
+var token;
+
+function mooc_login(username,password) {
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4) {
+            login = this.status == 200 ? 1 : 2;
+            document.getElementById("test").innerHTML = this.responseText;
+            if (login == 1) {
+                token = JSON.parse(this.responseText)["access_token"]
+            }
+        }
+    }
+    xhttp.open("POST","https://tmc.mooc.fi/oauth/token",true);
+    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhttp.send("client_id="+client_id+"&"+
+               "client_secret="+client_secret+"&"+
+               "username="+encodeURIComponent(username)+"&"+
+               "password="+encodeURIComponent(password)+"&"+
+               "grant_type=password"); 
+}
+
+function mooc_query(query) {
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            document.getElementById("test").innerHTML = this.responseText;
+        }
+    }
+    xhttp.open("GET",query,true);
+    xhttp.setRequestHeader("Authorization","Bearer "+token);
+    xhttp.send();
+}
+
+function test() {
+    mooc_login("pllk","a");
+}
+function lol() {
+    mooc_query("https://tmc.mooc.fi/api/v8/users/current");
+}
+</script>
+<button onclick="test()">Test</button>
+<button onclick="lol()">Lol</button>
