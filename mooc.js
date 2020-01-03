@@ -10,6 +10,7 @@ function mooc_login(username,password,callback) {
             mooc_status = this.status == 200 ? 1 : 2;
             if (mooc_status == 1) {
                 mooc_token = JSON.parse(this.responseText)["access_token"];
+                sessionStorage.setItem("mooc_token",mooc_token);
             }
             callback();
         }
@@ -26,6 +27,7 @@ function mooc_login(username,password,callback) {
 function mooc_logout(callback) {
     mooc_status = 0;
     mooc_token = "";
+    sessionStorage.clear();
     callback();
 }
 
@@ -39,4 +41,9 @@ function mooc_query(query,callback) {
     xhttp.open("GET",query,true);
     xhttp.setRequestHeader("Authorization","Bearer "+mooc_token);
     xhttp.send();
+}
+
+if (sessionStorage.getItem("mooc_token")) {
+    mooc_status = 1;
+    mooc_token = sessionStorage.getItem("mooc_token");
 }
