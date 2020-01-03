@@ -310,8 +310,8 @@ function create_menu() {
     html += "<table>";
     for (var i = 1; i <= 100; i++) {
         if (i%10 == 1) html += "<tr>";
-        var link = i == my_task ? "<b>"+i+"</b>" : "<a href=\"#"+i+"\" onclick=\"show_task("+i+");\">"+i+"</a>";
-        html += "<td><div class=\"task_button\">"+link+"</div></td>";
+        var link = i == my_task ? "<b>"+i+"</b>" : i;
+        html += "<td><div class=\"task_button\" style=\"cursor:pointer\" onclick=\"show_task("+i+")\">"+link+"</div></td>";
         if (i%10 == 0) html += "</tr>";
     }
     html += "</table>";
