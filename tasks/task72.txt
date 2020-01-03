@@ -1,0 +1,29 @@
+TASK
+Laske tulosten <i>mediaani</i>
+(eli keskimmäinen tulos, kun tulokset on järjestetty pienimmästä suurimpaan).
+Voit olettaa, että tulosten määrä on pariton.
+
+TABLES
+CREATE TABLE Tulokset (id INTEGER PRIMARY KEY, tulos INTEGER);
+
+TEST
+INSERT INTO Tulokset (tulos) VALUES (5);
+INSERT INTO Tulokset (tulos) VALUES (2);
+INSERT INTO Tulokset (tulos) VALUES (3);
+INSERT INTO Tulokset (tulos) VALUES (5);
+INSERT INTO Tulokset (tulos) VALUES (2);
+INSERT INTO Tulokset (tulos) VALUES (6);
+INSERT INTO Tulokset (tulos) VALUES (5);
+
+RESULT
+5
+
+TEST
+INSERT INTO Tulokset (tulos) VALUES (3);
+INSERT INTO Tulokset (tulos) VALUES (4);
+INSERT INTO Tulokset (tulos) VALUES (2);
+INSERT INTO Tulokset (tulos) VALUES (4);
+INSERT INTO Tulokset (tulos) VALUES (3);
+
+RESULT
+3

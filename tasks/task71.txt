@@ -1,0 +1,29 @@
+TASK
+Laske tulosten <i>moodi</i> (eli yleisin tulos).
+Jos vaihtoehtoja on useita, valitse niistä pienin.
+
+TABLES
+CREATE TABLE Tulokset (id INTEGER PRIMARY KEY, tulos INTEGER);
+
+TEST
+INSERT INTO Tulokset (tulos) VALUES (2);
+INSERT INTO Tulokset (tulos) VALUES (2);
+INSERT INTO Tulokset (tulos) VALUES (3);
+INSERT INTO Tulokset (tulos) VALUES (5);
+INSERT INTO Tulokset (tulos) VALUES (5);
+INSERT INTO Tulokset (tulos) VALUES (5);
+INSERT INTO Tulokset (tulos) VALUES (6);
+
+RESULT
+5
+
+TEST
+INSERT INTO Tulokset (tulos) VALUES (2);
+INSERT INTO Tulokset (tulos) VALUES (3);
+INSERT INTO Tulokset (tulos) VALUES (3);
+INSERT INTO Tulokset (tulos) VALUES (4);
+INSERT INTO Tulokset (tulos) VALUES (4);
+INSERT INTO Tulokset (tulos) VALUES (7);
+
+RESULT
+3

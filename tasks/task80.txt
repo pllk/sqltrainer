@@ -1,0 +1,37 @@
+TASK
+Laske, monellako tavalla voidaan valita kaksi matkustajaa,
+jotka ovat samassa vaunussa.
+
+TABLES
+CREATE TABLE Vaunut (id INTEGER PRIMARY KEY, nimi TEXT, paikat INTEGER);
+CREATE TABLE Matkustajat (id INTEGER PRIMARY KEY, nimi TEXT, vaunu_id INTEGER);
+
+TEST
+INSERT INTO Vaunut (nimi,paikat) VALUES ("vaunu1",10);
+INSERT INTO Vaunut (nimi,paikat) VALUES ("vaunu2",10);
+INSERT INTO Vaunut (nimi,paikat) VALUES ("vaunu3",10);
+INSERT INTO Vaunut (nimi,paikat) VALUES ("vaunu4",10);
+INSERT INTO Matkustajat (nimi,vaunu_id) VALUES ("Uolevi",1);
+INSERT INTO Matkustajat (nimi,vaunu_id) VALUES ("Maija",1);
+INSERT INTO Matkustajat (nimi,vaunu_id) VALUES ("Kaaleppi",2);
+INSERT INTO Matkustajat (nimi,vaunu_id) VALUES ("Kotivalo",4);
+INSERT INTO Matkustajat (nimi,vaunu_id) VALUES ("Justiina",4);
+INSERT INTO Matkustajat (nimi,vaunu_id) VALUES ("Vihtori",4);
+
+RESULT
+4
+
+TEST
+INSERT INTO Vaunut (nimi,paikat) VALUES ("vaunu1",10);
+INSERT INTO Vaunut (nimi,paikat) VALUES ("vaunu2",10);
+INSERT INTO Vaunut (nimi,paikat) VALUES ("vaunu3",10);
+INSERT INTO Vaunut (nimi,paikat) VALUES ("vaunu4",10);
+INSERT INTO Matkustajat (nimi,vaunu_id) VALUES ("Uolevi",1);
+INSERT INTO Matkustajat (nimi,vaunu_id) VALUES ("Maija",1);
+INSERT INTO Matkustajat (nimi,vaunu_id) VALUES ("Kaaleppi",1);
+INSERT INTO Matkustajat (nimi,vaunu_id) VALUES ("Kotivalo",1);
+INSERT INTO Matkustajat (nimi,vaunu_id) VALUES ("Justiina",1);
+INSERT INTO Matkustajat (nimi,vaunu_id) VALUES ("Vihtori",4);
+
+RESULT
+10
