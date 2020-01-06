@@ -338,6 +338,7 @@ function show_task(task) {
     get("which").innerHTML = task;
     read_task("tasks/task"+task+".txt");
     create_menu();
+    window.location.hash = task;
 }
 
 function begin() {
