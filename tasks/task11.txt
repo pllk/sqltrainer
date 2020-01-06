@@ -1,39 +1,27 @@
 TASK
-Hae kaikki eri elokuvien julkaisuvuodet.
+Hae kaikki eri etunimet.
 
 TABLES
-CREATE TABLE Elokuvat (id INTEGER PRIMARY KEY, nimi TEXT, vuosi INTEGER);
+CREATE TABLE Nimet (id INTEGER PRIMARY KEY, etunimi TEXT, sukunimi TEXT);
 
 TEST
-INSERT INTO Elokuvat (nimi,vuosi) VALUES ('Lumikki',1937);
-INSERT INTO Elokuvat (nimi,vuosi) VALUES ('Fantasia',1940);
-INSERT INTO Elokuvat (nimi,vuosi) VALUES ('Pinocchio',1940);
-INSERT INTO Elokuvat (nimi,vuosi) VALUES ('Dumbo',1941);
-INSERT INTO Elokuvat (nimi,vuosi) VALUES ('Bambi',1942);
+INSERT INTO Nimet (etunimi,sukunimi) VALUES ('Anna','Korhonen');
+INSERT INTO Nimet (etunimi,sukunimi) VALUES ('Anna','Virtanen');
+INSERT INTO Nimet (etunimi,sukunimi) VALUES ('Pekka','Korhonen');
+INSERT INTO Nimet (etunimi,sukunimi) VALUES ('Pekka','Lahtinen');
+INSERT INTO Nimet (etunimi,sukunimi) VALUES ('Pekka','Virtanen');
 
 RESULT
-1937
-1940
-1941
-1942
+Anna
+Pekka
 
 TEST
-INSERT INTO Elokuvat (nimi,vuosi) VALUES ('Tuhkimo',1950);
-INSERT INTO Elokuvat (nimi,vuosi) VALUES ('Peter Pan',1953);
-INSERT INTO Elokuvat (nimi,vuosi) VALUES ('Aristokatit',1970);
-INSERT INTO Elokuvat (nimi,vuosi) VALUES ('Hiidenpata',1985);
+INSERT INTO Nimet (etunimi,sukunimi) VALUES ('Anna','Korhonen');
+INSERT INTO Nimet (etunimi,sukunimi) VALUES ('Pekka','Korhonen');
+INSERT INTO Nimet (etunimi,sukunimi) VALUES ('Uolevi','Korhonen');
+INSERT INTO Nimet (etunimi,sukunimi) VALUES ('Uolevi','Lahtinen');
 
 RESULT
-1950
-1953
-1970
-1985
-
-TEST
-INSERT INTO Elokuvat (nimi,vuosi) VALUES ('A',2000);
-INSERT INTO Elokuvat (nimi,vuosi) VALUES ('B',2000);
-INSERT INTO Elokuvat (nimi,vuosi) VALUES ('C',2000);
-INSERT INTO Elokuvat (nimi,vuosi) VALUES ('D',2000);
-
-RESULT
-2000
+Anna
+Pekka
+Uolevi
