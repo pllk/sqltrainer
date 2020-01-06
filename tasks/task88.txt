@@ -1,0 +1,61 @@
+TASK
+Muodosta tuloslista, jossa on sijaluku,
+pelaajan nimi ja paras tulos.
+Jos kahdella pelaajalla on sama tulos,
+he ovat jaetulla sijalla aakkosjärjestyksessä (ks. esimerkki).
+Jokaisella pelaajalla on eri nimi
+ja ainakin yksi tulos.
+
+STRICT
+
+TABLES
+CREATE TABLE Pelaajat (id INTEGER PRIMARY KEY, nimi TEXT);
+CREATE TABLE Tulokset (id INTEGER PRIMARY KEY, pelaaja_id INTEGER, tulos INTEGER);
+
+TEST
+INSERT INTO Pelaajat (nimi) VALUES ('Uolevi');
+INSERT INTO Pelaajat (nimi) VALUES ('Maija');
+INSERT INTO Pelaajat (nimi) VALUES ('Kaaleppi');
+INSERT INTO Pelaajat (nimi) VALUES ('Liisa');
+INSERT INTO Tulokset (pelaaja_id,tulos) VALUES (1,100);
+INSERT INTO Tulokset (pelaaja_id,tulos) VALUES (1,350);
+INSERT INTO Tulokset (pelaaja_id,tulos) VALUES (2,300);
+INSERT INTO Tulokset (pelaaja_id,tulos) VALUES (2,350);
+INSERT INTO Tulokset (pelaaja_id,tulos) VALUES (3,500);
+INSERT INTO Tulokset (pelaaja_id,tulos) VALUES (4,100);
+
+RESULT
+1|Kaaleppi|500
+2|Maija|350
+2|Uolevi|350
+4|Liisa|100
+
+TEST
+INSERT INTO Pelaajat (nimi) VALUES ('Uolevi');
+INSERT INTO Tulokset (pelaaja_id,tulos) VALUES (1,100);
+INSERT INTO Tulokset (pelaaja_id,tulos) VALUES (1,200);
+INSERT INTO Tulokset (pelaaja_id,tulos) VALUES (1,300);
+INSERT INTO Tulokset (pelaaja_id,tulos) VALUES (1,400);
+INSERT INTO Tulokset (pelaaja_id,tulos) VALUES (1,500);
+
+RESULT
+1|Uolevi|500
+
+TEST
+INSERT INTO Pelaajat (nimi) VALUES ('Uolevi');
+INSERT INTO Pelaajat (nimi) VALUES ('Maija');
+INSERT INTO Pelaajat (nimi) VALUES ('Liisa');
+INSERT INTO Pelaajat (nimi) VALUES ('Kaaleppi');
+INSERT INTO Pelaajat (nimi) VALUES ('Kotivalo');
+INSERT INTO Tulokset (pelaaja_id,tulos) VALUES (1,100);
+INSERT INTO Tulokset (pelaaja_id,tulos) VALUES (2,200);
+INSERT INTO Tulokset (pelaaja_id,tulos) VALUES (3,200);
+INSERT INTO Tulokset (pelaaja_id,tulos) VALUES (4,100);
+INSERT INTO Tulokset (pelaaja_id,tulos) VALUES (5,50);
+
+RESULT
+1|Liisa|200
+1|Maija|200
+3|Kaaleppi|100
+3|Uolevi|100
+5|Kotivalo|50
