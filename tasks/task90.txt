@@ -1,0 +1,38 @@
+TASK
+Hae sanat järjestettynä niin,
+että kirjainkoolla ei ole merkitystä.
+Jokainen sana muodostuu kirjaimista
+a–z ja A–Z.
+
+STRICT
+
+TABLES
+CREATE TABLE Sanat (id INTEGER PRIMARY KEY, sana TEXT);
+
+TEST
+INSERT INTO Sanat(sana) VALUES ('Liisa');
+INSERT INTO Sanat(sana) VALUES ('Maija');
+INSERT INTO Sanat(sana) VALUES ('Uolevi');
+INSERT INTO Sanat(sana) VALUES ('apina');
+INSERT INTO Sanat(sana) VALUES ('omena');
+
+RESULT
+apina
+Liisa
+Maija
+omena
+Uolevi
+
+TEST
+INSERT INTO Sanat(sana) VALUES ('Helsinki');
+INSERT INTO Sanat(sana) VALUES ('apina');
+INSERT INTO Sanat(sana) VALUES ('Tukholma');
+INSERT INTO Sanat(sana) VALUES ('omena');
+INSERT INTO Sanat(sana) VALUES ('Tallinna');
+
+RESULT
+apina
+Helsinki
+omena
+Tallinna
+Tukholma
