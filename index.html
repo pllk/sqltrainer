@@ -182,10 +182,16 @@ function sql_result(result,what) {
         } else {
             var message = all_correct ? "<font color=green>Kyselysi toimii oikein</font>" : "<font color=red>Kyselysi toimii väärin</font>";
             get("message").innerHTML = message;
+            if (mooc_status == 1) {
+	            quizzes_send(my_task,get("query").value,all_correct,process_result);
+	    	}
         }
     }
 }
 
+function process_result() {
+    quizzes_status(process_status);
+}
 
 function sql_error(error,what) {
     get("message").innerHTML = "<font color=red>Kyselysi on virheellinen</font>";
@@ -292,12 +298,23 @@ function start_login() {
     mooc_login(get("username").value,get("password").value,end_login);
 }
 
+var task_status = [];
+var status_ready = 0;
+
+function process_status(status) {
+    for (var i = 1; i <= 100; i++) {
+        task_status[i] = status[quizzes_tasks[i-1][0]];
+    }
+    status_ready = 2;
+    create_menu();
+}
+
 function end_login(result) {
     if (mooc_status == 2) {
         alert("Tunnus tai salasana ei ole oikea");
         mooc_status = 0;
     }
-    create_menu();    
+    quizzes_status(process_status);
 }
 
 function check_submit(event) {
@@ -305,16 +322,29 @@ function check_submit(event) {
 }
 
 function create_menu() {
+	if (mooc_status == 1 && status_ready == 0) {
+		status_ready = 1;
+        quizzes_status(process_status);		
+	}
     var html = "";
     html += "<h2>Tehtävän valinta</h2>";
     html += "<table>";
+    var count = 0;
     for (var i = 1; i <= 100; i++) {
         if (i%10 == 1) html += "<tr>";
         var link = i == my_task ? "<b>"+i+"</b>" : i;
-        html += "<td><div class=\"task_button\" style=\"cursor:pointer\" onclick=\"show_task("+i+")\">"+link+"</div></td>";
+        var color = "white";
+        if (mooc_status == 1 && status_ready == 2 && task_status[i].correct) {
+ 			color = "lightgreen";
+	        count++;
+        }
+        html += "<td><div class=\"task_button\" style=\"cursor:pointer;background:"+color+"\" onclick=\"show_task("+i+")\">"+link+"</div></td>";
         if (i%10 == 0) html += "</tr>";
     }
     html += "</table>";
+    if (mooc_status == 1) {
+        html += "<br>Olet ratkonut "+count+"/100 tehtävää.";
+    }
     html += "<h2>Kirjautuminen</h2>";
     if (mooc_status != 1) {
         html += "<p>Voit kirjautua sisään mooc.fi-tunnuksella:</p>";
@@ -328,6 +358,10 @@ function create_menu() {
     get("menu").innerHTML = html;
 }
 
+function show_answer(data) {
+	get("query").value = data["quizAnswer"]["itemAnswers"][0]["textData"];
+}
+
 function show_task(task) {
     my_task = task;
     get("query").value = "";
@@ -339,6 +373,9 @@ function show_task(task) {
     read_task("tasks/task"+task+".txt");
     create_menu();
     window.location.hash = task;
+    if (mooc_status == 1) {
+    	quizzes_answer(task,show_answer);
+    }
 }
 
 function begin() {
