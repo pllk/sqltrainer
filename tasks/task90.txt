@@ -1,38 +1,69 @@
 TASK
-Hae sanat järjestettynä niin,
-että kirjainkoolla ei ole merkitystä.
-Jokainen sana muodostuu kirjaimista
-a–z ja A–Z.
-
-STRICT
+Ilmoita jokaisesta käyttäjästä,
+montako muuta eri käyttäjää on joko hänen kaverilistallaan
+tai jonkun kaverin kaverilistalla.
 
 TABLES
-CREATE TABLE Sanat (id INTEGER PRIMARY KEY, sana TEXT);
+CREATE TABLE Kayttajat (id INTEGER PRIMARY KEY, nimi TEXT);
+CREATE TABLE Kaverit (kayttaja_id INTEGER, kaveri_id INTEGER);
 
 TEST
-INSERT INTO Sanat(sana) VALUES ('Liisa');
-INSERT INTO Sanat(sana) VALUES ('Maija');
-INSERT INTO Sanat(sana) VALUES ('Uolevi');
-INSERT INTO Sanat(sana) VALUES ('apina');
-INSERT INTO Sanat(sana) VALUES ('omena');
+INSERT INTO Kayttajat(nimi) VALUES ('Uolevi');
+INSERT INTO Kayttajat(nimi) VALUES ('Maija');
+INSERT INTO Kayttajat(nimi) VALUES ('Liisa');
+INSERT INTO Kayttajat(nimi) VALUES ('Kaaleppi');
+INSERT INTO Kaverit(kayttaja_id, kaveri_id) VALUES (1,2);
+INSERT INTO Kaverit(kayttaja_id, kaveri_id) VALUES (1,3);
+INSERT INTO Kaverit(kayttaja_id, kaveri_id) VALUES (2,1);
+INSERT INTO Kaverit(kayttaja_id, kaveri_id) VALUES (3,2);
+INSERT INTO Kaverit(kayttaja_id, kaveri_id) VALUES (4,2);
+INSERT INTO Kaverit(kayttaja_id, kaveri_id) VALUES (4,3);
 
 RESULT
-apina
-Liisa
-Maija
-omena
-Uolevi
+Uolevi|2
+Maija|2
+Liisa|2
+Kaaleppi|3
 
 TEST
-INSERT INTO Sanat(sana) VALUES ('Helsinki');
-INSERT INTO Sanat(sana) VALUES ('apina');
-INSERT INTO Sanat(sana) VALUES ('Tukholma');
-INSERT INTO Sanat(sana) VALUES ('omena');
-INSERT INTO Sanat(sana) VALUES ('Tallinna');
+INSERT INTO Kayttajat(nimi) VALUES ('Uolevi');
+INSERT INTO Kayttajat(nimi) VALUES ('Maija');
+INSERT INTO Kayttajat(nimi) VALUES ('Liisa');
+INSERT INTO Kayttajat(nimi) VALUES ('Kaaleppi');
+INSERT INTO Kaverit(kayttaja_id, kaveri_id) VALUES (1,2);
+INSERT INTO Kaverit(kayttaja_id, kaveri_id) VALUES (2,3);
+INSERT INTO Kaverit(kayttaja_id, kaveri_id) VALUES (3,4);
+INSERT INTO Kaverit(kayttaja_id, kaveri_id) VALUES (4,1);
 
 RESULT
-apina
-Helsinki
-omena
-Tallinna
-Tukholma
+Uolevi|2
+Maija|2
+Liisa|2
+Kaaleppi|2
+
+TEST
+INSERT INTO Kayttajat(nimi) VALUES ('Uolevi');
+INSERT INTO Kayttajat(nimi) VALUES ('Maija');
+INSERT INTO Kayttajat(nimi) VALUES ('Liisa');
+INSERT INTO Kayttajat(nimi) VALUES ('Kaaleppi');
+
+RESULT
+Uolevi|0
+Maija|0
+Liisa|0
+Kaaleppi|0
+
+TEST
+INSERT INTO Kayttajat(nimi) VALUES ('Uolevi');
+INSERT INTO Kayttajat(nimi) VALUES ('Maija');
+INSERT INTO Kayttajat(nimi) VALUES ('Liisa');
+INSERT INTO Kayttajat(nimi) VALUES ('Kaaleppi');
+INSERT INTO Kaverit(kayttaja_id, kaveri_id) VALUES (4,3);
+INSERT INTO Kaverit(kayttaja_id, kaveri_id) VALUES (1,2);
+INSERT INTO Kaverit(kayttaja_id, kaveri_id) VALUES (1,4);
+
+RESULT
+Uolevi|3
+Maija|0
+Liisa|0
+Kaaleppi|1

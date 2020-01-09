@@ -1,5 +1,5 @@
 TASK
-Hae kaikki sanat, joissa esiintyy i-kirjain.
+Hae kaikki sanat, joissa on tasan kaksi a-kirjainta.
 
 TABLES
 CREATE TABLE Sanat (id INTEGER PRIMARY KEY, sana TEXT);
@@ -11,25 +11,33 @@ INSERT INTO Sanat (sana) VALUES ('cembalo');
 
 RESULT
 apina
-banaani
 
 TEST
-INSERT INTO Sanat (sana) VALUES ('apina');
-INSERT INTO Sanat (sana) VALUES ('apila');
-INSERT INTO Sanat (sana) VALUES ('koivu');
-INSERT INTO Sanat (sana) VALUES ('kuusi');
+INSERT INTO Sanat (sana) VALUES ('a');
+INSERT INTO Sanat (sana) VALUES ('aa');
+INSERT INTO Sanat (sana) VALUES ('aaa');
+INSERT INTO Sanat (sana) VALUES ('aaaa');
 
 RESULT
-apina
-apila
-koivu
-kuusi
+aa
 
 TEST
-INSERT INTO Sanat (sana) VALUES ('puku');
-INSERT INTO Sanat (sana) VALUES ('kivi');
-INSERT INTO Sanat (sana) VALUES ('auto');
-INSERT INTO Sanat (sana) VALUES ('haku');
+INSERT INTO Sanat (sana) VALUES ('aa');
+INSERT INTO Sanat (sana) VALUES ('aba');
+INSERT INTO Sanat (sana) VALUES ('abb');
+INSERT INTO Sanat (sana) VALUES ('baa');
+INSERT INTO Sanat (sana) VALUES ('bab');
+INSERT INTO Sanat (sana) VALUES ('baba');
+INSERT INTO Sanat (sana) VALUES ('abba');
+INSERT INTO Sanat (sana) VALUES ('baaa');
+INSERT INTO Sanat (sana) VALUES ('bbbb');
+INSERT INTO Sanat (sana) VALUES ('aaaa');
+INSERT INTO Sanat (sana) VALUES ('aabb');
 
 RESULT
-kivi
+aa
+aba
+baa
+baba
+abba
+aabb

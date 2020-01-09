@@ -1,43 +1,74 @@
 TASK
-Hae kaikkien elokuvien nimet,
-jotka on julkaistu karkausvuonna.
-(Vuosi on karkausvuosi, jos se on jaollinen 4:llä.
-Jos vuosi on jaollinen 100:lla,
-se on karkausvuosi vain, jos se on myös jaollinen 400:lla.)
+Ilmoita jokaisesta käyttäjästä,
+monellako muulla käyttäjällä on kaverilistalla
+kaikki käyttäjän kaverit.
 
 TABLES
-CREATE TABLE Elokuvat (id INTEGER PRIMARY KEY, nimi TEXT, vuosi INTEGER);
+CREATE TABLE Kayttajat (id INTEGER PRIMARY KEY, nimi TEXT);
+CREATE TABLE Kaverit (kayttaja_id INTEGER, kaveri_id INTEGER);
 
 TEST
-INSERT INTO Elokuvat (nimi,vuosi) VALUES ('Lumikki',1937);
-INSERT INTO Elokuvat (nimi,vuosi) VALUES ('Fantasia',1940);
-INSERT INTO Elokuvat (nimi,vuosi) VALUES ('Pinocchio',1940);
-INSERT INTO Elokuvat (nimi,vuosi) VALUES ('Dumbo',1941);
-INSERT INTO Elokuvat (nimi,vuosi) VALUES ('Bambi',1942);
+INSERT INTO Kayttajat(nimi) VALUES ('Uolevi');
+INSERT INTO Kayttajat(nimi) VALUES ('Maija');
+INSERT INTO Kayttajat(nimi) VALUES ('Liisa');
+INSERT INTO Kayttajat(nimi) VALUES ('Kaaleppi');
+INSERT INTO Kaverit(kayttaja_id, kaveri_id) VALUES (1,2);
+INSERT INTO Kaverit(kayttaja_id, kaveri_id) VALUES (1,3);
+INSERT INTO Kaverit(kayttaja_id, kaveri_id) VALUES (2,1);
+INSERT INTO Kaverit(kayttaja_id, kaveri_id) VALUES (3,2);
+INSERT INTO Kaverit(kayttaja_id, kaveri_id) VALUES (4,2);
+INSERT INTO Kaverit(kayttaja_id, kaveri_id) VALUES (4,3);
 
 RESULT
-Fantasia
-Pinocchio
+Uolevi|1
+Maija|0
+Liisa|2
+Kaaleppi|1
 
 TEST
-INSERT INTO Elokuvat (nimi,vuosi) VALUES ('Lumikki',1980);
-INSERT INTO Elokuvat (nimi,vuosi) VALUES ('Fantasia',1990);
-INSERT INTO Elokuvat (nimi,vuosi) VALUES ('Pinocchio',2000);
-INSERT INTO Elokuvat (nimi,vuosi) VALUES ('Dumbo',2010);
-INSERT INTO Elokuvat (nimi,vuosi) VALUES ('Bambi',2020);
+INSERT INTO Kayttajat(nimi) VALUES ('Uolevi');
+INSERT INTO Kayttajat(nimi) VALUES ('Maija');
+INSERT INTO Kayttajat(nimi) VALUES ('Liisa');
+INSERT INTO Kayttajat(nimi) VALUES ('Kaaleppi');
+INSERT INTO Kaverit(kayttaja_id, kaveri_id) VALUES (1,2);
+INSERT INTO Kaverit(kayttaja_id, kaveri_id) VALUES (2,1);
+INSERT INTO Kaverit(kayttaja_id, kaveri_id) VALUES (2,3);
+INSERT INTO Kaverit(kayttaja_id, kaveri_id) VALUES (2,4);
+INSERT INTO Kaverit(kayttaja_id, kaveri_id) VALUES (3,2);
+INSERT INTO Kaverit(kayttaja_id, kaveri_id) VALUES (4,2);
 
 RESULT
-Lumikki
-Pinocchio
-Bambi
+Uolevi|2
+Maija|0
+Liisa|2
+Kaaleppi|2
 
 TEST
-INSERT INTO Elokuvat (nimi,vuosi) VALUES ('Lumikki',1880);
-INSERT INTO Elokuvat (nimi,vuosi) VALUES ('Fantasia',1890);
-INSERT INTO Elokuvat (nimi,vuosi) VALUES ('Pinocchio',1900);
-INSERT INTO Elokuvat (nimi,vuosi) VALUES ('Dumbo',1910);
-INSERT INTO Elokuvat (nimi,vuosi) VALUES ('Bambi',1920);
+INSERT INTO Kayttajat(nimi) VALUES ('Uolevi');
+INSERT INTO Kayttajat(nimi) VALUES ('Maija');
+INSERT INTO Kayttajat(nimi) VALUES ('Liisa');
+INSERT INTO Kayttajat(nimi) VALUES ('Kaaleppi');
 
 RESULT
-Lumikki
-Bambi
+Uolevi|3
+Maija|3
+Liisa|3
+Kaaleppi|3
+
+TEST
+INSERT INTO Kayttajat(nimi) VALUES ('Uolevi');
+INSERT INTO Kayttajat(nimi) VALUES ('Maija');
+INSERT INTO Kayttajat(nimi) VALUES ('Liisa');
+INSERT INTO Kayttajat(nimi) VALUES ('Kaaleppi');
+INSERT INTO Kaverit(kayttaja_id, kaveri_id) VALUES (1,2);
+INSERT INTO Kaverit(kayttaja_id, kaveri_id) VALUES (1,3);
+INSERT INTO Kaverit(kayttaja_id, kaveri_id) VALUES (1,4);
+INSERT INTO Kaverit(kayttaja_id, kaveri_id) VALUES (2,3);
+INSERT INTO Kaverit(kayttaja_id, kaveri_id) VALUES (2,4);
+INSERT INTO Kaverit(kayttaja_id, kaveri_id) VALUES (3,4);
+
+RESULT
+Uolevi|0
+Maija|1
+Liisa|2
+Kaaleppi|3

@@ -1,34 +1,35 @@
 TASK
-Hae tuote, jonka hinta on halvin
-(jos halvimpia tuotteita on useita,
-valitse aakkosjärjestyksessä ensimmäinen).
+Hae kaikki sanat, joissa esiintyy i-kirjain.
 
 TABLES
-CREATE TABLE Tuotteet (id INTEGER PRIMARY KEY, nimi TEXT, hinta INTEGER);
+CREATE TABLE Sanat (id INTEGER PRIMARY KEY, sana TEXT);
 
 TEST
-INSERT INTO Tuotteet (nimi,hinta) VALUES ('selleri',7);
-INSERT INTO Tuotteet (nimi,hinta) VALUES ('lanttu',5);
-INSERT INTO Tuotteet (nimi,hinta) VALUES ('retiisi',8);
-INSERT INTO Tuotteet (nimi,hinta) VALUES ('nauris',5);
+INSERT INTO Sanat (sana) VALUES ('apina');
+INSERT INTO Sanat (sana) VALUES ('banaani');
+INSERT INTO Sanat (sana) VALUES ('cembalo');
 
 RESULT
-lanttu|5
+apina
+banaani
 
 TEST
-INSERT INTO Tuotteet (nimi,hinta) VALUES ('selleri',7);
-INSERT INTO Tuotteet (nimi,hinta) VALUES ('lanttu',5);
-INSERT INTO Tuotteet (nimi,hinta) VALUES ('retiisi',8);
-INSERT INTO Tuotteet (nimi,hinta) VALUES ('nauris',3);
+INSERT INTO Sanat (sana) VALUES ('apina');
+INSERT INTO Sanat (sana) VALUES ('apila');
+INSERT INTO Sanat (sana) VALUES ('koivu');
+INSERT INTO Sanat (sana) VALUES ('kuusi');
 
 RESULT
-nauris|3
+apina
+apila
+koivu
+kuusi
 
 TEST
-INSERT INTO Tuotteet (nimi,hinta) VALUES ('selleri',5);
-INSERT INTO Tuotteet (nimi,hinta) VALUES ('lanttu',5);
-INSERT INTO Tuotteet (nimi,hinta) VALUES ('retiisi',5);
-INSERT INTO Tuotteet (nimi,hinta) VALUES ('nauris',5);
+INSERT INTO Sanat (sana) VALUES ('puku');
+INSERT INTO Sanat (sana) VALUES ('kivi');
+INSERT INTO Sanat (sana) VALUES ('auto');
+INSERT INTO Sanat (sana) VALUES ('haku');
 
 RESULT
-lanttu|5
+kivi

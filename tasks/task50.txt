@@ -1,26 +1,43 @@
 TASK
-Ilmoita jokaisesta sanan pituudesta,
-montako sellaista sanaa on.
+Hae kaikkien elokuvien nimet,
+jotka on julkaistu karkausvuonna.
+(Vuosi on karkausvuosi, jos se on jaollinen 4:llä.
+Jos vuosi on jaollinen 100:lla,
+se on karkausvuosi vain, jos se on myös jaollinen 400:lla.)
 
 TABLES
-CREATE TABLE Sanat (id INTEGER PRIMARY KEY, sana TEXT);
+CREATE TABLE Elokuvat (id INTEGER PRIMARY KEY, nimi TEXT, vuosi INTEGER);
 
 TEST
-INSERT INTO Sanat (sana) VALUES ('apina');
-INSERT INTO Sanat (sana) VALUES ('banaani');
-INSERT INTO Sanat (sana) VALUES ('cembalo');
+INSERT INTO Elokuvat (nimi,vuosi) VALUES ('Lumikki',1937);
+INSERT INTO Elokuvat (nimi,vuosi) VALUES ('Fantasia',1940);
+INSERT INTO Elokuvat (nimi,vuosi) VALUES ('Pinocchio',1940);
+INSERT INTO Elokuvat (nimi,vuosi) VALUES ('Dumbo',1941);
+INSERT INTO Elokuvat (nimi,vuosi) VALUES ('Bambi',1942);
 
 RESULT
-5|1
-7|2
+Fantasia
+Pinocchio
 
 TEST
-INSERT INTO Sanat (sana) VALUES ('Uolevi');
-INSERT INTO Sanat (sana) VALUES ('Maija');
-INSERT INTO Sanat (sana) VALUES ('Kaaleppi');
-INSERT INTO Sanat (sana) VALUES ('Liisa');
+INSERT INTO Elokuvat (nimi,vuosi) VALUES ('Lumikki',1980);
+INSERT INTO Elokuvat (nimi,vuosi) VALUES ('Fantasia',1990);
+INSERT INTO Elokuvat (nimi,vuosi) VALUES ('Pinocchio',2000);
+INSERT INTO Elokuvat (nimi,vuosi) VALUES ('Dumbo',2010);
+INSERT INTO Elokuvat (nimi,vuosi) VALUES ('Bambi',2020);
 
 RESULT
-5|2
-6|1
-8|1
+Lumikki
+Pinocchio
+Bambi
+
+TEST
+INSERT INTO Elokuvat (nimi,vuosi) VALUES ('Lumikki',1880);
+INSERT INTO Elokuvat (nimi,vuosi) VALUES ('Fantasia',1890);
+INSERT INTO Elokuvat (nimi,vuosi) VALUES ('Pinocchio',1900);
+INSERT INTO Elokuvat (nimi,vuosi) VALUES ('Dumbo',1910);
+INSERT INTO Elokuvat (nimi,vuosi) VALUES ('Bambi',1920);
+
+RESULT
+Lumikki
+Bambi
