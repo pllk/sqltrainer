@@ -1,0 +1,44 @@
+TASK
+Jokaisesta varauksesta on tiedossa alkupäivä ja loppupäivä.
+Mitkään kaksi varausta eivät ole päällekkäin.
+Ilmoita, mikä on suurin määrä tyhjiä päiviä
+kahden peräkkäisen varauksen välillä.
+
+TABLES
+CREATE TABLE Varaukset (id INTEGER PRIMARY KEY, alku INTEGER, loppu INTEGER);
+
+TEST
+INSERT INTO Varaukset(alku,loppu) VALUES (3,5);
+INSERT INTO Varaukset(alku,loppu) VALUES (8,10);
+INSERT INTO Varaukset(alku,loppu) VALUES (14,17);
+INSERT INTO Varaukset(alku,loppu) VALUES (6,6);
+INSERT INTO Varaukset(alku,loppu) VALUES (19,20);
+
+RESULT
+3
+
+TEST
+INSERT INTO Varaukset(alku,loppu) VALUES (1,2);
+INSERT INTO Varaukset(alku,loppu) VALUES (3,4);
+INSERT INTO Varaukset(alku,loppu) VALUES (5,6);
+INSERT INTO Varaukset(alku,loppu) VALUES (7,8);
+
+RESULT
+0
+
+TEST
+INSERT INTO Varaukset(alku,loppu) VALUES (1,1);
+INSERT INTO Varaukset(alku,loppu) VALUES (1000,1000);
+
+RESULT
+998
+
+TEST
+INSERT INTO Varaukset(alku,loppu) VALUES (100,200);
+INSERT INTO Varaukset(alku,loppu) VALUES (8,9);
+INSERT INTO Varaukset(alku,loppu) VALUES (15,19);
+INSERT INTO Varaukset(alku,loppu) VALUES (40,42);
+INSERT INTO Varaukset(alku,loppu) VALUES (1,3);
+
+RESULT
+57
