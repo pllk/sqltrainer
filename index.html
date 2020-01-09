@@ -293,7 +293,7 @@ function check() {
     check_test();
 }
 
-var my_task;
+var my_task = 0;
 
 function start_login() {
     mooc_login(get("username").value,get("password").value,end_login);
@@ -364,6 +364,7 @@ function show_answer(data) {
 }
 
 function show_task(task) {
+    if (my_task == task) return;
     my_task = task;
     get("query").value = "";
     get("task").innerHTML = "";
