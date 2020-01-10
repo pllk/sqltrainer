@@ -1,5 +1,6 @@
 TASK
-Hae kaikki vaunut, joissa ei ole yhtään matkustajaa.
+Ilmoita jokaisesta junan vaunusta,
+montako matkustajaa siellä on.
 
 TABLES
 CREATE TABLE Vaunut (id INTEGER PRIMARY KEY, nimi TEXT, paikat INTEGER);
@@ -18,7 +19,10 @@ INSERT INTO Matkustajat (nimi,vaunu_id) VALUES ("Justiina",4);
 INSERT INTO Matkustajat (nimi,vaunu_id) VALUES ("Vihtori",4);
 
 RESULT
-vaunu3
+vaunu1|2
+vaunu2|1
+vaunu3|0
+vaunu4|3
 
 TEST
 INSERT INTO Vaunut (nimi,paikat) VALUES ("vaunu1",10);
@@ -33,5 +37,7 @@ INSERT INTO Matkustajat (nimi,vaunu_id) VALUES ("Justiina",1);
 INSERT INTO Matkustajat (nimi,vaunu_id) VALUES ("Vihtori",4);
 
 RESULT
-vaunu2
-vaunu3
+vaunu1|5
+vaunu2|0
+vaunu3|0
+vaunu4|1

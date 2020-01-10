@@ -1,48 +1,30 @@
 TASK
-Laske Uolevin tilin saldon historia.
-
-STRICT
+Hae jokaisesta tuotteesta tieto,
+monenko tuotteen hinta eroaa enintään yhdellä.
 
 TABLES
-CREATE TABLE Tilit (id INTEGER PRIMARY KEY, haltija TEXT);
-CREATE TABLE Tapahtumat (id INTEGER PRIMARY KEY, tili_id INTEGER, muutos INTEGER);
+CREATE TABLE Tuotteet (id INTEGER PRIMARY KEY, nimi TEXT, hinta INTEGER);
 
 TEST
-INSERT INTO Tilit (haltija) VALUES ('Uolevi');
-INSERT INTO Tilit (haltija) VALUES ('Maija');
-INSERT INTO Tilit (haltija) VALUES ('Kaaleppi');
-INSERT INTO Tapahtumat (tili_id,muutos) VALUES (1,500);
-INSERT INTO Tapahtumat (tili_id,muutos) VALUES (2,300);
-INSERT INTO Tapahtumat (tili_id,muutos) VALUES (1,-100);
-INSERT INTO Tapahtumat (tili_id,muutos) VALUES (2,100);
-INSERT INTO Tapahtumat (tili_id,muutos) VALUES (2,-300);
+INSERT INTO Tuotteet (nimi,hinta) VALUES ('selleri',7);
+INSERT INTO Tuotteet (nimi,hinta) VALUES ('lanttu',4);
+INSERT INTO Tuotteet (nimi,hinta) VALUES ('retiisi',8);
+INSERT INTO Tuotteet (nimi,hinta) VALUES ('nauris',6);
 
 RESULT
-500
-400
+selleri|3
+lanttu|1
+retiisi|2
+nauris|2
 
 TEST
-INSERT INTO Tilit (haltija) VALUES ('Uolevi');
-INSERT INTO Tilit (haltija) VALUES ('Maija');
-INSERT INTO Tilit (haltija) VALUES ('Kaaleppi');
-INSERT INTO Tapahtumat (tili_id,muutos) VALUES (1,100);
-INSERT INTO Tapahtumat (tili_id,muutos) VALUES (1,200);
-INSERT INTO Tapahtumat (tili_id,muutos) VALUES (1,300);
-INSERT INTO Tapahtumat (tili_id,muutos) VALUES (1,400);
-INSERT INTO Tapahtumat (tili_id,muutos) VALUES (1,-500);
+INSERT INTO Tuotteet (nimi,hinta) VALUES ('selleri',7);
+INSERT INTO Tuotteet (nimi,hinta) VALUES ('lanttu',5);
+INSERT INTO Tuotteet (nimi,hinta) VALUES ('retiisi',8);
+INSERT INTO Tuotteet (nimi,hinta) VALUES ('nauris',3);
 
 RESULT
-100
-300
-600
-1000
-500
-
-TEST
-INSERT INTO Tilit (haltija) VALUES ('Maija');
-INSERT INTO Tilit (haltija) VALUES ('Uolevi');
-INSERT INTO Tapahtumat (tili_id,muutos) VALUES (1,100);
-INSERT INTO Tapahtumat (tili_id,muutos) VALUES (2,200);
-
-RESULT
-200
+selleri|2
+lanttu|1
+retiisi|2
+nauris|1

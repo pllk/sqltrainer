@@ -1,49 +1,69 @@
 TASK
-Jokaisesta varauksesta on tiedossa alkupäivä ja loppupäivä.
-Laske, montako varausta on enimmillään päällekkäin samana päivänä.
+Ilmoita jokaisesta käyttäjästä,
+montako muuta eri käyttäjää on joko hänen kaverilistallaan
+tai jonkun kaverin kaverilistalla.
 
 TABLES
-CREATE TABLE Varaukset (id INTEGER PRIMARY KEY, alku INTEGER, loppu INTEGER);
+CREATE TABLE Kayttajat (id INTEGER PRIMARY KEY, nimi TEXT);
+CREATE TABLE Kaverit (kayttaja_id INTEGER, kaveri_id INTEGER);
 
 TEST
-INSERT INTO Varaukset(alku,loppu) VALUES (2,5);
-INSERT INTO Varaukset(alku,loppu) VALUES (4,8);
-INSERT INTO Varaukset(alku,loppu) VALUES (3,4);
-INSERT INTO Varaukset(alku,loppu) VALUES (10,15);
-INSERT INTO Varaukset(alku,loppu) VALUES (9,16);
+INSERT INTO Kayttajat(nimi) VALUES ('Uolevi');
+INSERT INTO Kayttajat(nimi) VALUES ('Maija');
+INSERT INTO Kayttajat(nimi) VALUES ('Liisa');
+INSERT INTO Kayttajat(nimi) VALUES ('Kaaleppi');
+INSERT INTO Kaverit(kayttaja_id, kaveri_id) VALUES (1,2);
+INSERT INTO Kaverit(kayttaja_id, kaveri_id) VALUES (1,3);
+INSERT INTO Kaverit(kayttaja_id, kaveri_id) VALUES (2,1);
+INSERT INTO Kaverit(kayttaja_id, kaveri_id) VALUES (3,2);
+INSERT INTO Kaverit(kayttaja_id, kaveri_id) VALUES (4,2);
+INSERT INTO Kaverit(kayttaja_id, kaveri_id) VALUES (4,3);
 
 RESULT
-3
+Uolevi|2
+Maija|2
+Liisa|2
+Kaaleppi|3
 
 TEST
-INSERT INTO Varaukset(alku,loppu) VALUES (1,1);
-INSERT INTO Varaukset(alku,loppu) VALUES (2,2);
-INSERT INTO Varaukset(alku,loppu) VALUES (3,3);
-INSERT INTO Varaukset(alku,loppu) VALUES (4,4);
-INSERT INTO Varaukset(alku,loppu) VALUES (5,5);
+INSERT INTO Kayttajat(nimi) VALUES ('Uolevi');
+INSERT INTO Kayttajat(nimi) VALUES ('Maija');
+INSERT INTO Kayttajat(nimi) VALUES ('Liisa');
+INSERT INTO Kayttajat(nimi) VALUES ('Kaaleppi');
+INSERT INTO Kaverit(kayttaja_id, kaveri_id) VALUES (1,2);
+INSERT INTO Kaverit(kayttaja_id, kaveri_id) VALUES (2,3);
+INSERT INTO Kaverit(kayttaja_id, kaveri_id) VALUES (3,4);
+INSERT INTO Kaverit(kayttaja_id, kaveri_id) VALUES (4,1);
 
 RESULT
-1
+Uolevi|2
+Maija|2
+Liisa|2
+Kaaleppi|2
 
 TEST
-INSERT INTO Varaukset(alku,loppu) VALUES (1,5);
-INSERT INTO Varaukset(alku,loppu) VALUES (1,5);
-INSERT INTO Varaukset(alku,loppu) VALUES (1,5);
-INSERT INTO Varaukset(alku,loppu) VALUES (1,5);
-INSERT INTO Varaukset(alku,loppu) VALUES (1,5);
+INSERT INTO Kayttajat(nimi) VALUES ('Uolevi');
+INSERT INTO Kayttajat(nimi) VALUES ('Maija');
+INSERT INTO Kayttajat(nimi) VALUES ('Liisa');
+INSERT INTO Kayttajat(nimi) VALUES ('Kaaleppi');
 
 RESULT
-5
+Uolevi|0
+Maija|0
+Liisa|0
+Kaaleppi|0
 
 TEST
-INSERT INTO Varaukset(alku,loppu) VALUES (1,3);
-INSERT INTO Varaukset(alku,loppu) VALUES (5,15);
-INSERT INTO Varaukset(alku,loppu) VALUES (4,8);
-INSERT INTO Varaukset(alku,loppu) VALUES (7,9);
-INSERT INTO Varaukset(alku,loppu) VALUES (2,4);
-INSERT INTO Varaukset(alku,loppu) VALUES (11,16);
-INSERT INTO Varaukset(alku,loppu) VALUES (7,7);
-INSERT INTO Varaukset(alku,loppu) VALUES (14,16);
+INSERT INTO Kayttajat(nimi) VALUES ('Uolevi');
+INSERT INTO Kayttajat(nimi) VALUES ('Maija');
+INSERT INTO Kayttajat(nimi) VALUES ('Liisa');
+INSERT INTO Kayttajat(nimi) VALUES ('Kaaleppi');
+INSERT INTO Kaverit(kayttaja_id, kaveri_id) VALUES (4,3);
+INSERT INTO Kaverit(kayttaja_id, kaveri_id) VALUES (1,2);
+INSERT INTO Kaverit(kayttaja_id, kaveri_id) VALUES (1,4);
 
 RESULT
-4
+Uolevi|3
+Maija|0
+Liisa|0
+Kaaleppi|1

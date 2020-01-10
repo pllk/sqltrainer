@@ -1,29 +1,37 @@
 TASK
-Laske tulosten <i>moodi</i> (eli yleisin tulos).
-Jos vaihtoehtoja on useita, valitse niistä pienin.
+Laske jokaisen tilin saldo tapahtumien perusteella
+(jokaisen tilin saldo on aluksi 0).
 
 TABLES
-CREATE TABLE Tulokset (id INTEGER PRIMARY KEY, tulos INTEGER);
+CREATE TABLE Tilit (id INTEGER PRIMARY KEY, haltija TEXT);
+CREATE TABLE Tapahtumat (id INTEGER PRIMARY KEY, tili_id INTEGER, muutos INTEGER);
 
 TEST
-INSERT INTO Tulokset (tulos) VALUES (2);
-INSERT INTO Tulokset (tulos) VALUES (2);
-INSERT INTO Tulokset (tulos) VALUES (3);
-INSERT INTO Tulokset (tulos) VALUES (5);
-INSERT INTO Tulokset (tulos) VALUES (5);
-INSERT INTO Tulokset (tulos) VALUES (5);
-INSERT INTO Tulokset (tulos) VALUES (6);
+INSERT INTO Tilit (haltija) VALUES ('Uolevi');
+INSERT INTO Tilit (haltija) VALUES ('Maija');
+INSERT INTO Tilit (haltija) VALUES ('Kaaleppi');
+INSERT INTO Tapahtumat (tili_id,muutos) VALUES (1,500);
+INSERT INTO Tapahtumat (tili_id,muutos) VALUES (2,300);
+INSERT INTO Tapahtumat (tili_id,muutos) VALUES (1,-100);
+INSERT INTO Tapahtumat (tili_id,muutos) VALUES (2,100);
+INSERT INTO Tapahtumat (tili_id,muutos) VALUES (2,-300);
 
 RESULT
-5
+Uolevi|400
+Maija|100
+Kaaleppi|0
 
 TEST
-INSERT INTO Tulokset (tulos) VALUES (2);
-INSERT INTO Tulokset (tulos) VALUES (3);
-INSERT INTO Tulokset (tulos) VALUES (3);
-INSERT INTO Tulokset (tulos) VALUES (4);
-INSERT INTO Tulokset (tulos) VALUES (4);
-INSERT INTO Tulokset (tulos) VALUES (7);
+INSERT INTO Tilit (haltija) VALUES ('Uolevi');
+INSERT INTO Tilit (haltija) VALUES ('Maija');
+INSERT INTO Tilit (haltija) VALUES ('Kaaleppi');
+INSERT INTO Tapahtumat (tili_id,muutos) VALUES (1,100);
+INSERT INTO Tapahtumat (tili_id,muutos) VALUES (1,200);
+INSERT INTO Tapahtumat (tili_id,muutos) VALUES (1,300);
+INSERT INTO Tapahtumat (tili_id,muutos) VALUES (1,400);
+INSERT INTO Tapahtumat (tili_id,muutos) VALUES (1,-500);
 
 RESULT
-3
+Uolevi|500
+Maija|0
+Kaaleppi|0

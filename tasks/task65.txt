@@ -1,23 +1,41 @@
 TASK
-Laske, mikä on pienin ero kahden tuotteen hinnassa.
+Hae kaikki käyttäjät, jotka eivät kuulu mihinkään
+samaan ryhmään käyttäjän "uolevi" kanssa.
 
 TABLES
-CREATE TABLE Tuotteet (id INTEGER PRIMARY KEY, nimi TEXT, hinta INTEGER);
+CREATE TABLE Kayttajat (id INTEGER PRIMARY KEY, tunnus TEXT);
+CREATE TABLE Ryhmat (id INTEGER PRIMARY KEY, nimi TEXT);
+CREATE TABLE Oikeudet (kayttaja_id INTEGER, ryhma_id INTEGER);
 
 TEST
-INSERT INTO Tuotteet (nimi,hinta) VALUES ('selleri',5);
-INSERT INTO Tuotteet (nimi,hinta) VALUES ('lanttu',3);
-INSERT INTO Tuotteet (nimi,hinta) VALUES ('retiisi',8);
-INSERT INTO Tuotteet (nimi,hinta) VALUES ('nauris',7);
+INSERT INTO Kayttajat(tunnus) VALUES ('uolevi');
+INSERT INTO Kayttajat(tunnus) VALUES ('maija');
+INSERT INTO Kayttajat(tunnus) VALUES ('kaaleppi');
+INSERT INTO Kayttajat(tunnus) VALUES ('liisa');
+INSERT INTO Ryhmat(nimi) VALUES ('puput');
+INSERT INTO Ryhmat(nimi) VALUES ('kilit');
+INSERT INTO Oikeudet(kayttaja_id, ryhma_id) VALUES (1,1);
+INSERT INTO Oikeudet(kayttaja_id, ryhma_id) VALUES (1,2);
+INSERT INTO Oikeudet(kayttaja_id, ryhma_id) VALUES (2,1);
+INSERT INTO Oikeudet(kayttaja_id, ryhma_id) VALUES (4,2);
 
 RESULT
-1
+kaaleppi
 
 TEST
-INSERT INTO Tuotteet (nimi,hinta) VALUES ('selleri',1);
-INSERT INTO Tuotteet (nimi,hinta) VALUES ('lanttu',7);
-INSERT INTO Tuotteet (nimi,hinta) VALUES ('retiisi',15);
-INSERT INTO Tuotteet (nimi,hinta) VALUES ('nauris',18);
+INSERT INTO Kayttajat(tunnus) VALUES ('uolevi');
+INSERT INTO Kayttajat(tunnus) VALUES ('maija');
+INSERT INTO Kayttajat(tunnus) VALUES ('kaaleppi');
+INSERT INTO Kayttajat(tunnus) VALUES ('liisa');
+INSERT INTO Ryhmat(nimi) VALUES ('puput');
+INSERT INTO Ryhmat(nimi) VALUES ('kilit');
+INSERT INTO Ryhmat(nimi) VALUES ('perhoset');
+INSERT INTO Oikeudet(kayttaja_id,ryhma_id) VALUES (1,1);
+INSERT INTO Oikeudet(kayttaja_id,ryhma_id) VALUES (2,2);
+INSERT INTO Oikeudet(kayttaja_id,ryhma_id) VALUES (2,3);
+INSERT INTO Oikeudet(kayttaja_id,ryhma_id) VALUES (3,1);
+INSERT INTO Oikeudet(kayttaja_id,ryhma_id) VALUES (4,2);
 
 RESULT
-3
+maija
+liisa

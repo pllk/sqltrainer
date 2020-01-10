@@ -1,43 +1,54 @@
 TASK
-Ilmoita jokaisesta junan vaunusta,
-montako matkustajaa siellä on.
+Laske, montako eri tehtävää kukin opiskelija on ratkaissut oikein
+(lähetyksen tila on 0 = väärin tai 1 = oikein).
 
 TABLES
-CREATE TABLE Vaunut (id INTEGER PRIMARY KEY, nimi TEXT, paikat INTEGER);
-CREATE TABLE Matkustajat (id INTEGER PRIMARY KEY, nimi TEXT, vaunu_id INTEGER);
+CREATE TABLE Opiskelijat (id INTEGER PRIMARY KEY, nimi TEXT);
+CREATE TABLE Tehtavat (id INTEGER PRIMARY KEY, nimi TEXT);
+CREATE TABLE Lahetykset (id INTEGER PRIMARY KEY, opiskelija_id INTEGER, tehtava_id INTEGER, tila INTEGER);
 
 TEST
-INSERT INTO Vaunut (nimi,paikat) VALUES ("vaunu1",10);
-INSERT INTO Vaunut (nimi,paikat) VALUES ("vaunu2",10);
-INSERT INTO Vaunut (nimi,paikat) VALUES ("vaunu3",10);
-INSERT INTO Vaunut (nimi,paikat) VALUES ("vaunu4",10);
-INSERT INTO Matkustajat (nimi,vaunu_id) VALUES ("Uolevi",1);
-INSERT INTO Matkustajat (nimi,vaunu_id) VALUES ("Maija",1);
-INSERT INTO Matkustajat (nimi,vaunu_id) VALUES ("Kaaleppi",2);
-INSERT INTO Matkustajat (nimi,vaunu_id) VALUES ("Kotivalo",4);
-INSERT INTO Matkustajat (nimi,vaunu_id) VALUES ("Justiina",4);
-INSERT INTO Matkustajat (nimi,vaunu_id) VALUES ("Vihtori",4);
+INSERT INTO Opiskelijat (nimi) VALUES ('Uolevi');
+INSERT INTO Opiskelijat (nimi) VALUES ('Maija');
+INSERT INTO Opiskelijat (nimi) VALUES ('Kaaleppi');
+INSERT INTO Tehtavat (nimi) VALUES ('T1');
+INSERT INTO Tehtavat (nimi) VALUES ('T2');
+INSERT INTO Tehtavat (nimi) VALUES ('T3');
+INSERT INTO Lahetykset (opiskelija_id,tehtava_id,tila) VALUES (1,1,0);
+INSERT INTO Lahetykset (opiskelija_id,tehtava_id,tila) VALUES (1,1,0);
+INSERT INTO Lahetykset (opiskelija_id,tehtava_id,tila) VALUES (2,1,1);
+INSERT INTO Lahetykset (opiskelija_id,tehtava_id,tila) VALUES (1,2,0);
+INSERT INTO Lahetykset (opiskelija_id,tehtava_id,tila) VALUES (1,1,1);
+INSERT INTO Lahetykset (opiskelija_id,tehtava_id,tila) VALUES (2,2,1);
+INSERT INTO Lahetykset (opiskelija_id,tehtava_id,tila) VALUES (2,3,0);
+INSERT INTO Lahetykset (opiskelija_id,tehtava_id,tila) VALUES (1,2,0);
+INSERT INTO Lahetykset (opiskelija_id,tehtava_id,tila) VALUES (1,2,1);
+INSERT INTO Lahetykset (opiskelija_id,tehtava_id,tila) VALUES (2,2,1);
+INSERT INTO Lahetykset (opiskelija_id,tehtava_id,tila) VALUES (2,2,1);
 
 RESULT
-vaunu1|2
-vaunu2|1
-vaunu3|0
-vaunu4|3
+Uolevi|2
+Maija|2
+Kaaleppi|0
 
 TEST
-INSERT INTO Vaunut (nimi,paikat) VALUES ("vaunu1",10);
-INSERT INTO Vaunut (nimi,paikat) VALUES ("vaunu2",10);
-INSERT INTO Vaunut (nimi,paikat) VALUES ("vaunu3",10);
-INSERT INTO Vaunut (nimi,paikat) VALUES ("vaunu4",10);
-INSERT INTO Matkustajat (nimi,vaunu_id) VALUES ("Uolevi",1);
-INSERT INTO Matkustajat (nimi,vaunu_id) VALUES ("Maija",1);
-INSERT INTO Matkustajat (nimi,vaunu_id) VALUES ("Kaaleppi",1);
-INSERT INTO Matkustajat (nimi,vaunu_id) VALUES ("Kotivalo",1);
-INSERT INTO Matkustajat (nimi,vaunu_id) VALUES ("Justiina",1);
-INSERT INTO Matkustajat (nimi,vaunu_id) VALUES ("Vihtori",4);
+INSERT INTO Opiskelijat (nimi) VALUES ('Uolevi');
+INSERT INTO Opiskelijat (nimi) VALUES ('Maija');
+INSERT INTO Opiskelijat (nimi) VALUES ('Kaaleppi');
+INSERT INTO Tehtavat (nimi) VALUES ('T1');
+INSERT INTO Tehtavat (nimi) VALUES ('T2');
+INSERT INTO Tehtavat (nimi) VALUES ('T3');
+INSERT INTO Lahetykset (opiskelija_id,tehtava_id,tila) VALUES (1,1,1);
+INSERT INTO Lahetykset (opiskelija_id,tehtava_id,tila) VALUES (1,2,1);
+INSERT INTO Lahetykset (opiskelija_id,tehtava_id,tila) VALUES (1,3,1);
+INSERT INTO Lahetykset (opiskelija_id,tehtava_id,tila) VALUES (2,1,0);
+INSERT INTO Lahetykset (opiskelija_id,tehtava_id,tila) VALUES (2,2,0);
+INSERT INTO Lahetykset (opiskelija_id,tehtava_id,tila) VALUES (2,3,0);
+INSERT INTO Lahetykset (opiskelija_id,tehtava_id,tila) VALUES (1,2,1);
+INSERT INTO Lahetykset (opiskelija_id,tehtava_id,tila) VALUES (1,3,1);
+INSERT INTO Lahetykset (opiskelija_id,tehtava_id,tila) VALUES (3,3,1);
 
 RESULT
-vaunu1|5
-vaunu2|0
-vaunu3|0
-vaunu4|1
+Uolevi|3
+Maija|0
+Kaaleppi|1

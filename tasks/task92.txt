@@ -1,38 +1,62 @@
 TASK
-Pelaajat jaetaan joukkueisiin niin,
-että aakkosjärjestyksessä joka toinen pelaaja kuuluu
-joukkueeseen "Puput" ja "Kilit". Ilmoita joukkuejako
-annetuille pelaajille.
+Ilmoita jokaisesta käyttäjästä,
+monenko kaverin kaverilistalla
+hän esiintyy itse.
 
 TABLES
-CREATE TABLE Pelaajat (id INTEGER PRIMARY KEY, nimi TEXT);
+CREATE TABLE Kayttajat (id INTEGER PRIMARY KEY, nimi TEXT);
+CREATE TABLE Kaverit (kayttaja_id INTEGER, kaveri_id INTEGER);
 
 TEST
-INSERT INTO Pelaajat(nimi) VALUES ('Uolevi');
-INSERT INTO Pelaajat(nimi) VALUES ('Maija');
-INSERT INTO Pelaajat(nimi) VALUES ('Liisa');
-INSERT INTO Pelaajat(nimi) VALUES ('Kaaleppi');
+INSERT INTO Kayttajat(nimi) VALUES ('Uolevi');
+INSERT INTO Kayttajat(nimi) VALUES ('Maija');
+INSERT INTO Kayttajat(nimi) VALUES ('Liisa');
+INSERT INTO Kayttajat(nimi) VALUES ('Kaaleppi');
+INSERT INTO Kaverit(kayttaja_id, kaveri_id) VALUES (1,2);
+INSERT INTO Kaverit(kayttaja_id, kaveri_id) VALUES (1,3);
+INSERT INTO Kaverit(kayttaja_id, kaveri_id) VALUES (2,1);
+INSERT INTO Kaverit(kayttaja_id, kaveri_id) VALUES (3,1);
+INSERT INTO Kaverit(kayttaja_id, kaveri_id) VALUES (4,1);
+INSERT INTO Kaverit(kayttaja_id, kaveri_id) VALUES (4,2);
+INSERT INTO Kaverit(kayttaja_id, kaveri_id) VALUES (4,3);
 
 RESULT
-Kaaleppi|Puput
-Liisa|Kilit
-Maija|Puput
-Uolevi|Kilit
+Uolevi|2
+Maija|1
+Liisa|1
+Kaaleppi|0
 
 TEST
-INSERT INTO Pelaajat(nimi) VALUES ('Uolevi');
-INSERT INTO Pelaajat(nimi) VALUES ('Maija');
-INSERT INTO Pelaajat(nimi) VALUES ('Liisa');
-INSERT INTO Pelaajat(nimi) VALUES ('Kaaleppi');
-INSERT INTO Pelaajat(nimi) VALUES ('Vihtori');
-INSERT INTO Pelaajat(nimi) VALUES ('Justiina');
-INSERT INTO Pelaajat(nimi) VALUES ('Kotivalo');
+INSERT INTO Kayttajat(nimi) VALUES ('Uolevi');
+INSERT INTO Kayttajat(nimi) VALUES ('Maija');
+INSERT INTO Kayttajat(nimi) VALUES ('Liisa');
+INSERT INTO Kayttajat(nimi) VALUES ('Kaaleppi');
+INSERT INTO Kaverit(kayttaja_id, kaveri_id) VALUES (1,2);
+INSERT INTO Kaverit(kayttaja_id, kaveri_id) VALUES (1,3);
+INSERT INTO Kaverit(kayttaja_id, kaveri_id) VALUES (1,4);
+INSERT INTO Kaverit(kayttaja_id, kaveri_id) VALUES (2,3);
+INSERT INTO Kaverit(kayttaja_id, kaveri_id) VALUES (3,2);
 
 RESULT
-Justiina|Puput
-Kaaleppi|Kilit
-Kotivalo|Puput
-Liisa|Kilit
-Maija|Puput
-Uolevi|Kilit
-Vihtori|Puput
+Uolevi|0
+Maija|1
+Liisa|1
+Kaaleppi|0
+
+TEST
+INSERT INTO Kayttajat(nimi) VALUES ('Uolevi');
+INSERT INTO Kayttajat(nimi) VALUES ('Maija');
+INSERT INTO Kayttajat(nimi) VALUES ('Liisa');
+INSERT INTO Kayttajat(nimi) VALUES ('Kaaleppi');
+INSERT INTO Kaverit(kayttaja_id, kaveri_id) VALUES (1,2);
+INSERT INTO Kaverit(kayttaja_id, kaveri_id) VALUES (1,3);
+INSERT INTO Kaverit(kayttaja_id, kaveri_id) VALUES (1,4);
+INSERT INTO Kaverit(kayttaja_id, kaveri_id) VALUES (2,1);
+INSERT INTO Kaverit(kayttaja_id, kaveri_id) VALUES (3,1);
+INSERT INTO Kaverit(kayttaja_id, kaveri_id) VALUES (4,1);
+
+RESULT
+Uolevi|3
+Maija|1
+Liisa|1
+Kaaleppi|1

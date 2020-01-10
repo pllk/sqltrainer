@@ -1,38 +1,58 @@
 TASK
-Hae sanat järjestettynä niin,
-että kirjainkoolla ei ole merkitystä.
-Jokainen sana muodostuu kirjaimista
-a–z ja A–Z.
-
-STRICT
+Hae jokaisesta käyttäjästä tieto, monessako ryhmässä hän on.
 
 TABLES
-CREATE TABLE Sanat (id INTEGER PRIMARY KEY, sana TEXT);
+CREATE TABLE Kayttajat (id INTEGER PRIMARY KEY, tunnus TEXT);
+CREATE TABLE Ryhmat (id INTEGER PRIMARY KEY, nimi TEXT);
+CREATE TABLE Oikeudet (kayttaja_id INTEGER, ryhma_id INTEGER);
 
 TEST
-INSERT INTO Sanat(sana) VALUES ('Liisa');
-INSERT INTO Sanat(sana) VALUES ('Maija');
-INSERT INTO Sanat(sana) VALUES ('Uolevi');
-INSERT INTO Sanat(sana) VALUES ('apina');
-INSERT INTO Sanat(sana) VALUES ('omena');
+INSERT INTO Kayttajat(tunnus) VALUES ('uolevi');
+INSERT INTO Kayttajat(tunnus) VALUES ('maija');
+INSERT INTO Kayttajat(tunnus) VALUES ('kaaleppi');
+INSERT INTO Kayttajat(tunnus) VALUES ('liisa');
+INSERT INTO Ryhmat(nimi) VALUES ('puput');
+INSERT INTO Ryhmat(nimi) VALUES ('kilit');
+INSERT INTO Oikeudet(kayttaja_id, ryhma_id) VALUES (1,1);
+INSERT INTO Oikeudet(kayttaja_id, ryhma_id) VALUES (2,1);
+INSERT INTO Oikeudet(kayttaja_id, ryhma_id) VALUES (3,1);
+INSERT INTO Oikeudet(kayttaja_id, ryhma_id) VALUES (3,2);
 
 RESULT
-apina
-Liisa
-Maija
-omena
-Uolevi
+uolevi|1
+maija|1
+kaaleppi|2
+liisa|0
 
 TEST
-INSERT INTO Sanat(sana) VALUES ('Helsinki');
-INSERT INTO Sanat(sana) VALUES ('apina');
-INSERT INTO Sanat(sana) VALUES ('Tukholma');
-INSERT INTO Sanat(sana) VALUES ('omena');
-INSERT INTO Sanat(sana) VALUES ('Tallinna');
+INSERT INTO Kayttajat(tunnus) VALUES ('uolevi');
+INSERT INTO Kayttajat(tunnus) VALUES ('maija');
+INSERT INTO Kayttajat(tunnus) VALUES ('kaaleppi');
+INSERT INTO Kayttajat(tunnus) VALUES ('liisa');
+INSERT INTO Ryhmat(nimi) VALUES ('puput');
 
 RESULT
-apina
-Helsinki
-omena
-Tallinna
-Tukholma
+uolevi|0
+maija|0
+kaaleppi|0
+liisa|0
+
+TEST
+INSERT INTO Kayttajat(tunnus) VALUES ('uolevi');
+INSERT INTO Kayttajat(tunnus) VALUES ('maija');
+INSERT INTO Kayttajat(tunnus) VALUES ('kaaleppi');
+INSERT INTO Kayttajat(tunnus) VALUES ('liisa');
+INSERT INTO Ryhmat(nimi) VALUES ('puput');
+INSERT INTO Ryhmat(nimi) VALUES ('kilit');
+INSERT INTO Ryhmat(nimi) VALUES ('perhoset');
+INSERT INTO Oikeudet(kayttaja_id,ryhma_id) VALUES (1,1);
+INSERT INTO Oikeudet(kayttaja_id,ryhma_id) VALUES (1,2);
+INSERT INTO Oikeudet(kayttaja_id,ryhma_id) VALUES (1,3);
+INSERT INTO Oikeudet(kayttaja_id,ryhma_id) VALUES (4,1);
+INSERT INTO Oikeudet(kayttaja_id,ryhma_id) VALUES (4,3);
+
+RESULT
+uolevi|3
+maija|0
+kaaleppi|0
+liisa|2

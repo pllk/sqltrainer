@@ -1,37 +1,38 @@
 TASK
-Laske jokaisen tilin saldo tapahtumien perusteella
-(jokaisen tilin saldo on aluksi 0).
+Hae sanat järjestettynä niin,
+että kirjainkoolla ei ole merkitystä.
+Jokainen sana muodostuu kirjaimista
+a–z ja A–Z.
+
+STRICT
 
 TABLES
-CREATE TABLE Tilit (id INTEGER PRIMARY KEY, haltija TEXT);
-CREATE TABLE Tapahtumat (id INTEGER PRIMARY KEY, tili_id INTEGER, muutos INTEGER);
+CREATE TABLE Sanat (id INTEGER PRIMARY KEY, sana TEXT);
 
 TEST
-INSERT INTO Tilit (haltija) VALUES ('Uolevi');
-INSERT INTO Tilit (haltija) VALUES ('Maija');
-INSERT INTO Tilit (haltija) VALUES ('Kaaleppi');
-INSERT INTO Tapahtumat (tili_id,muutos) VALUES (1,500);
-INSERT INTO Tapahtumat (tili_id,muutos) VALUES (2,300);
-INSERT INTO Tapahtumat (tili_id,muutos) VALUES (1,-100);
-INSERT INTO Tapahtumat (tili_id,muutos) VALUES (2,100);
-INSERT INTO Tapahtumat (tili_id,muutos) VALUES (2,-300);
+INSERT INTO Sanat(sana) VALUES ('Liisa');
+INSERT INTO Sanat(sana) VALUES ('Maija');
+INSERT INTO Sanat(sana) VALUES ('Uolevi');
+INSERT INTO Sanat(sana) VALUES ('apina');
+INSERT INTO Sanat(sana) VALUES ('omena');
 
 RESULT
-Uolevi|400
-Maija|100
-Kaaleppi|0
+apina
+Liisa
+Maija
+omena
+Uolevi
 
 TEST
-INSERT INTO Tilit (haltija) VALUES ('Uolevi');
-INSERT INTO Tilit (haltija) VALUES ('Maija');
-INSERT INTO Tilit (haltija) VALUES ('Kaaleppi');
-INSERT INTO Tapahtumat (tili_id,muutos) VALUES (1,100);
-INSERT INTO Tapahtumat (tili_id,muutos) VALUES (1,200);
-INSERT INTO Tapahtumat (tili_id,muutos) VALUES (1,300);
-INSERT INTO Tapahtumat (tili_id,muutos) VALUES (1,400);
-INSERT INTO Tapahtumat (tili_id,muutos) VALUES (1,-500);
+INSERT INTO Sanat(sana) VALUES ('Helsinki');
+INSERT INTO Sanat(sana) VALUES ('apina');
+INSERT INTO Sanat(sana) VALUES ('Tukholma');
+INSERT INTO Sanat(sana) VALUES ('omena');
+INSERT INTO Sanat(sana) VALUES ('Tallinna');
 
 RESULT
-Uolevi|500
-Maija|0
-Kaaleppi|0
+apina
+Helsinki
+omena
+Tallinna
+Tukholma

@@ -1,34 +1,52 @@
 TASK
-Hae tuote, jonka hinta on halvin
-(jos halvimpia tuotteita on useita,
-valitse aakkosjärjestyksessä ensimmäinen).
+Hae jokaisesta ryhmästä tieto, montako käyttäjää siihen kuuluu.
 
 TABLES
-CREATE TABLE Tuotteet (id INTEGER PRIMARY KEY, nimi TEXT, hinta INTEGER);
+CREATE TABLE Kayttajat (id INTEGER PRIMARY KEY, tunnus TEXT);
+CREATE TABLE Ryhmat (id INTEGER PRIMARY KEY, nimi TEXT);
+CREATE TABLE Oikeudet (kayttaja_id INTEGER, ryhma_id INTEGER);
 
 TEST
-INSERT INTO Tuotteet (nimi,hinta) VALUES ('selleri',7);
-INSERT INTO Tuotteet (nimi,hinta) VALUES ('lanttu',5);
-INSERT INTO Tuotteet (nimi,hinta) VALUES ('retiisi',8);
-INSERT INTO Tuotteet (nimi,hinta) VALUES ('nauris',5);
+INSERT INTO Kayttajat(tunnus) VALUES ('uolevi');
+INSERT INTO Kayttajat(tunnus) VALUES ('maija');
+INSERT INTO Kayttajat(tunnus) VALUES ('kaaleppi');
+INSERT INTO Kayttajat(tunnus) VALUES ('liisa');
+INSERT INTO Ryhmat(nimi) VALUES ('puput');
+INSERT INTO Ryhmat(nimi) VALUES ('kilit');
+INSERT INTO Oikeudet(kayttaja_id, ryhma_id) VALUES (1,1);
+INSERT INTO Oikeudet(kayttaja_id, ryhma_id) VALUES (2,1);
+INSERT INTO Oikeudet(kayttaja_id, ryhma_id) VALUES (3,1);
+INSERT INTO Oikeudet(kayttaja_id, ryhma_id) VALUES (3,2);
 
 RESULT
-lanttu|5
+puput|3
+kilit|1
 
 TEST
-INSERT INTO Tuotteet (nimi,hinta) VALUES ('selleri',7);
-INSERT INTO Tuotteet (nimi,hinta) VALUES ('lanttu',5);
-INSERT INTO Tuotteet (nimi,hinta) VALUES ('retiisi',8);
-INSERT INTO Tuotteet (nimi,hinta) VALUES ('nauris',3);
+INSERT INTO Kayttajat(tunnus) VALUES ('uolevi');
+INSERT INTO Kayttajat(tunnus) VALUES ('maija');
+INSERT INTO Kayttajat(tunnus) VALUES ('kaaleppi');
+INSERT INTO Kayttajat(tunnus) VALUES ('liisa');
+INSERT INTO Ryhmat(nimi) VALUES ('puput');
 
 RESULT
-nauris|3
+puput|0
 
 TEST
-INSERT INTO Tuotteet (nimi,hinta) VALUES ('selleri',5);
-INSERT INTO Tuotteet (nimi,hinta) VALUES ('lanttu',5);
-INSERT INTO Tuotteet (nimi,hinta) VALUES ('retiisi',5);
-INSERT INTO Tuotteet (nimi,hinta) VALUES ('nauris',5);
+INSERT INTO Kayttajat(tunnus) VALUES ('uolevi');
+INSERT INTO Kayttajat(tunnus) VALUES ('maija');
+INSERT INTO Kayttajat(tunnus) VALUES ('kaaleppi');
+INSERT INTO Kayttajat(tunnus) VALUES ('liisa');
+INSERT INTO Ryhmat(nimi) VALUES ('puput');
+INSERT INTO Ryhmat(nimi) VALUES ('kilit');
+INSERT INTO Ryhmat(nimi) VALUES ('perhoset');
+INSERT INTO Oikeudet(kayttaja_id,ryhma_id) VALUES (1,1);
+INSERT INTO Oikeudet(kayttaja_id,ryhma_id) VALUES (1,2);
+INSERT INTO Oikeudet(kayttaja_id,ryhma_id) VALUES (1,3);
+INSERT INTO Oikeudet(kayttaja_id,ryhma_id) VALUES (4,1);
+INSERT INTO Oikeudet(kayttaja_id,ryhma_id) VALUES (4,3);
 
 RESULT
-lanttu|5
+puput|2
+kilit|1
+perhoset|2

@@ -1,46 +1,37 @@
 TASK
-Hae jokaisesta tuotteesta tieto, monessako paketissa se esiintyy
-(yhden tai useamman kerran).
+Hae kaikki matkustajat, jotka ovat yksin vaunussaan.
 
 TABLES
-CREATE TABLE Tuotteet (id INTEGER PRIMARY KEY, nimi TEXT, hinta INTEGER);
-CREATE TABLE Paketit (id INTEGER PRIMARY KEY, nimi TEXT, hinta INTEGER);
-CREATE TABLE Sisallot (paketti_id INTEGER, tuote_id INTEGER);
+CREATE TABLE Vaunut (id INTEGER PRIMARY KEY, nimi TEXT, paikat INTEGER);
+CREATE TABLE Matkustajat (id INTEGER PRIMARY KEY, nimi TEXT, vaunu_id INTEGER);
 
 TEST
-INSERT INTO Tuotteet (nimi,hinta) VALUES ('selleri',7);
-INSERT INTO Tuotteet (nimi,hinta) VALUES ('lanttu',3);
-INSERT INTO Tuotteet (nimi,hinta) VALUES ('retiisi',5);
-INSERT INTO Tuotteet (nimi,hinta) VALUES ('nauris',6);
-INSERT INTO Paketit (nimi,hinta) VALUES ('Mummon herkut',10);
-INSERT INTO Paketit (nimi,hinta) VALUES ('Papan herkut',10);
-INSERT INTO Sisallot (paketti_id,tuote_id) VALUES (1,1);
-INSERT INTO Sisallot (paketti_id,tuote_id) VALUES (1,4);
-INSERT INTO Sisallot (paketti_id,tuote_id) VALUES (2,3);
-INSERT INTO Sisallot (paketti_id,tuote_id) VALUES (2,3);
-INSERT INTO Sisallot (paketti_id,tuote_id) VALUES (2,4);
+INSERT INTO Vaunut (nimi,paikat) VALUES ("vaunu1",10);
+INSERT INTO Vaunut (nimi,paikat) VALUES ("vaunu2",10);
+INSERT INTO Vaunut (nimi,paikat) VALUES ("vaunu3",10);
+INSERT INTO Vaunut (nimi,paikat) VALUES ("vaunu4",10);
+INSERT INTO Matkustajat (nimi,vaunu_id) VALUES ("Uolevi",1);
+INSERT INTO Matkustajat (nimi,vaunu_id) VALUES ("Maija",1);
+INSERT INTO Matkustajat (nimi,vaunu_id) VALUES ("Kaaleppi",2);
+INSERT INTO Matkustajat (nimi,vaunu_id) VALUES ("Kotivalo",4);
+INSERT INTO Matkustajat (nimi,vaunu_id) VALUES ("Justiina",4);
+INSERT INTO Matkustajat (nimi,vaunu_id) VALUES ("Vihtori",4);
 
 RESULT
-selleri|1
-lanttu|0
-retiisi|1
-nauris|2
+Kaaleppi
 
 TEST
-INSERT INTO Tuotteet (nimi,hinta) VALUES ('selleri',7);
-INSERT INTO Tuotteet (nimi,hinta) VALUES ('lanttu',3);
-INSERT INTO Tuotteet (nimi,hinta) VALUES ('retiisi',5);
-INSERT INTO Tuotteet (nimi,hinta) VALUES ('nauris',6);
-INSERT INTO Paketit (nimi,hinta) VALUES ('Mummon herkut',10);
-INSERT INTO Paketit (nimi,hinta) VALUES ('Papan herkut',10);
-INSERT INTO Sisallot (paketti_id,tuote_id) VALUES (1,1);
-INSERT INTO Sisallot (paketti_id,tuote_id) VALUES (2,1);
-INSERT INTO Sisallot (paketti_id,tuote_id) VALUES (2,2);
-INSERT INTO Sisallot (paketti_id,tuote_id) VALUES (2,3);
-INSERT INTO Sisallot (paketti_id,tuote_id) VALUES (2,4);
+INSERT INTO Vaunut (nimi,paikat) VALUES ("vaunu1",10);
+INSERT INTO Vaunut (nimi,paikat) VALUES ("vaunu2",10);
+INSERT INTO Vaunut (nimi,paikat) VALUES ("vaunu3",10);
+INSERT INTO Vaunut (nimi,paikat) VALUES ("vaunu4",10);
+INSERT INTO Matkustajat (nimi,vaunu_id) VALUES ("Uolevi",1);
+INSERT INTO Matkustajat (nimi,vaunu_id) VALUES ("Maija",1);
+INSERT INTO Matkustajat (nimi,vaunu_id) VALUES ("Kaaleppi",2);
+INSERT INTO Matkustajat (nimi,vaunu_id) VALUES ("Kotivalo",3);
+INSERT INTO Matkustajat (nimi,vaunu_id) VALUES ("Justiina",3);
+INSERT INTO Matkustajat (nimi,vaunu_id) VALUES ("Vihtori",4);
 
 RESULT
-selleri|2
-lanttu|1
-retiisi|1
-nauris|1
+Kaaleppi
+Vihtori

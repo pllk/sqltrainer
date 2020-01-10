@@ -1,37 +1,39 @@
 TASK
-Hae kaikki matkustajat, jotka ovat yksin vaunussaan.
+Laske tulosten <i>mediaani</i>
+(eli keskimmäinen tulos, kun tulokset on järjestetty pienimmästä suurimpaan).
+Jos tulosten määrä on parillinen, tulosta keskikohdan vasemmalla puolella oleva tulos.
 
 TABLES
-CREATE TABLE Vaunut (id INTEGER PRIMARY KEY, nimi TEXT, paikat INTEGER);
-CREATE TABLE Matkustajat (id INTEGER PRIMARY KEY, nimi TEXT, vaunu_id INTEGER);
+CREATE TABLE Tulokset (id INTEGER PRIMARY KEY, tulos INTEGER);
 
 TEST
-INSERT INTO Vaunut (nimi,paikat) VALUES ("vaunu1",10);
-INSERT INTO Vaunut (nimi,paikat) VALUES ("vaunu2",10);
-INSERT INTO Vaunut (nimi,paikat) VALUES ("vaunu3",10);
-INSERT INTO Vaunut (nimi,paikat) VALUES ("vaunu4",10);
-INSERT INTO Matkustajat (nimi,vaunu_id) VALUES ("Uolevi",1);
-INSERT INTO Matkustajat (nimi,vaunu_id) VALUES ("Maija",1);
-INSERT INTO Matkustajat (nimi,vaunu_id) VALUES ("Kaaleppi",2);
-INSERT INTO Matkustajat (nimi,vaunu_id) VALUES ("Kotivalo",4);
-INSERT INTO Matkustajat (nimi,vaunu_id) VALUES ("Justiina",4);
-INSERT INTO Matkustajat (nimi,vaunu_id) VALUES ("Vihtori",4);
+INSERT INTO Tulokset (tulos) VALUES (3);
+INSERT INTO Tulokset (tulos) VALUES (2);
+INSERT INTO Tulokset (tulos) VALUES (7);
+INSERT INTO Tulokset (tulos) VALUES (3);
+INSERT INTO Tulokset (tulos) VALUES (4);
+INSERT INTO Tulokset (tulos) VALUES (7);
 
 RESULT
-Kaaleppi
+3
 
 TEST
-INSERT INTO Vaunut (nimi,paikat) VALUES ("vaunu1",10);
-INSERT INTO Vaunut (nimi,paikat) VALUES ("vaunu2",10);
-INSERT INTO Vaunut (nimi,paikat) VALUES ("vaunu3",10);
-INSERT INTO Vaunut (nimi,paikat) VALUES ("vaunu4",10);
-INSERT INTO Matkustajat (nimi,vaunu_id) VALUES ("Uolevi",1);
-INSERT INTO Matkustajat (nimi,vaunu_id) VALUES ("Maija",1);
-INSERT INTO Matkustajat (nimi,vaunu_id) VALUES ("Kaaleppi",2);
-INSERT INTO Matkustajat (nimi,vaunu_id) VALUES ("Kotivalo",3);
-INSERT INTO Matkustajat (nimi,vaunu_id) VALUES ("Justiina",3);
-INSERT INTO Matkustajat (nimi,vaunu_id) VALUES ("Vihtori",4);
+INSERT INTO Tulokset (tulos) VALUES (4);
+INSERT INTO Tulokset (tulos) VALUES (3);
+INSERT INTO Tulokset (tulos) VALUES (2);
+INSERT INTO Tulokset (tulos) VALUES (1);
 
 RESULT
-Kaaleppi
-Vihtori
+2
+
+TEST
+INSERT INTO Tulokset (tulos) VALUES (1);
+INSERT INTO Tulokset (tulos) VALUES (2);
+INSERT INTO Tulokset (tulos) VALUES (1);
+INSERT INTO Tulokset (tulos) VALUES (2);
+INSERT INTO Tulokset (tulos) VALUES (1);
+INSERT INTO Tulokset (tulos) VALUES (2);
+INSERT INTO Tulokset (tulos) VALUES (1);
+
+RESULT
+1

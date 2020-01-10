@@ -1,30 +1,42 @@
 TASK
-Hae jokaisesta tuotteesta tieto,
-monenko tuotteen hinta eroaa enintään yhdellä.
+Hae kaikki käyttäjät, jotka kuuluvat yli yhteen ryhmään.
 
 TABLES
-CREATE TABLE Tuotteet (id INTEGER PRIMARY KEY, nimi TEXT, hinta INTEGER);
+CREATE TABLE Kayttajat (id INTEGER PRIMARY KEY, tunnus TEXT);
+CREATE TABLE Ryhmat (id INTEGER PRIMARY KEY, nimi TEXT);
+CREATE TABLE Oikeudet (kayttaja_id INTEGER, ryhma_id INTEGER);
 
 TEST
-INSERT INTO Tuotteet (nimi,hinta) VALUES ('selleri',7);
-INSERT INTO Tuotteet (nimi,hinta) VALUES ('lanttu',4);
-INSERT INTO Tuotteet (nimi,hinta) VALUES ('retiisi',8);
-INSERT INTO Tuotteet (nimi,hinta) VALUES ('nauris',6);
+INSERT INTO Kayttajat(tunnus) VALUES ('uolevi');
+INSERT INTO Kayttajat(tunnus) VALUES ('maija');
+INSERT INTO Kayttajat(tunnus) VALUES ('kaaleppi');
+INSERT INTO Kayttajat(tunnus) VALUES ('liisa');
+INSERT INTO Ryhmat(nimi) VALUES ('puput');
+INSERT INTO Ryhmat(nimi) VALUES ('kilit');
+INSERT INTO Oikeudet(kayttaja_id, ryhma_id) VALUES (1,1);
+INSERT INTO Oikeudet(kayttaja_id, ryhma_id) VALUES (2,1);
+INSERT INTO Oikeudet(kayttaja_id, ryhma_id) VALUES (3,1);
+INSERT INTO Oikeudet(kayttaja_id, ryhma_id) VALUES (3,2);
 
 RESULT
-selleri|3
-lanttu|1
-retiisi|2
-nauris|2
+kaaleppi
 
 TEST
-INSERT INTO Tuotteet (nimi,hinta) VALUES ('selleri',7);
-INSERT INTO Tuotteet (nimi,hinta) VALUES ('lanttu',5);
-INSERT INTO Tuotteet (nimi,hinta) VALUES ('retiisi',8);
-INSERT INTO Tuotteet (nimi,hinta) VALUES ('nauris',3);
+INSERT INTO Kayttajat(tunnus) VALUES ('uolevi');
+INSERT INTO Kayttajat(tunnus) VALUES ('maija');
+INSERT INTO Kayttajat(tunnus) VALUES ('kaaleppi');
+INSERT INTO Kayttajat(tunnus) VALUES ('liisa');
+INSERT INTO Ryhmat(nimi) VALUES ('puput');
+INSERT INTO Ryhmat(nimi) VALUES ('kilit');
+INSERT INTO Ryhmat(nimi) VALUES ('perhoset');
+INSERT INTO Oikeudet(kayttaja_id,ryhma_id) VALUES (1,1);
+INSERT INTO Oikeudet(kayttaja_id,ryhma_id) VALUES (1,2);
+INSERT INTO Oikeudet(kayttaja_id,ryhma_id) VALUES (1,3);
+INSERT INTO Oikeudet(kayttaja_id,ryhma_id) VALUES (2,2);
+INSERT INTO Oikeudet(kayttaja_id,ryhma_id) VALUES (3,3);
+INSERT INTO Oikeudet(kayttaja_id,ryhma_id) VALUES (4,1);
+INSERT INTO Oikeudet(kayttaja_id,ryhma_id) VALUES (4,3);
 
 RESULT
-selleri|2
-lanttu|1
-retiisi|2
-nauris|1
+uolevi
+liisa

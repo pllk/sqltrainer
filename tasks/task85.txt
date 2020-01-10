@@ -1,52 +1,37 @@
 TASK
-Muodosta tuloslista, jossa on sijaluku,
-pelaajan nimi ja paras tulos.
-Jos kahdella pelaajalla on sama tulos,
-nimet järjestetään aakkosjärjestykseen.
-Jokaisella pelaajalla on eri nimi
-ja ainakin yksi tulos.
-
-STRICT
+Laske, monellako tavalla voidaan valita kaksi matkustajaa,
+jotka ovat samassa vaunussa.
 
 TABLES
-CREATE TABLE Pelaajat (id INTEGER PRIMARY KEY, nimi TEXT);
-CREATE TABLE Tulokset (id INTEGER PRIMARY KEY, pelaaja_id INTEGER, tulos INTEGER);
+CREATE TABLE Vaunut (id INTEGER PRIMARY KEY, nimi TEXT, paikat INTEGER);
+CREATE TABLE Matkustajat (id INTEGER PRIMARY KEY, nimi TEXT, vaunu_id INTEGER);
 
 TEST
-INSERT INTO Pelaajat (nimi) VALUES ('Uolevi');
-INSERT INTO Pelaajat (nimi) VALUES ('Maija');
-INSERT INTO Pelaajat (nimi) VALUES ('Kaaleppi');
-INSERT INTO Tulokset (pelaaja_id,tulos) VALUES (1,100);
-INSERT INTO Tulokset (pelaaja_id,tulos) VALUES (1,350);
-INSERT INTO Tulokset (pelaaja_id,tulos) VALUES (2,300);
-INSERT INTO Tulokset (pelaaja_id,tulos) VALUES (2,350);
-INSERT INTO Tulokset (pelaaja_id,tulos) VALUES (3,500);
+INSERT INTO Vaunut (nimi,paikat) VALUES ("vaunu1",10);
+INSERT INTO Vaunut (nimi,paikat) VALUES ("vaunu2",10);
+INSERT INTO Vaunut (nimi,paikat) VALUES ("vaunu3",10);
+INSERT INTO Vaunut (nimi,paikat) VALUES ("vaunu4",10);
+INSERT INTO Matkustajat (nimi,vaunu_id) VALUES ("Uolevi",1);
+INSERT INTO Matkustajat (nimi,vaunu_id) VALUES ("Maija",1);
+INSERT INTO Matkustajat (nimi,vaunu_id) VALUES ("Kaaleppi",2);
+INSERT INTO Matkustajat (nimi,vaunu_id) VALUES ("Kotivalo",4);
+INSERT INTO Matkustajat (nimi,vaunu_id) VALUES ("Justiina",4);
+INSERT INTO Matkustajat (nimi,vaunu_id) VALUES ("Vihtori",4);
 
 RESULT
-1|Kaaleppi|500
-2|Maija|350
-3|Uolevi|350
+4
 
 TEST
-INSERT INTO Pelaajat (nimi) VALUES ('Uolevi');
-INSERT INTO Tulokset (pelaaja_id,tulos) VALUES (1,100);
-INSERT INTO Tulokset (pelaaja_id,tulos) VALUES (1,200);
-INSERT INTO Tulokset (pelaaja_id,tulos) VALUES (1,300);
-INSERT INTO Tulokset (pelaaja_id,tulos) VALUES (1,400);
-INSERT INTO Tulokset (pelaaja_id,tulos) VALUES (1,500);
+INSERT INTO Vaunut (nimi,paikat) VALUES ("vaunu1",10);
+INSERT INTO Vaunut (nimi,paikat) VALUES ("vaunu2",10);
+INSERT INTO Vaunut (nimi,paikat) VALUES ("vaunu3",10);
+INSERT INTO Vaunut (nimi,paikat) VALUES ("vaunu4",10);
+INSERT INTO Matkustajat (nimi,vaunu_id) VALUES ("Uolevi",1);
+INSERT INTO Matkustajat (nimi,vaunu_id) VALUES ("Maija",1);
+INSERT INTO Matkustajat (nimi,vaunu_id) VALUES ("Kaaleppi",1);
+INSERT INTO Matkustajat (nimi,vaunu_id) VALUES ("Kotivalo",1);
+INSERT INTO Matkustajat (nimi,vaunu_id) VALUES ("Justiina",1);
+INSERT INTO Matkustajat (nimi,vaunu_id) VALUES ("Vihtori",4);
 
 RESULT
-1|Uolevi|500
-
-TEST
-INSERT INTO Pelaajat (nimi) VALUES ('Uolevi');
-INSERT INTO Pelaajat (nimi) VALUES ('Maija');
-INSERT INTO Pelaajat (nimi) VALUES ('Liisa');
-INSERT INTO Tulokset (pelaaja_id,tulos) VALUES (1,100);
-INSERT INTO Tulokset (pelaaja_id,tulos) VALUES (2,200);
-INSERT INTO Tulokset (pelaaja_id,tulos) VALUES (3,200);
-
-RESULT
-1|Liisa|200
-2|Maija|200
-3|Uolevi|100
+10
