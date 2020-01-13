@@ -1,52 +1,55 @@
 TASK
-Muodosta tuloslista, jossa on sijaluku,
-pelaajan nimi ja paras tulos.
-Jos kahdella pelaajalla on sama tulos,
-nimet järjestetään aakkosjärjestykseen.
-Jokaisella pelaajalla on eri nimi
-ja ainakin yksi tulos.
-
-STRICT
+Ilmoita jokaisesta paketista hinta, tuotteiden hinta erikseen
+ostettuna sekä paketin tuottama säästö.
 
 TABLES
-CREATE TABLE Pelaajat (id INTEGER PRIMARY KEY, nimi TEXT);
-CREATE TABLE Tulokset (id INTEGER PRIMARY KEY, pelaaja_id INTEGER, tulos INTEGER);
+CREATE TABLE Tuotteet (id INTEGER PRIMARY KEY, nimi TEXT, hinta INTEGER);
+CREATE TABLE Paketit (id INTEGER PRIMARY KEY, nimi TEXT, hinta INTEGER);
+CREATE TABLE Sisallot (paketti_id INTEGER, tuote_id INTEGER);
 
 TEST
-INSERT INTO Pelaajat (nimi) VALUES ('Uolevi');
-INSERT INTO Pelaajat (nimi) VALUES ('Maija');
-INSERT INTO Pelaajat (nimi) VALUES ('Kaaleppi');
-INSERT INTO Tulokset (pelaaja_id,tulos) VALUES (1,100);
-INSERT INTO Tulokset (pelaaja_id,tulos) VALUES (1,350);
-INSERT INTO Tulokset (pelaaja_id,tulos) VALUES (2,300);
-INSERT INTO Tulokset (pelaaja_id,tulos) VALUES (2,350);
-INSERT INTO Tulokset (pelaaja_id,tulos) VALUES (3,500);
+INSERT INTO Tuotteet (nimi,hinta) VALUES ('selleri',7);
+INSERT INTO Tuotteet (nimi,hinta) VALUES ('lanttu',3);
+INSERT INTO Tuotteet (nimi,hinta) VALUES ('retiisi',5);
+INSERT INTO Tuotteet (nimi,hinta) VALUES ('nauris',6);
+INSERT INTO Paketit (nimi,hinta) VALUES ('Mummon herkut',10);
+INSERT INTO Paketit (nimi,hinta) VALUES ('Kolmikko',14);
+INSERT INTO Sisallot (paketti_id,tuote_id) VALUES (1,1);
+INSERT INTO Sisallot (paketti_id,tuote_id) VALUES (1,4);
+INSERT INTO Sisallot (paketti_id,tuote_id) VALUES (2,3);
+INSERT INTO Sisallot (paketti_id,tuote_id) VALUES (2,3);
+INSERT INTO Sisallot (paketti_id,tuote_id) VALUES (2,3);
 
 RESULT
-1|Kaaleppi|500
-2|Maija|350
-3|Uolevi|350
+Mummon herkut|10|13|3
+Kolmikko|14|15|1
 
 TEST
-INSERT INTO Pelaajat (nimi) VALUES ('Uolevi');
-INSERT INTO Tulokset (pelaaja_id,tulos) VALUES (1,100);
-INSERT INTO Tulokset (pelaaja_id,tulos) VALUES (1,200);
-INSERT INTO Tulokset (pelaaja_id,tulos) VALUES (1,300);
-INSERT INTO Tulokset (pelaaja_id,tulos) VALUES (1,400);
-INSERT INTO Tulokset (pelaaja_id,tulos) VALUES (1,500);
+INSERT INTO Tuotteet (nimi,hinta) VALUES ('selleri',7);
+INSERT INTO Tuotteet (nimi,hinta) VALUES ('lanttu',3);
+INSERT INTO Tuotteet (nimi,hinta) VALUES ('retiisi',5);
+INSERT INTO Tuotteet (nimi,hinta) VALUES ('nauris',6);
+INSERT INTO Paketit (nimi,hinta) VALUES ('Aybabtu',6);
+INSERT INTO Paketit (nimi,hinta) VALUES ('Papan herkut',10);
+INSERT INTO Sisallot (paketti_id,tuote_id) VALUES (1,1);
+INSERT INTO Sisallot (paketti_id,tuote_id) VALUES (1,2);
+INSERT INTO Sisallot (paketti_id,tuote_id) VALUES (1,3);
+INSERT INTO Sisallot (paketti_id,tuote_id) VALUES (1,4);
+INSERT INTO Sisallot (paketti_id,tuote_id) VALUES (2,2);
+INSERT INTO Sisallot (paketti_id,tuote_id) VALUES (2,2);
+INSERT INTO Sisallot (paketti_id,tuote_id) VALUES (2,3);
+INSERT INTO Sisallot (paketti_id,tuote_id) VALUES (2,3);
 
 RESULT
-1|Uolevi|500
+Aybabtu|6|21|15
+Papan herkut|10|16|6
 
 TEST
-INSERT INTO Pelaajat (nimi) VALUES ('Uolevi');
-INSERT INTO Pelaajat (nimi) VALUES ('Maija');
-INSERT INTO Pelaajat (nimi) VALUES ('Liisa');
-INSERT INTO Tulokset (pelaaja_id,tulos) VALUES (1,100);
-INSERT INTO Tulokset (pelaaja_id,tulos) VALUES (2,200);
-INSERT INTO Tulokset (pelaaja_id,tulos) VALUES (3,200);
+INSERT INTO Tuotteet (nimi,hinta) VALUES ('selleri',7);
+INSERT INTO Tuotteet (nimi,hinta) VALUES ('lanttu',3);
+INSERT INTO Tuotteet (nimi,hinta) VALUES ('retiisi',5);
+INSERT INTO Tuotteet (nimi,hinta) VALUES ('nauris',6);
+INSERT INTO Paketit (nimi,hinta) VALUES ('Aybabtu',6);
 
 RESULT
-1|Liisa|200
-2|Maija|200
-3|Uolevi|100
+Aybabtu|6|0|-6

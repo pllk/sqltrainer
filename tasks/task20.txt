@@ -1,41 +1,37 @@
 TASK
-Hae joka maasta aakkosjärjestyksessä ensimmäinen kaupunki.
+Näytä suurin työntekijän palkka yrityksistä, joissa se on ainakin 5000.
 
 TABLES
-CREATE TABLE Kaupungit (id INTEGER PRIMARY KEY, nimi TEXT, maa TEXT);
+CREATE TABLE Tyontekijat (id INTEGER PRIMARY KEY, nimi TEXT, palkka INTEGER, yritys TEXT);
 
 TEST
-INSERT INTO Kaupungit (nimi,maa) VALUES ('Helsinki','Suomi');
-INSERT INTO Kaupungit (nimi,maa) VALUES ('Tampere','Suomi');
-INSERT INTO Kaupungit (nimi,maa) VALUES ('Tukholma','Ruotsi');
-INSERT INTO Kaupungit (nimi,maa) VALUES ('Tartto','Viro');
-INSERT INTO Kaupungit (nimi,maa) VALUES ('Tallinna','Viro');
+INSERT INTO Tyontekijat (nimi,palkka,yritys) VALUES ('Uolevi',5000,'Google');
+INSERT INTO Tyontekijat (nimi,palkka,yritys) VALUES ('Maija',6000,'Google');
+INSERT INTO Tyontekijat (nimi,palkka,yritys) VALUES ('Liisa',2000,'Amazon');
+INSERT INTO Tyontekijat (nimi,palkka,yritys) VALUES ('Kaaleppi',7500,'Microsoft');
 
 RESULT
-Suomi|Helsinki
-Ruotsi|Tukholma
-Viro|Tallinna
+Google|6000
+Microsoft|7500
 
 TEST
-INSERT INTO Kaupungit (nimi,maa) VALUES ('Helsinki','Suomi');
-INSERT INTO Kaupungit (nimi,maa) VALUES ('Tampere','Suomi');
-INSERT INTO Kaupungit (nimi,maa) VALUES ('Turku','Suomi');
-INSERT INTO Kaupungit (nimi,maa) VALUES ('Oulu','Suomi');
+INSERT INTO Tyontekijat (nimi,palkka,yritys) VALUES ('Uolevi',2000,'Google');
+INSERT INTO Tyontekijat (nimi,palkka,yritys) VALUES ('Maija',3000,'Google');
+INSERT INTO Tyontekijat (nimi,palkka,yritys) VALUES ('Liisa',4000,'Google');
+INSERT INTO Tyontekijat (nimi,palkka,yritys) VALUES ('Kaaleppi',5000,'Google');
 
 RESULT
-Suomi|Helsinki
+Google|5000
 
 TEST
-INSERT INTO Kaupungit (nimi,maa) VALUES ('Helsinki','Suomi');
-INSERT INTO Kaupungit (nimi,maa) VALUES ('Hampuri','Saksa');
-INSERT INTO Kaupungit (nimi,maa) VALUES ('Tukholma','Ruotsi');
-INSERT INTO Kaupungit (nimi,maa) VALUES ('Tallinna','Viro');
-INSERT INTO Kaupungit (nimi,maa) VALUES ('Berliini','Saksa');
-INSERT INTO Kaupungit (nimi,maa) VALUES ('Lyypekki','Saksa');
-INSERT INTO Kaupungit (nimi,maa) VALUES ('Tartto','Viro');
+INSERT INTO Tyontekijat (nimi,palkka,yritys) VALUES ('Uolevi',2000,'Google');
+INSERT INTO Tyontekijat (nimi,palkka,yritys) VALUES ('Maija',6000,'Amazon');
+INSERT INTO Tyontekijat (nimi,palkka,yritys) VALUES ('Liisa',2000,'Amazon');
+INSERT INTO Tyontekijat (nimi,palkka,yritys) VALUES ('Kaaleppi',7500,'Microsoft');
+INSERT INTO Tyontekijat (nimi,palkka,yritys) VALUES ('Vihtori',7500,'Microsoft');
+INSERT INTO Tyontekijat (nimi,palkka,yritys) VALUES ('Justiina',8000,'Amazon');
+INSERT INTO Tyontekijat (nimi,palkka,yritys) VALUES ('Kotivalo',7500,'Microsoft');
 
 RESULT
-Suomi|Helsinki
-Ruotsi|Tukholma
-Viro|Tallinna
-Saksa|Berliini
+Amazon|8000
+Microsoft|7500

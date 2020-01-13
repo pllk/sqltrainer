@@ -1,53 +1,23 @@
 TASK
-Laske jokaiselle opiskelijalle,
-montako lähetystä enimmillään hän on lähettänyt samaan tehtävään.
+Laske, mikä on pienin ero kahden tuotteen hinnassa.
 
 TABLES
-CREATE TABLE Opiskelijat (id INTEGER PRIMARY KEY, nimi TEXT);
-CREATE TABLE Tehtavat (id INTEGER PRIMARY KEY, nimi TEXT);
-CREATE TABLE Lahetykset (id INTEGER PRIMARY KEY, opiskelija_id INTEGER, tehtava_id INTEGER, tila INTEGER);
+CREATE TABLE Tuotteet (id INTEGER PRIMARY KEY, nimi TEXT, hinta INTEGER);
 
 TEST
-INSERT INTO Opiskelijat (nimi) VALUES ('Uolevi');
-INSERT INTO Opiskelijat (nimi) VALUES ('Maija');
-INSERT INTO Opiskelijat (nimi) VALUES ('Kaaleppi');
-INSERT INTO Tehtavat (nimi) VALUES ('T1');
-INSERT INTO Tehtavat (nimi) VALUES ('T2');
-INSERT INTO Tehtavat (nimi) VALUES ('T3');
-INSERT INTO Lahetykset (opiskelija_id,tehtava_id,tila) VALUES (1,1,0);
-INSERT INTO Lahetykset (opiskelija_id,tehtava_id,tila) VALUES (2,1,1);
-INSERT INTO Lahetykset (opiskelija_id,tehtava_id,tila) VALUES (1,2,0);
-INSERT INTO Lahetykset (opiskelija_id,tehtava_id,tila) VALUES (1,1,1);
-INSERT INTO Lahetykset (opiskelija_id,tehtava_id,tila) VALUES (2,2,1);
-INSERT INTO Lahetykset (opiskelija_id,tehtava_id,tila) VALUES (2,3,0);
-INSERT INTO Lahetykset (opiskelija_id,tehtava_id,tila) VALUES (1,2,0);
-INSERT INTO Lahetykset (opiskelija_id,tehtava_id,tila) VALUES (2,2,1);
-INSERT INTO Lahetykset (opiskelija_id,tehtava_id,tila) VALUES (2,2,1);
+INSERT INTO Tuotteet (nimi,hinta) VALUES ('selleri',5);
+INSERT INTO Tuotteet (nimi,hinta) VALUES ('lanttu',3);
+INSERT INTO Tuotteet (nimi,hinta) VALUES ('retiisi',8);
+INSERT INTO Tuotteet (nimi,hinta) VALUES ('nauris',7);
 
 RESULT
-Uolevi|2
-Maija|3
-Kaaleppi|0
+1
 
 TEST
-INSERT INTO Opiskelijat (nimi) VALUES ('Uolevi');
-INSERT INTO Opiskelijat (nimi) VALUES ('Maija');
-INSERT INTO Opiskelijat (nimi) VALUES ('Kaaleppi');
-INSERT INTO Tehtavat (nimi) VALUES ('T1');
-INSERT INTO Tehtavat (nimi) VALUES ('T2');
-INSERT INTO Tehtavat (nimi) VALUES ('T3');
-INSERT INTO Lahetykset (opiskelija_id,tehtava_id,tila) VALUES (1,1,1);
-INSERT INTO Lahetykset (opiskelija_id,tehtava_id,tila) VALUES (1,1,1);
-INSERT INTO Lahetykset (opiskelija_id,tehtava_id,tila) VALUES (1,1,1);
-INSERT INTO Lahetykset (opiskelija_id,tehtava_id,tila) VALUES (1,1,1);
-INSERT INTO Lahetykset (opiskelija_id,tehtava_id,tila) VALUES (2,1,1);
-INSERT INTO Lahetykset (opiskelija_id,tehtava_id,tila) VALUES (2,2,1);
-INSERT INTO Lahetykset (opiskelija_id,tehtava_id,tila) VALUES (2,3,1);
-INSERT INTO Lahetykset (opiskelija_id,tehtava_id,tila) VALUES (3,1,1);
-INSERT INTO Lahetykset (opiskelija_id,tehtava_id,tila) VALUES (3,3,1);
-INSERT INTO Lahetykset (opiskelija_id,tehtava_id,tila) VALUES (3,1,1);
+INSERT INTO Tuotteet (nimi,hinta) VALUES ('selleri',1);
+INSERT INTO Tuotteet (nimi,hinta) VALUES ('lanttu',7);
+INSERT INTO Tuotteet (nimi,hinta) VALUES ('retiisi',15);
+INSERT INTO Tuotteet (nimi,hinta) VALUES ('nauris',18);
 
 RESULT
-Uolevi|4
-Maija|1
-Kaaleppi|2
+3

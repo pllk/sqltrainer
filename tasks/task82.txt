@@ -1,27 +1,47 @@
 TASK
-Hae kaikki sanat paitsi aakkosjärjestyksessä ensimmäinen.
+Hae jokaisesta matkustajasta tieto,
+montako muuta matkustajaa on samassa vaunussa.
 
 TABLES
-CREATE TABLE Sanat (id INTEGER PRIMARY KEY, sana TEXT);
+CREATE TABLE Vaunut (id INTEGER PRIMARY KEY, nimi TEXT, paikat INTEGER);
+CREATE TABLE Matkustajat (id INTEGER PRIMARY KEY, nimi TEXT, vaunu_id INTEGER);
 
 TEST
-INSERT INTO Sanat (sana) VALUES ('apina');
-INSERT INTO Sanat (sana) VALUES ('banaani');
-INSERT INTO Sanat (sana) VALUES ('cembalo');
+INSERT INTO Vaunut (nimi,paikat) VALUES ("vaunu1",10);
+INSERT INTO Vaunut (nimi,paikat) VALUES ("vaunu2",10);
+INSERT INTO Vaunut (nimi,paikat) VALUES ("vaunu3",10);
+INSERT INTO Vaunut (nimi,paikat) VALUES ("vaunu4",10);
+INSERT INTO Matkustajat (nimi,vaunu_id) VALUES ("Uolevi",1);
+INSERT INTO Matkustajat (nimi,vaunu_id) VALUES ("Maija",1);
+INSERT INTO Matkustajat (nimi,vaunu_id) VALUES ("Kaaleppi",2);
+INSERT INTO Matkustajat (nimi,vaunu_id) VALUES ("Kotivalo",4);
+INSERT INTO Matkustajat (nimi,vaunu_id) VALUES ("Justiina",4);
+INSERT INTO Matkustajat (nimi,vaunu_id) VALUES ("Vihtori",4);
 
 RESULT
-banaani
-cembalo
+Uolevi|1
+Maija|1
+Kaaleppi|0
+Kotivalo|2
+Justiina|2
+Vihtori|2
 
 TEST
-INSERT INTO Sanat (sana) VALUES ('selleri');
-INSERT INTO Sanat (sana) VALUES ('lanttu');
-INSERT INTO Sanat (sana) VALUES ('nauris');
-INSERT INTO Sanat (sana) VALUES ('peruna');
-INSERT INTO Sanat (sana) VALUES ('porkkana');
+INSERT INTO Vaunut (nimi,paikat) VALUES ("vaunu1",10);
+INSERT INTO Vaunut (nimi,paikat) VALUES ("vaunu2",10);
+INSERT INTO Vaunut (nimi,paikat) VALUES ("vaunu3",10);
+INSERT INTO Vaunut (nimi,paikat) VALUES ("vaunu4",10);
+INSERT INTO Matkustajat (nimi,vaunu_id) VALUES ("Uolevi",1);
+INSERT INTO Matkustajat (nimi,vaunu_id) VALUES ("Maija",1);
+INSERT INTO Matkustajat (nimi,vaunu_id) VALUES ("Kaaleppi",1);
+INSERT INTO Matkustajat (nimi,vaunu_id) VALUES ("Kotivalo",1);
+INSERT INTO Matkustajat (nimi,vaunu_id) VALUES ("Justiina",1);
+INSERT INTO Matkustajat (nimi,vaunu_id) VALUES ("Vihtori",4);
 
 RESULT
-selleri
-nauris
-peruna
-porkkana
+Uolevi|4
+Maija|4
+Kaaleppi|4
+Kotivalo|4
+Justiina|4
+Vihtori|0

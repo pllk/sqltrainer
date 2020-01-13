@@ -1,43 +1,65 @@
 TASK
-Hae kaikkien elokuvien nimet,
-jotka on julkaistu karkausvuonna.
-(Vuosi on karkausvuosi, jos se on jaollinen 4:llä.
-Jos vuosi on jaollinen 100:lla,
-se on karkausvuosi vain, jos se on myös jaollinen 400:lla.)
+Hae jokaisesta tuotteesta tieto, montako kertaa se esiintyy
+enimmillään samassa paketissa.
 
 TABLES
-CREATE TABLE Elokuvat (id INTEGER PRIMARY KEY, nimi TEXT, vuosi INTEGER);
+CREATE TABLE Tuotteet (id INTEGER PRIMARY KEY, nimi TEXT, hinta INTEGER);
+CREATE TABLE Paketit (id INTEGER PRIMARY KEY, nimi TEXT, hinta INTEGER);
+CREATE TABLE Sisallot (paketti_id INTEGER, tuote_id INTEGER);
 
 TEST
-INSERT INTO Elokuvat (nimi,vuosi) VALUES ('Lumikki',1937);
-INSERT INTO Elokuvat (nimi,vuosi) VALUES ('Fantasia',1940);
-INSERT INTO Elokuvat (nimi,vuosi) VALUES ('Pinocchio',1940);
-INSERT INTO Elokuvat (nimi,vuosi) VALUES ('Dumbo',1941);
-INSERT INTO Elokuvat (nimi,vuosi) VALUES ('Bambi',1942);
+INSERT INTO Tuotteet (nimi,hinta) VALUES ('selleri',7);
+INSERT INTO Tuotteet (nimi,hinta) VALUES ('lanttu',3);
+INSERT INTO Tuotteet (nimi,hinta) VALUES ('retiisi',5);
+INSERT INTO Tuotteet (nimi,hinta) VALUES ('nauris',6);
+INSERT INTO Paketit (nimi,hinta) VALUES ('Mummon herkut',10);
+INSERT INTO Paketit (nimi,hinta) VALUES ('Papan herkut',10);
+INSERT INTO Sisallot (paketti_id,tuote_id) VALUES (1,1);
+INSERT INTO Sisallot (paketti_id,tuote_id) VALUES (1,4);
+INSERT INTO Sisallot (paketti_id,tuote_id) VALUES (2,3);
+INSERT INTO Sisallot (paketti_id,tuote_id) VALUES (2,3);
+INSERT INTO Sisallot (paketti_id,tuote_id) VALUES (2,4);
 
 RESULT
-Fantasia
-Pinocchio
+selleri|1
+lanttu|0
+retiisi|2
+nauris|1
 
 TEST
-INSERT INTO Elokuvat (nimi,vuosi) VALUES ('Lumikki',1980);
-INSERT INTO Elokuvat (nimi,vuosi) VALUES ('Fantasia',1990);
-INSERT INTO Elokuvat (nimi,vuosi) VALUES ('Pinocchio',2000);
-INSERT INTO Elokuvat (nimi,vuosi) VALUES ('Dumbo',2010);
-INSERT INTO Elokuvat (nimi,vuosi) VALUES ('Bambi',2020);
+INSERT INTO Tuotteet (nimi,hinta) VALUES ('selleri',7);
+INSERT INTO Tuotteet (nimi,hinta) VALUES ('lanttu',3);
+INSERT INTO Tuotteet (nimi,hinta) VALUES ('retiisi',5);
+INSERT INTO Tuotteet (nimi,hinta) VALUES ('nauris',6);
+INSERT INTO Paketit (nimi,hinta) VALUES ('Mummon herkut',10);
+INSERT INTO Paketit (nimi,hinta) VALUES ('Papan herkut',10);
+INSERT INTO Sisallot (paketti_id,tuote_id) VALUES (1,1);
+INSERT INTO Sisallot (paketti_id,tuote_id) VALUES (2,1);
+INSERT INTO Sisallot (paketti_id,tuote_id) VALUES (2,3);
+INSERT INTO Sisallot (paketti_id,tuote_id) VALUES (2,3);
+INSERT INTO Sisallot (paketti_id,tuote_id) VALUES (2,3);
 
 RESULT
-Lumikki
-Pinocchio
-Bambi
+selleri|1
+lanttu|0
+retiisi|3
+nauris|0
 
 TEST
-INSERT INTO Elokuvat (nimi,vuosi) VALUES ('Lumikki',1880);
-INSERT INTO Elokuvat (nimi,vuosi) VALUES ('Fantasia',1890);
-INSERT INTO Elokuvat (nimi,vuosi) VALUES ('Pinocchio',1900);
-INSERT INTO Elokuvat (nimi,vuosi) VALUES ('Dumbo',1910);
-INSERT INTO Elokuvat (nimi,vuosi) VALUES ('Bambi',1920);
+INSERT INTO Tuotteet (nimi,hinta) VALUES ('selleri',7);
+INSERT INTO Tuotteet (nimi,hinta) VALUES ('lanttu',3);
+INSERT INTO Tuotteet (nimi,hinta) VALUES ('retiisi',5);
+INSERT INTO Tuotteet (nimi,hinta) VALUES ('nauris',6);
+INSERT INTO Paketit (nimi,hinta) VALUES ('Mummon herkut',10);
+INSERT INTO Paketit (nimi,hinta) VALUES ('Papan herkut',10);
+INSERT INTO Sisallot (paketti_id,tuote_id) VALUES (1,1);
+INSERT INTO Sisallot (paketti_id,tuote_id) VALUES (1,1);
+INSERT INTO Sisallot (paketti_id,tuote_id) VALUES (2,1);
+INSERT INTO Sisallot (paketti_id,tuote_id) VALUES (2,1);
+INSERT INTO Sisallot (paketti_id,tuote_id) VALUES (2,1);
 
 RESULT
-Lumikki
-Bambi
+selleri|3
+lanttu|0
+retiisi|0
+nauris|0

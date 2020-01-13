@@ -1,43 +1,29 @@
 TASK
-Laske, montako tyhjää paikkaa junassa on kaikkiaan.
+Laske tulosten <i>moodi</i> (eli yleisin tulos).
+Jos vaihtoehtoja on useita, valitse niistä pienin.
 
 TABLES
-CREATE TABLE Vaunut (id INTEGER PRIMARY KEY, nimi TEXT, paikat INTEGER);
-CREATE TABLE Matkustajat (id INTEGER PRIMARY KEY, nimi TEXT, vaunu_id INTEGER);
+CREATE TABLE Tulokset (id INTEGER PRIMARY KEY, tulos INTEGER);
 
 TEST
-INSERT INTO Vaunut (nimi,paikat) VALUES ("vaunu1",10);
-INSERT INTO Vaunut (nimi,paikat) VALUES ("vaunu2",10);
-INSERT INTO Vaunut (nimi,paikat) VALUES ("vaunu3",10);
-INSERT INTO Vaunut (nimi,paikat) VALUES ("vaunu4",10);
-INSERT INTO Matkustajat (nimi,vaunu_id) VALUES ("Uolevi",1);
-INSERT INTO Matkustajat (nimi,vaunu_id) VALUES ("Maija",1);
-INSERT INTO Matkustajat (nimi,vaunu_id) VALUES ("Kaaleppi",2);
-INSERT INTO Matkustajat (nimi,vaunu_id) VALUES ("Kotivalo",4);
-INSERT INTO Matkustajat (nimi,vaunu_id) VALUES ("Justiina",4);
-INSERT INTO Matkustajat (nimi,vaunu_id) VALUES ("Vihtori",4);
+INSERT INTO Tulokset (tulos) VALUES (2);
+INSERT INTO Tulokset (tulos) VALUES (2);
+INSERT INTO Tulokset (tulos) VALUES (3);
+INSERT INTO Tulokset (tulos) VALUES (5);
+INSERT INTO Tulokset (tulos) VALUES (5);
+INSERT INTO Tulokset (tulos) VALUES (5);
+INSERT INTO Tulokset (tulos) VALUES (6);
 
 RESULT
-34
+5
 
 TEST
-INSERT INTO Vaunut (nimi,paikat) VALUES ("vaunu1",10);
-INSERT INTO Vaunut (nimi,paikat) VALUES ("vaunu2",10);
-INSERT INTO Vaunut (nimi,paikat) VALUES ("vaunu3",10);
-INSERT INTO Vaunut (nimi,paikat) VALUES ("vaunu4",10);
-INSERT INTO Matkustajat (nimi,vaunu_id) VALUES ("Uolevi",1);
-INSERT INTO Matkustajat (nimi,vaunu_id) VALUES ("Maija",4);
+INSERT INTO Tulokset (tulos) VALUES (2);
+INSERT INTO Tulokset (tulos) VALUES (3);
+INSERT INTO Tulokset (tulos) VALUES (3);
+INSERT INTO Tulokset (tulos) VALUES (4);
+INSERT INTO Tulokset (tulos) VALUES (4);
+INSERT INTO Tulokset (tulos) VALUES (7);
 
 RESULT
-38
-
-TEST
-INSERT INTO Vaunut (nimi,paikat) VALUES ("vaunu1",10);
-INSERT INTO Vaunut (nimi,paikat) VALUES ("vaunu2",10);
-INSERT INTO Vaunut (nimi,paikat) VALUES ("vaunu3",10);
-INSERT INTO Vaunut (nimi,paikat) VALUES ("vaunu4",100);
-INSERT INTO Matkustajat (nimi,vaunu_id) VALUES ("Uolevi",1);
-INSERT INTO Matkustajat (nimi,vaunu_id) VALUES ("Maija",4);
-
-RESULT
-128
+3

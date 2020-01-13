@@ -1,5 +1,5 @@
 TASK
-Hae aakkosjärjestyksessä toinen sana.
+Hae kaikki sanat, jotka alkavat a-kirjaimella.
 
 TABLES
 CREATE TABLE Sanat (id INTEGER PRIMARY KEY, sana TEXT);
@@ -10,7 +10,7 @@ INSERT INTO Sanat (sana) VALUES ('banaani');
 INSERT INTO Sanat (sana) VALUES ('cembalo');
 
 RESULT
-banaani
+apina
 
 TEST
 INSERT INTO Sanat (sana) VALUES ('apina');
@@ -20,3 +20,4 @@ INSERT INTO Sanat (sana) VALUES ('kuusi');
 
 RESULT
 apina
+apila

@@ -1,0 +1,38 @@
+TASK
+Pelaajat jaetaan joukkueisiin niin,
+että aakkosjärjestyksessä joka toinen pelaaja kuuluu
+joukkueeseen "Puput" ja "Kilit". Ilmoita joukkuejako
+annetuille pelaajille.
+
+TABLES
+CREATE TABLE Pelaajat (id INTEGER PRIMARY KEY, nimi TEXT);
+
+TEST
+INSERT INTO Pelaajat(nimi) VALUES ('Uolevi');
+INSERT INTO Pelaajat(nimi) VALUES ('Maija');
+INSERT INTO Pelaajat(nimi) VALUES ('Liisa');
+INSERT INTO Pelaajat(nimi) VALUES ('Kaaleppi');
+
+RESULT
+Kaaleppi|Puput
+Liisa|Kilit
+Maija|Puput
+Uolevi|Kilit
+
+TEST
+INSERT INTO Pelaajat(nimi) VALUES ('Uolevi');
+INSERT INTO Pelaajat(nimi) VALUES ('Maija');
+INSERT INTO Pelaajat(nimi) VALUES ('Liisa');
+INSERT INTO Pelaajat(nimi) VALUES ('Kaaleppi');
+INSERT INTO Pelaajat(nimi) VALUES ('Vihtori');
+INSERT INTO Pelaajat(nimi) VALUES ('Justiina');
+INSERT INTO Pelaajat(nimi) VALUES ('Kotivalo');
+
+RESULT
+Justiina|Puput
+Kaaleppi|Kilit
+Kotivalo|Puput
+Liisa|Kilit
+Maija|Puput
+Uolevi|Kilit
+Vihtori|Puput

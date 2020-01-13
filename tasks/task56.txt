@@ -1,5 +1,5 @@
 TASK
-Hae aakkosjärjestyksessä ensimmäinen sana.
+Hae kaikki sanat paitsi aakkosjärjestyksessä ensimmäinen.
 
 TABLES
 CREATE TABLE Sanat (id INTEGER PRIMARY KEY, sana TEXT);
@@ -10,13 +10,18 @@ INSERT INTO Sanat (sana) VALUES ('banaani');
 INSERT INTO Sanat (sana) VALUES ('cembalo');
 
 RESULT
-apina
+banaani
+cembalo
 
 TEST
-INSERT INTO Sanat (sana) VALUES ('apina');
-INSERT INTO Sanat (sana) VALUES ('apila');
-INSERT INTO Sanat (sana) VALUES ('koivu');
-INSERT INTO Sanat (sana) VALUES ('kuusi');
+INSERT INTO Sanat (sana) VALUES ('selleri');
+INSERT INTO Sanat (sana) VALUES ('lanttu');
+INSERT INTO Sanat (sana) VALUES ('nauris');
+INSERT INTO Sanat (sana) VALUES ('peruna');
+INSERT INTO Sanat (sana) VALUES ('porkkana');
 
 RESULT
-apila
+selleri
+nauris
+peruna
+porkkana

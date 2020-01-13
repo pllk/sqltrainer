@@ -1,8 +1,12 @@
 <meta charset="utf-8">
+<title>SQL Trainer</title>
 <style>
 .task_button {width:30px;border-style:solid;border-width:1px;border-color:black;text-align:center;color:black;}
 
 a {text-decoration:none;color:black}
+
+* {font-family:sans serif}
+textarea {font-family:monospace}
 </style>
 <body onhashchange="begin()">
 <h1>SQL Trainer</h1>
@@ -292,7 +296,7 @@ function check() {
     check_test();
 }
 
-var my_task;
+var my_task = 0;
 
 function start_login() {
     mooc_login(get("username").value,get("password").value,end_login);
@@ -347,7 +351,7 @@ function create_menu() {
     }
     html += "<h2>Kirjautuminen</h2>";
     if (mooc_status != 1) {
-        html += "<p>Voit kirjautua sisään mooc.fi-tunnuksella:</p>";
+        html += "<p>Kirjaudu sisään mooc.fi-tunnuksella:</p>";
         html += "Tunnus:<br><input onkeyup=\"check_submit(event)\" type=text id=\"username\"><br>";
         html += "Salasana:<br><input onkeyup=\"check_submit(event)\" type=password id=\"password\"><br>";
         html += "<br><button onclick=\"start_login()\">Kirjaudu sisään</button>";
@@ -363,6 +367,7 @@ function show_answer(data) {
 }
 
 function show_task(task) {
+    if (my_task == task) return;
     my_task = task;
     get("query").value = "";
     get("task").innerHTML = "";
