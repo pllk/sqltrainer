@@ -2,6 +2,8 @@ TASK
 Muodosta tuloslista, jossa näkyy kaikki tulokset järjestettynä ensisijaisesti
 käänteisesti pistemäärän mukaan ja toissijaisesti nimen mukaan.
 
+STRICT
+
 TABLES
 CREATE TABLE Pelaajat (id INTEGER PRIMARY KEY, nimi TEXT);
 CREATE TABLE Tulokset (id INTEGER PRIMARY KEY, pelaaja_id INTEGER, tulos INTEGER);
