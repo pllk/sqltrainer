@@ -1,6 +1,7 @@
 TASK
 Hae jokaisesta tuotteesta tieto,
-monenko tuotteen hinta eroaa enintään yhdellä.
+monenko tuotteen hinta eroaa enintään yhdellä
+(tässä lasketaan mukaan myös tuote itse).
 
 TABLES
 CREATE TABLE Tuotteet (id INTEGER PRIMARY KEY, nimi TEXT, hinta INTEGER);
