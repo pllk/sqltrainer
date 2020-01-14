@@ -39,3 +39,17 @@ INSERT INTO Oikeudet(kayttaja_id,ryhma_id) VALUES (4,2);
 RESULT
 maija
 liisa
+
+TEST
+INSERT INTO Kayttajat(tunnus) VALUES ('uolevi');
+INSERT INTO Kayttajat(tunnus) VALUES ('maija');
+INSERT INTO Kayttajat(tunnus) VALUES ('liisa');
+INSERT INTO Ryhmat(nimi) VALUES ('puput');
+INSERT INTO Ryhmat(nimi) VALUES ('kilit');
+INSERT INTO Oikeudet(kayttaja_id,ryhma_id) VALUES (1,1);
+INSERT INTO Oikeudet(kayttaja_id,ryhma_id) VALUES (2,1);
+INSERT INTO Oikeudet(kayttaja_id,ryhma_id) VALUES (2,2);
+INSERT INTO Oikeudet(kayttaja_id,ryhma_id) VALUES (3,2);
+
+RESULT
+liisa
