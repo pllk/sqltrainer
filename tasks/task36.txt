@@ -32,6 +32,8 @@ INSERT INTO Opiskelijat (nimi) VALUES ('Maija');
 INSERT INTO Opiskelijat (nimi) VALUES ('Kaaleppi');
 INSERT INTO Kurssit (nimi) VALUES ('Ohpe');
 INSERT INTO Kurssit (nimi) VALUES ('Ohja');
+INSERT INTO Kurssit (nimi) VALUES ('Tira');
+INSERT INTO Kurssit (nimi) VALUES ('Lama');
 INSERT INTO Suoritukset (opiskelija_id,kurssi_id,arvosana) VALUES (1,1,4);
 INSERT INTO Suoritukset (opiskelija_id,kurssi_id,arvosana) VALUES (1,2,4);
 INSERT INTO Suoritukset (opiskelija_id,kurssi_id,arvosana) VALUES (1,3,5);
