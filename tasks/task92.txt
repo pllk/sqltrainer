@@ -1,7 +1,7 @@
 TASK
 Ilmoita jokaisesta käyttäjästä,
-monenko kaverin kaverilistalla
-hän esiintyy itse.
+montako sellaista kaveria hänen kaverilistallaan on,
+joiden kaverilistalla hän esiintyy itse.
 
 TABLES
 CREATE TABLE Kayttajat (id INTEGER PRIMARY KEY, nimi TEXT);
