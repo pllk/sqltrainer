@@ -34,3 +34,12 @@ selleri
 lanttu
 retiisi
 nauris
+
+TEST
+INSERT INTO Tuotteet (nimi,hinta) VALUES ('selleri',1);
+INSERT INTO Tuotteet (nimi,hinta) VALUES ('lanttu',2);
+INSERT INTO Tuotteet (nimi,hinta) VALUES ('retiisi',3);
+INSERT INTO Tuotteet (nimi,hinta) VALUES ('nauris',4);
+
+RESULT
+selleri
