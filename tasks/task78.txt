@@ -37,3 +37,12 @@ INSERT INTO Tulokset (tulos) VALUES (1);
 
 RESULT
 1
+
+TEST
+INSERT INTO Tulokset (tulos) VALUES (1);
+INSERT INTO Tulokset (tulos) VALUES (10);
+INSERT INTO Tulokset (tulos) VALUES (100);
+INSERT INTO Tulokset (tulos) VALUES (1000);
+
+RESULT
+10
