@@ -59,7 +59,12 @@ function sql_run(context,query,what) {
 }
 
 function render_table(data,name) {
-    if (data.length == 0) return "";
+    if (data.length == 0) {
+        var table = "";
+        table += "<i>"+name+"</i>";
+        table += "<table border><tr><td>(taulu on tyhjä)</td></tr></table>";
+        return table;
+    }
     data = data[0];
     var table = "";
     table += "<i>"+name+"</i>";
