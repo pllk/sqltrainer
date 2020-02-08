@@ -1,6 +1,11 @@
 TASK
 Laske, monellako tavalla voit valita kaksi tuotetta niin,
 että yhteishinta on tasan 10.
+<br><br>
+Huom! Yhdistelmässä voi olla kaksi samaa tuotetta ja
+halutaan laskea erilaiset yhdistelmät.
+Esimerkissä yhdistelmät ovat selleri+selleri ja lanttu+nauris
+(eli nauris+lanttu ei ole mukana).
 
 TABLES
 CREATE TABLE Tuotteet (id INTEGER PRIMARY KEY, nimi TEXT, hinta INTEGER);
