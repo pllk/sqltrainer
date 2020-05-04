@@ -1,6 +1,8 @@
 TASK
-Laske jokaisen tilin suurin saldo historian aikana
-(jokaisen tilin saldo on aluksi 0).
+Laske Uolevin tilin saldon historia.
+Tapahtumat ovat järjestyksessä id:n mukaisesti.
+
+STRICT
 
 TABLES
 CREATE TABLE Tilit (id INTEGER PRIMARY KEY, haltija TEXT);
@@ -17,9 +19,8 @@ INSERT INTO Tapahtumat (tili_id,muutos) VALUES (2,100);
 INSERT INTO Tapahtumat (tili_id,muutos) VALUES (2,-300);
 
 RESULT
-Uolevi|500
-Maija|400
-Kaaleppi|0
+500
+400
 
 TEST
 INSERT INTO Tilit (haltija) VALUES ('Uolevi');
@@ -32,6 +33,36 @@ INSERT INTO Tapahtumat (tili_id,muutos) VALUES (1,400);
 INSERT INTO Tapahtumat (tili_id,muutos) VALUES (1,-500);
 
 RESULT
-Uolevi|1000
-Maija|0
-Kaaleppi|0
+100
+300
+600
+1000
+500
+
+TEST
+INSERT INTO Tilit (haltija) VALUES ('Maija');
+INSERT INTO Tilit (haltija) VALUES ('Uolevi');
+INSERT INTO Tapahtumat (tili_id,muutos) VALUES (1,100);
+INSERT INTO Tapahtumat (tili_id,muutos) VALUES (2,200);
+
+RESULT
+200
+
+TEST
+INSERT INTO Tilit (haltija) VALUES ('Uolevi');
+INSERT INTO Tapahtumat (tili_id,muutos) VALUES (1,100);
+INSERT INTO Tapahtumat (tili_id,muutos) VALUES (1,100);
+INSERT INTO Tapahtumat (tili_id,muutos) VALUES (1,-50);
+INSERT INTO Tapahtumat (tili_id,muutos) VALUES (1,100);
+INSERT INTO Tapahtumat (tili_id,muutos) VALUES (1,-50);
+INSERT INTO Tapahtumat (tili_id,muutos) VALUES (1,100);
+INSERT INTO Tapahtumat (tili_id,muutos) VALUES (1,-50);
+
+RESULT
+100
+200
+150
+250
+200
+300
+250
