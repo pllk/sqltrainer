@@ -312,7 +312,7 @@ var status_ready = 0;
 
 function process_status(status) {
     for (var i = 1; i <= 100; i++) {
-        task_status[i] = status[quizzes_tasks[i-1][0]];
+        task_status[i] = parseInt(status[i-1]);
     }
     status_ready = 2;
     create_menu();
@@ -343,7 +343,7 @@ function create_menu() {
         if (i%10 == 1) html += "<tr>";
         var link = i == my_task ? "<b>"+i+"</b>" : i;
         var color = "white";
-        if (mooc_status == 1 && status_ready == 2 && task_status[i].correct) {
+        if (mooc_status == 1 && status_ready == 2 && task_status[i] == 1) {
  			color = "lightgreen";
 	        count++;
         }
@@ -368,7 +368,7 @@ function create_menu() {
 }
 
 function show_answer(data) {
-	get("query").value = data["quizAnswer"]["itemAnswers"][0]["textData"];
+	get("query").value = data;
 }
 
 function show_task(task) {
