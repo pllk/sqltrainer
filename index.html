@@ -114,10 +114,19 @@ function render_plain(data) {
     return lines;
 }
 
-function render_result(data,title) {
+var show_headers = false;
+
+function render_result(data,title,header) {
     var html = "";
     html += "<fieldset><legend><b>"+title+"</b></legend>";
     html += "<table border>";
+    if (header != undefined && show_headers) {
+    	html += "<tr>";
+	    for (var i = 0; i < header.length; i++) {
+    		html += "<th>"+header[i]+"</th>";
+	    }
+    	html += "</tr>";
+    }
     for (var i = 0; i < data.length; i++) {
         html += "<tr>";
         var parts = data[i].split("|");
@@ -185,7 +194,7 @@ function sql_result(result,what) {
         verdict.innerHTML += "<h2>Testi "+(what[1]+1)+" ("+message+")</h2>";
         verdict.innerHTML += render_tables(table_data[what[1]]);
         verdict.innerHTML += render_result(results[what[1]],"Haluttu tulos");
-        verdict.innerHTML += render_result(plain,"Kyselysi tulos");
+        verdict.innerHTML += render_result(plain,"Kyselysi tulos",result[0].columns);
         my_test++;
         if (my_test < tests.length) {
             check_test();
