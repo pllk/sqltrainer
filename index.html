@@ -18,6 +18,7 @@ textarea {font-family:monospace}
 <h2>Esimerkki</h2>
 <div id="example"></div>
 </fieldset>
+<div id="model"></div>
 <h2>Lähetä vastaus</h2>
 Kysely:<br>
 <textarea rows=5 style="width:100%" id=query></textarea>
@@ -310,6 +311,7 @@ function start_login() {
 var task_status = [];
 var status_ready = 0;
 
+
 function process_status(status) {
     for (var i = 1; i <= 100; i++) {
         task_status[i] = parseInt(status[i-1]);
@@ -365,10 +367,29 @@ function create_menu() {
         html += "<button onclick=\"mooc_logout(create_menu)\">Kirjaudu ulos</button>";
     }
     get("menu").innerHTML = html;
+    quizzes_model(my_task,show_model);
 }
 
 function show_answer(data) {
 	get("query").value = data;
+}
+
+var my_model;
+
+function show_model(data) {
+    if (data == "") {
+        get("model").innerHTML = "";
+    } else {
+        data = data.replace("<","&lt;");
+        data = data.replace(">","&gt;");
+        my_model = data;
+        get("model").innerHTML = "<br><span style=\"cursor:pointer\" onclick=\"real_model();\"><u>Näytä mallivastaus</u></span>";
+    }
+}
+
+function real_model() {
+    get("model").innerHTML = "<br><textarea readonly style=\"width:100%\" rows=3>"+my_model+"</textarea>";
+    return false;
 }
 
 function show_task(task) {
