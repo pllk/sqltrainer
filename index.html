@@ -376,6 +376,7 @@ function create_menu() {
         html += "<button onclick=\"mooc_logout(create_menu)\">Kirjaudu ulos</button>";
     }
     get("menu").innerHTML = html;
+    quizzes_answer(my_task,show_answer);
     quizzes_model(my_task,show_model);
 }
 
