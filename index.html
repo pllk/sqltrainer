@@ -194,7 +194,8 @@ function sql_result(result,what) {
         verdict.innerHTML += "<h2>Testi "+(what[1]+1)+" ("+message+")</h2>";
         verdict.innerHTML += render_tables(table_data[what[1]]);
         verdict.innerHTML += render_result(results[what[1]],"Haluttu tulos");
-        verdict.innerHTML += render_result(plain,"Kyselysi tulos",result[0].columns);
+        var columns = result[0] == undefined ? undefined : result[0].columns;
+        verdict.innerHTML += render_result(plain,"Kyselysi tulos",columns);
         my_test++;
         if (my_test < tests.length) {
             check_test();
