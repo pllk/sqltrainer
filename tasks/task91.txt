@@ -59,3 +59,26 @@ RESULT
 3|Kaaleppi|100
 3|Uolevi|100
 5|Kotivalo|50
+
+TEST
+INSERT INTO Pelaajat (nimi) VALUES ('Uolevi');
+INSERT INTO Pelaajat (nimi) VALUES ('Maija');
+INSERT INTO Pelaajat (nimi) VALUES ('Liisa');
+INSERT INTO Pelaajat (nimi) VALUES ('Kotivalo');
+INSERT INTO Pelaajat (nimi) VALUES ('Justiina');
+INSERT INTO Pelaajat (nimi) VALUES ('Kaaleppi');
+INSERT INTO Tulokset (pelaaja_id,tulos) VALUES (1,100);
+INSERT INTO Tulokset (pelaaja_id,tulos) VALUES (2,100);
+INSERT INTO Tulokset (pelaaja_id,tulos) VALUES (3,100);
+INSERT INTO Tulokset (pelaaja_id,tulos) VALUES (4,100);
+INSERT INTO Tulokset (pelaaja_id,tulos) VALUES (5,100);
+INSERT INTO Tulokset (pelaaja_id,tulos) VALUES (6,100);
+
+RESULT
+1|Justiina|100
+1|Kaaleppi|100
+1|Kotivalo|100
+1|Liisa|100
+1|Maija|100
+1|Uolevi|100
+
