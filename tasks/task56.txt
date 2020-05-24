@@ -1,6 +1,8 @@
 TASK
 Hae kaikki sanat paitsi aakkosjärjestyksessä ensimmäinen.
 
+Voit olettaa, että taulussa ei ole kahta samaa sanaa.
+
 TABLES
 CREATE TABLE Sanat (id INTEGER PRIMARY KEY, sana TEXT);
 
