@@ -33,3 +33,33 @@ INSERT INTO Tuotteet (nimi,hinta) VALUES ('j',10);
 
 RESULT
 5
+
+TEST
+INSERT INTO Tuotteet (nimi,hinta) VALUES ('a',5);
+INSERT INTO Tuotteet (nimi,hinta) VALUES ('b',5);
+INSERT INTO Tuotteet (nimi,hinta) VALUES ('c',5);
+INSERT INTO Tuotteet (nimi,hinta) VALUES ('d',5);
+INSERT INTO Tuotteet (nimi,hinta) VALUES ('e',5);
+INSERT INTO Tuotteet (nimi,hinta) VALUES ('f',5);
+INSERT INTO Tuotteet (nimi,hinta) VALUES ('g',5);
+INSERT INTO Tuotteet (nimi,hinta) VALUES ('h',5);
+INSERT INTO Tuotteet (nimi,hinta) VALUES ('i',5);
+INSERT INTO Tuotteet (nimi,hinta) VALUES ('j',5);
+
+RESULT
+55
+
+TEST
+INSERT INTO Tuotteet (nimi,hinta) VALUES ('a',4);
+INSERT INTO Tuotteet (nimi,hinta) VALUES ('b',4);
+INSERT INTO Tuotteet (nimi,hinta) VALUES ('c',4);
+INSERT INTO Tuotteet (nimi,hinta) VALUES ('d',4);
+INSERT INTO Tuotteet (nimi,hinta) VALUES ('e',4);
+INSERT INTO Tuotteet (nimi,hinta) VALUES ('f',6);
+INSERT INTO Tuotteet (nimi,hinta) VALUES ('g',6);
+INSERT INTO Tuotteet (nimi,hinta) VALUES ('h',6);
+INSERT INTO Tuotteet (nimi,hinta) VALUES ('i',6);
+INSERT INTO Tuotteet (nimi,hinta) VALUES ('j',6);
+
+RESULT
+25
